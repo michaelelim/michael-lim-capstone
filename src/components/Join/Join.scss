@@ -1,0 +1,52 @@
+.join {
+
+  &__wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    width: 100%;
+    min-height: 50vh;
+  }
+
+  &__left {
+    text-align: left;
+    width: 50%;
+    height: 100%;
+    font-size: calc(50px + 2vmin);
+    padding-left: 5%;
+    margin-top: 0;
+  }
+
+  &__right {
+    text-align: right;
+    width: 50%;
+    padding-right: 5%;
+  }
+
+  &__text {
+    font-size: calc(30px + 2vmin);
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+
+  &__code {
+    font-size: calc(40px + 2vmin);
+  }
+
+  &__player-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    justify-content: space-around;
+    width: 80%;
+    padding-bottom: 50px;
+  }
+
+  &__player-name {
+    font-size: calc(30px + 2vmin);
+
+  }
+}
