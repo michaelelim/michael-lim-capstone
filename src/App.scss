@@ -1,3 +1,12 @@
+@import "./partials/mixins.scss";
+@import "./partials/fonts.scss";
+
+* {
+  font-family: 'Amaranth', sans-serif;
+  font-family: 'Titillium Web', sans-serif;
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
   background-color: #516e99;

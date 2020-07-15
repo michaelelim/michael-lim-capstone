@@ -1,16 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import '../../App.scss';
-import './Instructions.scss';
+import './Questions.scss';
 
-export default function Instructions() {
+export default function Questions() {
   return (
     <div className="App">
-      <div className="instructions__wrapper">
-        <h1 className="instructions__title">Instructions</h1>
-      </div>
-
-      <div className="instructions__wrapper-question">
+      <div className="question__wrapper">
         <div className="question__0">What is the capital of a fake question?</div>
         <div className="question__answer-wrapper">
           <div className="question__letter">A:</div>
@@ -30,7 +25,18 @@ export default function Instructions() {
         </div>
       </div>
 
-      <Link to="/questionintro"><button className="button">We get it! Let's go!</button></Link>
+
+      <div className="join__player-wrapper">
+        <div>
+          <div className="join__player-number">Player 1</div>
+          <div className="join__player-name">Adam</div>
+        </div>
+        
+        <div>
+          <div className="join__player-number">Player 2</div>
+          <div className="join__player-name">Eve</div>
+        </div>
+      </div>  
     </div>
   );
 }

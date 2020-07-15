@@ -9,15 +9,18 @@
     color: white;
     width: 100%;
     min-height: 50vh;
-  }
+}
 
   &__left {
     text-align: left;
     width: 50%;
     height: 100%;
-    font-size: calc(50px + 2vmin);
+    font-size: calc(70px + 2vmin);
     padding-left: 5%;
     margin-top: 0;
+
+    font-weight: 600;
+    font-family: "Amaranth";
   }
 
   &__right {
@@ -28,12 +31,15 @@
 
   &__text {
     font-size: calc(30px + 2vmin);
+    padding-left: 50px;
     margin-top: 0;
     margin-bottom: 5px;
+    font-weight: 400;
   }
 
   &__code {
     font-size: calc(40px + 2vmin);
+    font-weight: 600;
   }
 
   &__player-wrapper {
@@ -47,6 +53,7 @@
 
   &__player-name {
     font-size: calc(30px + 2vmin);
+    font-family: "Amaranth";
 
   }
 }

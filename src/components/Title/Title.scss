@@ -1,8 +1,12 @@
 .title {
-  font-size: calc(60px + 2vmin);
+  font-size: calc(70px + 2vmin);
   color: white;
+  font-weight: 600;
+  font-family: 'Amaranth';
 
   &__sub {
-    font-size: calc(40px + 2vmin);
+    font-family: 'Titillium Web';
+    font-size: calc(35px + 2vmin);
+    font-weight: 400;
   }
 }
