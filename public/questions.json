@@ -1,0 +1,605 @@
+{
+  "response_code": 0,
+  "results": [
+      {
+          "category": "Mythology",
+          "type": "multiple",
+          "difficulty": "hard",
+          "question": "According to Algonquian folklore, how does one transform into a Wendigo?",
+          "correct_answer": "Participating in cannibalism.",
+          "incorrect_answers": [
+              "Excessive mutilation of animal corpses.",
+              "Performing a ritual involving murder.",
+              "Drinking the blood of many slain animals."
+          ]
+      },
+      {
+          "category": "Entertainment: Video Games",
+          "type": "multiple",
+          "difficulty": "hard",
+          "question": "Which of these TrackMania environments was NOT in the original game?",
+          "correct_answer": "Bay",
+          "incorrect_answers": [
+              "Desert",
+              "Snow",
+              "Rally"
+          ]
+      },
+      {
+          "category": "General Knowledge",
+          "type": "multiple",
+          "difficulty": "easy",
+          "question": "What is the most common surname Wales?",
+          "correct_answer": "Jones",
+          "incorrect_answers": [
+              "Williams",
+              "Davies",
+              "Evans"
+          ]
+      },
+      {
+          "category": "Science & Nature",
+          "type": "multiple",
+          "difficulty": "easy",
+          "question": "What is the hottest planet in the Solar System?",
+          "correct_answer": "Venus",
+          "incorrect_answers": [
+              "Mars",
+              "Mercury",
+              "Jupiter"
+          ]
+      },
+      {
+          "category": "Entertainment: Video Games",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "Which was the first video game to be produced by development company Rare?",
+          "correct_answer": "Slalom",
+          "incorrect_answers": [
+              "R.C. Pro-Am",
+              "Donkey Kong Country",
+              "Battletoads"
+          ]
+      },
+      {
+          "category": "Science & Nature",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "The &quot;Tibia&quot; is found in which part of the body?",
+          "correct_answer": "Leg",
+          "incorrect_answers": [
+              "Arm",
+              "Hand",
+              "Head"
+          ]
+      },
+      {
+          "category": "Science: Computers",
+          "type": "multiple",
+          "difficulty": "easy",
+          "question": "In web design, what does CSS stand for?",
+          "correct_answer": "Cascading Style Sheet",
+          "incorrect_answers": [
+              "Counter Strike: Source",
+              "Corrective Style Sheet",
+              "Computer Style Sheet"
+          ]
+      },
+      {
+          "category": "General Knowledge",
+          "type": "multiple",
+          "difficulty": "easy",
+          "question": "How many colors are there in a rainbow?",
+          "correct_answer": "7",
+          "incorrect_answers": [
+              "8",
+              "9",
+              "10"
+          ]
+      },
+      {
+          "category": "Geography",
+          "type": "multiple",
+          "difficulty": "easy",
+          "question": "What name was historically used for the Turkish city currently known as Istanbul?",
+          "correct_answer": "Constaninople",
+          "incorrect_answers": [
+              "H&uuml;davendigar",
+              "S&ouml;ğ&uuml;t",
+              "Adrianople"
+          ]
+      },
+      {
+          "category": "Entertainment: Video Games",
+          "type": "multiple",
+          "difficulty": "easy",
+          "question": "Which of these is NOT a playable character in the 2016 video game Overwatch?",
+          "correct_answer": "Invoker",
+          "incorrect_answers": [
+              "Mercy",
+              "Winston",
+              "Zenyatta"
+          ]
+      },
+      {
+          "category": "Entertainment: Video Games",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "When was &quot;Garry&#039;s Mod&quot; released?",
+          "correct_answer": "December 24, 2004",
+          "incorrect_answers": [
+              "November 13, 2004",
+              "December 13, 2004",
+              "November 12, 2004"
+          ]
+      },
+      {
+          "category": "Entertainment: Musicals & Theatres",
+          "type": "multiple",
+          "difficulty": "easy",
+          "question": "Who wrote the award winning musical &quot;In The Heights&quot;?",
+          "correct_answer": "Lin-Manuel Miranda",
+          "incorrect_answers": [
+              "Steven Sondheim",
+              "Francis Scott Key",
+              "John Phillips Sousa"
+          ]
+      },
+      {
+          "category": "History",
+          "type": "multiple",
+          "difficulty": "hard",
+          "question": "During the Wars of the Roses (1455 - 1487) which Englishman was dubbed &quot;the Kingmaker&quot;?",
+          "correct_answer": "Richard Neville",
+          "incorrect_answers": [
+              "Richard III",
+              "Henry V",
+              "Thomas Warwick"
+          ]
+      },
+      {
+          "category": "Science: Computers",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "Generally, which component of a computer draws the most power?",
+          "correct_answer": "Video Card",
+          "incorrect_answers": [
+              "Hard Drive",
+              "Processor",
+              "Power Supply"
+          ]
+      },
+      {
+          "category": "Entertainment: Video Games",
+          "type": "multiple",
+          "difficulty": "hard",
+          "question": "Before Super Smash Bros. contained Nintendo characters, what was it known as internally?",
+          "correct_answer": "Dragon King: The Fighting Game",
+          "incorrect_answers": [
+              "Contest of Champions",
+              "Smash and Pummel",
+              "Fighter of the Ages: Conquest"
+          ]
+      },
+      {
+          "category": "Entertainment: Music",
+          "type": "multiple",
+          "difficulty": "hard",
+          "question": "Which of these songs is NOT included in the Suicide Squad OST?",
+          "correct_answer": "Skies on Fire - AC/DC",
+          "incorrect_answers": [
+              "Heathens - Twenty One Pilots",
+              "Without Me - Eminem",
+              "Fortunate Son - Creedence Clearwater Revival"
+          ]
+      },
+      {
+          "category": "Entertainment: Music",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "What is the relationship between the band members of American rock band King of Leon?",
+          "correct_answer": "Brothers &amp; cousins",
+          "incorrect_answers": [
+              "Childhood friends",
+              "Former classmates",
+              "Fraternity house members"
+          ]
+      },
+      {
+          "category": "Entertainment: Music",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "The song &quot;Feel Good Inc.&quot; by British band Gorillaz features which hip hop group?",
+          "correct_answer": "De La Soul",
+          "incorrect_answers": [
+              "Public Enemy",
+              "OutKast",
+              "Cypress Hill"
+          ]
+      },
+      {
+          "category": "History",
+          "type": "multiple",
+          "difficulty": "hard",
+          "question": "In which year did the Tokyo Subway Sarin Attack occur?",
+          "correct_answer": "1995",
+          "incorrect_answers": [
+              "2001",
+              "2011",
+              "1991"
+          ]
+      },
+      {
+          "category": "Entertainment: Video Games",
+          "type": "multiple",
+          "difficulty": "easy",
+          "question": "In PROTOTYPE 2. who is referred to as &quot;Tango Primary&quot;?",
+          "correct_answer": "James Heller",
+          "incorrect_answers": [
+              "Alex Mercer",
+              "Dana Mercer",
+              "Any Goliaths roaming around"
+          ]
+      },
+      {
+          "category": "Celebrities",
+          "type": "multiple",
+          "difficulty": "hard",
+          "question": "How tall is Tom Cruise?",
+          "correct_answer": "5&prime; 7&Prime;",
+          "incorrect_answers": [
+              "5&prime; 9&Prime;",
+              "5&prime; 4&Prime;",
+              "5&prime; 5&Prime;"
+          ]
+      },
+      {
+          "category": "Animals",
+          "type": "multiple",
+          "difficulty": "easy",
+          "question": "What is Grumpy Cat&#039;s real name?",
+          "correct_answer": "Tardar Sauce",
+          "incorrect_answers": [
+              "Sauce",
+              "Minnie",
+              "Broccoli"
+          ]
+      },
+      {
+          "category": "Entertainment: Music",
+          "type": "multiple",
+          "difficulty": "hard",
+          "question": "In Kendrick Lamar&#039;s 2012 album, &quot;Good Kid, M.A.A.D City&quot;, the album&#039;s story takes place in which city?",
+          "correct_answer": "Compton",
+          "incorrect_answers": [
+              "Detroit",
+              "New York",
+              "Baltimore"
+          ]
+      },
+      {
+          "category": "Entertainment: Video Games",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "What was the first game ever released that ran on the Source engine?",
+          "correct_answer": "Counter-Strike: Source",
+          "incorrect_answers": [
+              "Half-Life 2",
+              "Garry&#039;s Mod",
+              "Team Fortress 2"
+          ]
+      },
+      {
+          "category": "Entertainment: Japanese Anime & Manga",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "In the &quot;Toaru Majutsu no Index&quot; anime, Touma Kamijou is a level 0 esper that has the ability to do what?",
+          "correct_answer": "Dispell any esper or magical powers",
+          "incorrect_answers": [
+              "Teleport",
+              "Make telepathic communications",
+              "Create electricity from his own body"
+          ]
+      },
+      {
+          "category": "Entertainment: Video Games",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "In the original DOOM games, which of the following demons is a recolor of the Baron of Hell, but is weaker than the Baron?",
+          "correct_answer": "Hell Knight",
+          "incorrect_answers": [
+              "Mancubus",
+              "Pinky",
+              "Arch-Vile"
+          ]
+      },
+      {
+          "category": "Entertainment: Music",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "Which of these bands is the oldest?",
+          "correct_answer": "Pink Floyd",
+          "incorrect_answers": [
+              "AC/DC",
+              "Metallica",
+              "Red Hot Chili Peppers"
+          ]
+      },
+      {
+          "category": "General Knowledge",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "Which of the following carbonated soft drinks were introduced first?",
+          "correct_answer": "Dr. Pepper",
+          "incorrect_answers": [
+              "Coca-Cola",
+              "Sprite",
+              "Mountain Dew"
+          ]
+      },
+      {
+          "category": "Geography",
+          "type": "multiple",
+          "difficulty": "easy",
+          "question": "What is Canada&#039;s smallest province?",
+          "correct_answer": "Prince Edward Island",
+          "incorrect_answers": [
+              "New Brunswick",
+              "Nova Scotia",
+              "Yukon"
+          ]
+      },
+      {
+          "category": "History",
+          "type": "multiple",
+          "difficulty": "hard",
+          "question": "Who was the President of the United States during the signing of the Gadsden Purchase?",
+          "correct_answer": "Franklin Pierce",
+          "incorrect_answers": [
+              "Andrew Johnson",
+              "Abraham Lincoln",
+              "James Polk"
+          ]
+      },
+      {
+          "category": "Entertainment: Video Games",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "What is the item required to summon the boss Duke Fishron in the game Terraria?",
+          "correct_answer": "Truffle Worm",
+          "incorrect_answers": [
+              "Suspicious Looking Fish",
+              "King Grasshopper",
+              "Slug"
+          ]
+      },
+      {
+          "category": "Entertainment: Video Games",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "In &quot;Halo 2&quot;, what is the name of the monitor of Installation 05?",
+          "correct_answer": "2401 Penitent Tangent",
+          "incorrect_answers": [
+              "343 Guilty Spark",
+              "031 Exuberant Witness",
+              "252 Biodis Expolsion"
+          ]
+      },
+      {
+          "category": "Entertainment: Film",
+          "type": "multiple",
+          "difficulty": "easy",
+          "question": "In the movie &quot;Blade Runner&quot;, what is the term used for human-like androids ?",
+          "correct_answer": "Replicants",
+          "incorrect_answers": [
+              "Cylons",
+              "Synthetics",
+              "Skinjobs"
+          ]
+      },
+      {
+          "category": "Science: Computers",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "What does the term MIME stand for, in regards to computing?",
+          "correct_answer": "Multipurpose Internet Mail Extensions",
+          "incorrect_answers": [
+              "Mail Internet Mail Exchange",
+              "Multipurpose Interleave Mail Exchange",
+              "Mail Interleave Method Exchange"
+          ]
+      },
+      {
+          "category": "Entertainment: Cartoon & Animations",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "In &quot;The Simpsons&quot;, where did Homer and Marge first meet?",
+          "correct_answer": "At Summer Camp",
+          "incorrect_answers": [
+              "At High School",
+              "At Church",
+              "At 742 Evergreen Terrace"
+          ]
+      },
+      {
+          "category": "Entertainment: Japanese Anime & Manga",
+          "type": "multiple",
+          "difficulty": "hard",
+          "question": "The &quot;To Love-Ru&quot; Manga was started in what year?",
+          "correct_answer": "2006",
+          "incorrect_answers": [
+              "2007",
+              "2004",
+              "2005"
+          ]
+      },
+      {
+          "category": "Entertainment: Film",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "In the &quot;Jurassic Park&quot; universe, what is the name of the island that contains InGen&#039;s Site B?",
+          "correct_answer": "Isla Sorna",
+          "incorrect_answers": [
+              "Isla Nublar",
+              "Isla Pena",
+              "Isla Muerta"
+          ]
+      },
+      {
+          "category": "Entertainment: Video Games",
+          "type": "multiple",
+          "difficulty": "hard",
+          "question": "In &quot;Magicka&quot;, which two elements are combined to cast the spell, &quot;Nullify&quot;?",
+          "correct_answer": "Arcane + Shield",
+          "incorrect_answers": [
+              "Lightning + Shield",
+              "Lightning + Life",
+              "Arcane + Life"
+          ]
+      },
+      {
+          "category": "Entertainment: Books",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "Which of the following was the author of &quot;Username Evie&quot;?",
+          "correct_answer": "Joe Sugg",
+          "incorrect_answers": [
+              "Zoe Sugg",
+              "Joe Weller",
+              "Alfie Deyes"
+          ]
+      },
+      {
+          "category": "Geography",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "What continent is the country Lesotho in?",
+          "correct_answer": "Africa",
+          "incorrect_answers": [
+              "Asia",
+              "South America",
+              "Europe"
+          ]
+      },
+      {
+          "category": "Entertainment: Board Games",
+          "type": "multiple",
+          "difficulty": "hard",
+          "question": "Which ability from the &quot;Magic: The Gathering&quot; Scars of Mirrodin expansion involves having at least three artifacts in play?",
+          "correct_answer": "Metalcraft",
+          "incorrect_answers": [
+              "Affinity",
+              "Imprint",
+              "Living Weapon"
+          ]
+      },
+      {
+          "category": "Entertainment: Video Games",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "Which of these games takes place in the Irish town of Doolin, with the option to play as one of the characters, Ellen and Keats?",
+          "correct_answer": "Folklore",
+          "incorrect_answers": [
+              "Shadow of the Colossus",
+              "ICO",
+              "Beyond Good &amp; Evil"
+          ]
+      },
+      {
+          "category": "Entertainment: Japanese Anime & Manga",
+          "type": "multiple",
+          "difficulty": "hard",
+          "question": "Which animation studio produced the anime adaptation of &quot;xxxHolic&quot;?",
+          "correct_answer": "Production I.G",
+          "incorrect_answers": [
+              "Sunrise",
+              "Xebec",
+              "Kyoto Animation"
+          ]
+      },
+      {
+          "category": "Entertainment: Books",
+          "type": "multiple",
+          "difficulty": "hard",
+          "question": "In the Magic: The Gathering universe, which plane does the Homelands expansion take place in?",
+          "correct_answer": "Ulgrotha",
+          "incorrect_answers": [
+              "Bant",
+              "Llanowar",
+              "Tazeem"
+          ]
+      },
+      {
+          "category": "Entertainment: Film",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "What character in the Winnie the Pooh films was added by Disney and does not appear in the original books?",
+          "correct_answer": "Gopher",
+          "incorrect_answers": [
+              "Tigger",
+              "Heffalumps",
+              "Rabbit"
+          ]
+      },
+      {
+          "category": "Entertainment: Television",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "On the NBC show Community what was Star Burns&#039; real name?",
+          "correct_answer": "Alex",
+          "incorrect_answers": [
+              "Todd",
+              "Neal",
+              "Grimus"
+          ]
+      },
+      {
+          "category": "Entertainment: Music",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "Rick Astley&#039;s hit song &quot;Never Gonna Give You Up&quot; was released in what year?",
+          "correct_answer": "1987",
+          "incorrect_answers": [
+              "1985",
+              "1986",
+              "1988"
+          ]
+      },
+      {
+          "category": "Entertainment: Board Games",
+          "type": "multiple",
+          "difficulty": "easy",
+          "question": "What is the maximum level you can have in a single class in Dungeons and Dragons (5e)?",
+          "correct_answer": "20",
+          "incorrect_answers": [
+              "30",
+              "15",
+              "25"
+          ]
+      },
+      {
+          "category": "Entertainment: Japanese Anime & Manga",
+          "type": "multiple",
+          "difficulty": "medium",
+          "question": "Who is the main character in One Piece?",
+          "correct_answer": "Luffy",
+          "incorrect_answers": [
+              "Shanks",
+              "Zoro",
+              "Smoker"
+          ]
+      },
+      {
+          "category": "Entertainment: Music",
+          "type": "multiple",
+          "difficulty": "hard",
+          "question": "Where was Nicki Minaj born?",
+          "correct_answer": "Trinidad and Tobago",
+          "incorrect_answers": [
+              "Haiti",
+              "Saint Lucia",
+              "Grenada"
+          ]
+      }
+  ]
+}

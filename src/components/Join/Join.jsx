@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSpeechSynthesis } from 'react-speech-kit';
 import { Link } from 'react-router-dom';
 import '../../App.scss';
 import './Join.scss';
 
 export default function Join() {
+  const [text, setText] = useState('The instructions are simple!  A question will come up and you have to choose the correct answer on your device.  If you have the most points... you win!');
+  const onEnd = () => {};
+  const { speak, voices } = useSpeechSynthesis({onEnd});
+  const voice = voices[51];
+
+
   return (
     <div className="App">
       <div className="join__wrapper">
@@ -27,7 +34,9 @@ export default function Join() {
         </div>
       </div>  
 
-      <Link to="/instructions"><button className="button">Everyone's here!</button></Link>
+      <Link to="/instructions" onClick={() => {
+            speak({ text, voice })
+          }}><button className="button">Everyone's here!</button></Link>
     </div>
   );
 }

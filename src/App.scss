@@ -9,7 +9,7 @@
 
 .App {
   text-align: center;
-  background-color: #516e99;
+  background-color: #000000;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -33,4 +33,18 @@
   width: 400px;
   background-color: rgb(68, 19, 6);
   color: white;
+}
+
+.button2 {
+  border: none;
+  border-radius: 8px;
+  font-size: calc(30px + 2vmin);
+  height: 100px;
+  width: 100%;
+  background-color: black;
+  color: white;
+}
+
+.fade-out {
+  transition: opacity 4s;
 }

@@ -5,16 +5,12 @@ import '../../App.scss';
 import './Title.scss';
 
 export default function Title() {
-  const [text, setText] = useState('Welcome to You Dont Know Diddly Squat');
+  const [text, setText] = useState('Whos playing?  Join up now and press, everyones here when your ready');
   const onEnd = () => {
     setText("Let's get to the game!")
   };
   const { speak, voices } = useSpeechSynthesis({onEnd});
   const voice = voices[51];
-
-console.log("text", text)
-console.log("speak", speak)
-console.log("voice", voice)
 
   // useEffect(() => {
   //   speak({ text, voice })
@@ -28,7 +24,9 @@ console.log("voice", voice)
       <div className="App">
         <h1 className="title">You Don't Know Diddly Squat</h1>
         <h3 className="title__sub">A multiplayer quiz show for the whole family!</h3>
-        <Link to="/join"><button className="button">Let's Go!</button></Link>
+        <Link to="/join" onClick={() => {
+            speak({ text, voice })
+          }}><button className="button">Let's Go!</button></Link>
         
       </div>
       
