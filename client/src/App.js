@@ -6,12 +6,11 @@ import Title from './components/Title/Title.jsx';
 import Join from './components/Join/Join.jsx';
 import Instructions from './components/Instructions/Instructions.jsx';
 import QuestionIntro from './components/QuestionIntro/QuestionIntro.jsx';
-import Questions from './components/Questions/Questions.jsx';export default function App() {
+import Questions from './components/Questions/Questions.jsx';
+
+export default function App() {
   return (
     <MemoryRouter initialEntries={["/"]} initialIndex={1}>
-
-
-
       <Switch>
         <Route path="/" exact component={Logo}/>
         <Route path="/title" component={Title}/>
