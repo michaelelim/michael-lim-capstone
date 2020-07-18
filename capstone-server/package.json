@@ -1,0 +1,21 @@
+{
+  "name": "capstone-server",
+  "version": "1.0.0",
+  "description": "server for You don't know diddly squat",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server"
+  },
+  "author": "Michael Lim",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "moment": "^2.27.0",
+    "node-sass": "^4.14.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
