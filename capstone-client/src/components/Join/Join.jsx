@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSpeechSynthesis } from 'react-speech-kit';
 import { Link } from 'react-router-dom';
 import '../../App.scss';
 import './Join.scss';
 
-export default function Join() {
-  const [text, setText] = useState('The instructions are simple!  A question will come up and you have to choose the correct answer on your device.  If you have the most points... you win!');
+export default function Join({room, name1}) {
+
+  // console.log("props: ", props)
+  console.log("room: ", room)
+  console.log("name1: ", name1)
+
+  const [text] = useState('The instructions are simple!  A question will come up and you have to choose the correct answer on your device.  If you have the most points... you win!');
   const onEnd = () => {};
   const { speak, voices } = useSpeechSynthesis({onEnd});
   const voice = voices[51];
@@ -17,15 +22,15 @@ export default function Join() {
         <h1 className="join__left">Who's playing?</h1>
         
         <div className="join__right">
-          <h4 className="join__text">Connect now to the site, and use the code: </h4>
-          <div className="join__code">AB12</div>
+          <h4 className="join__room-title">Tell friends this room code: </h4>
+          {/* <div className="join__room">{room}</div> */}
         </div>
       </div>
 
       <div className="join__player-wrapper">
         <div>
           <div className="join__player-number">Player 1</div>
-          <div className="join__player-name">Adam</div>
+          {/* <div className="join__player-name">{name1}</div> */}
         </div>
         
         <div>

@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSpeechSynthesis } from 'react-speech-kit';
 import { Link } from 'react-router-dom';
 import '../../App.scss';
 import './Instructions.scss';
 
 export default function Instructions() {
-  const [text, setText] = useState('Question... number... 1...');
+  const [text] = useState('Question... number... 1...');
   const onEnd = () => {};
   const { speak, voices } = useSpeechSynthesis({onEnd});
   const voice = voices[51];

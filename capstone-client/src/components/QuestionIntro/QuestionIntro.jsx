@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSpeechSynthesis } from 'react-speech-kit';
 import { Link } from 'react-router-dom';
 import Questions from '../Questions/Questions'
@@ -6,7 +6,7 @@ import '../../App.scss';
 import './QuestionIntro.scss';
 
 export default function QuestionIntro() {  
-  const [text, setText] = useState(
+  const [text] = useState(
     'First Question...  The song...Feel Good Ink... by British band Gorillaz features which hip hop group?  Is it A... De La Soul...  B... Public Enemy... C... Outkast... Or D... Cypress Hill'
     );
   const onEnd = () => {

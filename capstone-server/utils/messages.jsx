@@ -1,7 +1,7 @@
-function formatMessage(username, text) {
+function formatMessage(username, msg) {
   return {
     username,
-    text
+    msg
   }
 }
 

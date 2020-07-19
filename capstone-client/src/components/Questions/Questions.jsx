@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { useSpeechSynthesis } from 'react-speech-kit';
-import { Link } from 'react-router-dom';
+import React from 'react';
+// import React, { useState } from 'react';
+// import { useSpeechSynthesis } from 'react-speech-kit';
+// import { Link } from 'react-router-dom';
 import '../../App.scss';
 import './Questions.scss';
 
 export default function Questions() {
-  const [text, setText] = useState('Question 1... ');
-  const onEnd = () => {
-    return (
-      <Link to="/questions2" component={Questions}/>
-    )
-  };
-  const { speak, voices } = useSpeechSynthesis({onEnd});
-  const voice = voices[51];
+  // const [text, setText] = useState('Question 1... ');
+  // const onEnd = () => {
+  //   return (
+  //     <Link to="/questions2" component={Questions}/>
+  //   )
+  // };
+  // const { speak, voices } = useSpeechSynthesis({onEnd});
+  // const voice = voices[51];
 
-  const fadeOut = (item) => {
-    const fadeTarget = document.querySelector(item)
-    fadeTarget.classList.add("fade-out");
-    fadeTarget.style.opacity = '0'
-  }
+  // const fadeOut = (item) => {
+  //   const fadeTarget = document.querySelector(item)
+  //   fadeTarget.classList.add("fade-out");
+  //   fadeTarget.style.opacity = '0'
+  // }
 
   return (
     <div className="App">

@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSpeechSynthesis } from 'react-speech-kit';
 import { Link } from 'react-router-dom';
 import '../../App.scss';
 import './Title.scss';
 
 export default function Title() {
-  const [text, setText] = useState('Whos playing?  Join up now and press, everyones here when your ready');
-  const onEnd = () => {
-    setText("Let's get to the game!")
-  };
-  const { speak, voices } = useSpeechSynthesis({onEnd});
+  const [text] = useState('Thanks for hosting!  Enter your name and a room name to tell your friends');
+  // const onEnd = () => {
+  //   setText("Let's get to the game!")
+  // };
+  const { speak, voices } = useSpeechSynthesis();
+  // const { speak, voices } = useSpeechSynthesis({onEnd});
   const voice = voices[51];
 
   // useEffect(() => {
@@ -24,7 +25,7 @@ export default function Title() {
       <div className="App">
         <h1 className="title">You Don't Know Diddly Squat</h1>
         <h3 className="title__sub">A multiplayer quiz show for the whole family!</h3>
-        <Link to="/join" onClick={() => {
+        <Link to="/host" onClick={() => {
             speak({ text, voice })
           }}><button className="button">Let's Go!</button></Link>
         
