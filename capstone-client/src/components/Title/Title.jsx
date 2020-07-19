@@ -6,29 +6,17 @@ import './Title.scss';
 
 export default function Title() {
   const [text] = useState('Thanks for hosting!  Enter your name and a room name to tell your friends');
-  // const onEnd = () => {
-  //   setText("Let's get to the game!")
-  // };
   const { speak, voices } = useSpeechSynthesis();
-  // const { speak, voices } = useSpeechSynthesis({onEnd});
   const voice = voices[51];
-
-  // useEffect(() => {
-  //   speak({ text, voice })
-  // }, [text, speak, voice])
-
-  // useEffect(() => {
-  //   speak({ text, voice })
-  // })
 
   return (
       <div className="App">
         <h1 className="title">You Don't Know Diddly Squat</h1>
         <h3 className="title__sub">A multiplayer quiz show for the whole family!</h3>
-        <Link to="/host" onClick={() => {
-            speak({ text, voice })
-          }}><button className="button">Let's Go!</button></Link>
-        
+        {/* <Link to="/host" onClick={() => {speak({ text, voice })}}> */}
+        <Link to="/host">
+          <button className="button">Let's Go!</button>
+        </Link>        
       </div>
       
   )

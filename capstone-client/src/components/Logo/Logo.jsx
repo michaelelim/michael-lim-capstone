@@ -33,11 +33,13 @@ export default function Logo() {
             fadeOut(".button2")
         }}>Click to start */}
 
-          <button className="button2" onClick={() => {
+        {/* <button className="button2" onClick={() => {
             speak({ text, voice })
             fadeOut(".logo-image")
             fadeOut(".button2")
-          }}>Click to start</button>
+          }}> */}
+          <button className="button2">
+            Click to start</button>
         </Link>
         
       </div>

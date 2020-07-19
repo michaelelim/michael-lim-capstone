@@ -17,6 +17,8 @@ export default function App() {
         <Route path="/title" component={Title}/>
         <Route path="/host" render={props => <Host {... props}/>}/>
         <Route path="/join" render={props => <Join {... props}/>}/>
+        {/* <Route path="/host" render={props => <Host props={props}/>}/>
+        <Route path="/join" render={props => <Join props={props}/>}/> */}
         <Route path="/instructions" component={Instructions}/>
         <Route path="/questionintro" component={QuestionIntro}/>
         <Route path="/questions" component={Questions}/>
