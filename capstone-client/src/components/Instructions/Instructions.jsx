@@ -1,14 +1,30 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 // import { useSpeechSynthesis } from 'react-speech-kit';
 import { Link } from 'react-router-dom';
 import '../../App.scss';
 import './Instructions.scss';
+import socketIOClient from 'socket.io-client';
 
-export default function Instructions() {
+const ENDPOINT = 'http://127.0.0.1:3009';
+const STARTPOINT = 'http://127.0.0.1:3000';
+const socket = socketIOClient(ENDPOINT);
+
+export default function Instructions({name, room}) {
   // const [text] = useState('Question... number... 1...');
   // const onEnd = () => {};
   // const { speak, voices } = useSpeechSynthesis({onEnd});
   // const voice = voices[51];
+
+  const advanceToServer = () => {
+    console.log("Sending advance call to server")
+    socket.emit('advanceButton', true)}
+
+    useEffect(() => {
+      socket.on("advancebuttonbroadcast", data => {
+        window.location.href = STARTPOINT + "/questions/" + name + "/" + room;
+      })
+    }, [])
+
 
   return (
     <div id="the-instructions" className="App">
@@ -36,7 +52,9 @@ export default function Instructions() {
         </div>
       </div>
 
-      <Link to="/questionintro"><button className="button">We get it! Let's go!</button></Link>
+      <Link to={`/questions/${name}/${room}`}>
+        <button className="button" onClick={advanceToServer}>We got it! Let's go!</button>
+      </Link>
     </div>
   );
 }

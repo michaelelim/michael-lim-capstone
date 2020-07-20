@@ -53,24 +53,25 @@ io.on('connection', (socket) => {
     }
   })
 
-  // Listen for name1
-  // socket.on('name1', (name1) => {
-  //   if (name1 == null) {name1 = player1} 
-  //   else {player1 = name1}
-  //   io.emit('name1broadcast', name1) // Broadcast to everyone
-  // })
-
-  // // Listen for name2
-  // socket.on('name2', (name2) => {
-  //   if (name2 == null) {name2 = player2} 
-  //   else {player2 = name2}
-  //   io.emit('name2broadcast', name2) // Broadcast to everyone
-  // })
-
   // Listen for advance button
-  socket.on('advancebutton', () => {
+  socket.on('advanceButton', () => {
+    console.log("Advance call received")
     io.emit('advancebuttonbroadcast', true)
   })
+
+  // Listen for time to serve questions
+  const questions = require('./questions.json');
+
+  function getRandomInt(max) {
+    return (Math.floor(Math.random() * Math.floor(max)));
+  }
+
+  socket.on('sendQuestion', () => {
+    const filteredQuestion = questions[getRandomInt(50)]
+    console.log('Sending question: ', filteredQuestion)
+    // io.emit('question', filteredQuestion)
+  })
+
 })
 
 const PORT = 3009 || process.env.PORT;

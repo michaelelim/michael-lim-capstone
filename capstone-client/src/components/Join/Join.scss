@@ -58,7 +58,14 @@
     }
   }
 
-  
+  &__room {
+    font-size: 200%;
+
+    &-title {
+      font-size: 200%;
+      margin: 0;
+    }
+  }
 
   &__player-wrapper {
     display: flex;

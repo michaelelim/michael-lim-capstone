@@ -26,7 +26,11 @@ export default function App() {
             room={props.match.params.room}
             name={props.match.params.name}
           />)}}/>
-        <Route path="/instructions" component={Instructions}/>
+        <Route path="/instructions/:name/:room" render={props => {
+          return (<Instructions 
+            room={props.match.params.room}
+            name={props.match.params.name}
+          />)}}/>
         <Route path="/questionintro" component={QuestionIntro}/>
         <Route path="/questions" component={Questions}/>
       </Switch>

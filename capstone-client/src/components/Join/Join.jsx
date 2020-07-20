@@ -7,6 +7,7 @@ import socketIOClient from 'socket.io-client';
 import Instructions from '../Instructions/Instructions'
 
 const ENDPOINT = 'http://127.0.0.1:3009';
+const STARTPOINT = 'http://127.0.0.1:3000';
 const socket = socketIOClient(ENDPOINT);
 
 export default function Join({name, room}) {
@@ -19,7 +20,9 @@ export default function Join({name, room}) {
   const roomToServer = () => {socket.emit('roomName', room)}
   const name1ToServer = () => {socket.emit('name1', name)}
   // const name2ToServer = () => {socket.emit('name2', name2Final)}
-  const advanceToServer = () => {socket.emit('advanceButton', true)}
+  const advanceToServer = () => {
+    console.log("Sending advance call to server")
+    socket.emit('advanceButton', true)}
 
   // {name1Final == '' ? setName1Final(name) : setName2Final(name)}
 
@@ -27,9 +30,7 @@ export default function Join({name, room}) {
     socket.on("name1broadcast", data => {setName1Final(data)})
     socket.on("name2broadcast", data => {setName2Final(data)})
     socket.on("advancebuttonbroadcast", data => {
-      setAdvanceButton(true)
-      // try window.location.href
-      return <Instructions/>
+      window.location.href = STARTPOINT + "/instructions/" + name + "/" + room;
     })
   }, [])
 
@@ -67,9 +68,10 @@ export default function Join({name, room}) {
 
 
       {/* <Link to="/instructions" onClick={() => {speak({ text, voice })}}> */}
-      {/* <button className="button" onClick={advanceToServer()}>Everyone's here!</button> */}
-      <Link to="/instructions">
-        <button className="button">Everyone's here!</button>
+      {/* <button className="button" onClick={advanceToServer}>Everyone's here!</button> */}
+      {/* <Link to={`/instructions/${name}/${room}`}> */}
+      <Link to={`/instructions/${name}/${room}`}>
+        <button className="button" onClick={advanceToServer}>Everyone's here!</button>
       </Link>
       
     </div>
