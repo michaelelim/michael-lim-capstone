@@ -1,25 +1,31 @@
 import React, { useState } from 'react';
-import { useSpeechSynthesis } from 'react-speech-kit';
+// import { useSpeechSynthesis } from 'react-speech-kit';
 import { MemoryRouter, Switch, Route, Link } from 'react-router-dom';
 import '../../App.scss';
 import './Host.scss';
 import Join from '../Join/Join'
 
 export default function Host() {
-  const [text] = useState('Whos Playing? Tell your friends to join with the code below and press everyone is here when ready');
+  // const [text] = useState('Whos Playing? Tell your friends to join with the code below and press everyone is here when ready');
   const [name1, setName1] = useState('');
   const [room, setRoom] = useState('');
-  const [hideItem, setHideItem] = useState(true);
+  // const [hideItem, setHideItem] = useState(true);
 
-  const hideOnClick = () => {
-    document.getElementById("the-host").style.display = "none";
-    // setHideItem(false)
+  // const hideOnClick = () => {
+  //   document.getElementById("the-host").style.display = "none";
+  //   // setHideItem(false)
+  // }
+
+  const removeElement = () => {
+    let element = document.querySelector("#the-host");
+    element.parentNode.removeChild(element)
   }
-  const { speak, voices } = useSpeechSynthesis();
-  const voice = voices[51];
+
+  // const { speak, voices } = useSpeechSynthesis();
+  // const voice = voices[51];
 
   return (
-    <MemoryRouter>
+      <MemoryRouter>
       <div id="the-host" className="App">
         <div className="host__wrapper">
           <h1 className="host__top">Host Settings</h1>
@@ -30,19 +36,18 @@ export default function Host() {
             <h4 className="host__code-text">Create a room name: </h4>
             <input className="host__code" type="text" onChange={(e) => {setRoom(e.target.value)}}></input>
           </div>
+
+          <Link to="/join">
+            <button className="button" onClick={removeElement}>
+              Create Room
+            </button>
+          </Link>  
         </div>
-      
-        <Link to="/join">
-          <button className="button" onClick={hideOnClick}>
-            Create Room
-          </button>
-        </Link>  
       </div>
 
-      <Switch>
-        <Route path="/join" render={() => <Join name1={name1} room={room}/>}/>
-      </Switch>
-
-    </MemoryRouter>
+          <Switch>
+            <Route path="/join" render={() => <Join name1={name1} room={room}/>}/>
+          </Switch>
+      </MemoryRouter>
   );
 }

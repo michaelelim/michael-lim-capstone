@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { useSpeechSynthesis } from 'react-speech-kit';
+import React from 'react';
+// import { useSpeechSynthesis } from 'react-speech-kit';
 import { Link } from 'react-router-dom';
 import '../../App.scss';
 import './Instructions.scss';
 
 export default function Instructions() {
-  const [text] = useState('Question... number... 1...');
-  const onEnd = () => {};
-  const { speak, voices } = useSpeechSynthesis({onEnd});
-  const voice = voices[51];
+  // const [text] = useState('Question... number... 1...');
+  // const onEnd = () => {};
+  // const { speak, voices } = useSpeechSynthesis({onEnd});
+  // const voice = voices[51];
 
   return (
-    <div className="App">
+    <div id="the-instructions" className="App">
       <div className="instructions__wrapper">
         <h1 className="instructions__title">Instructions</h1>
       </div>
@@ -36,9 +36,7 @@ export default function Instructions() {
         </div>
       </div>
 
-      <Link to="/questionintro" onClick={() => {
-            speak({ text, voice })
-          }}><button className="button">We get it! Let's go!</button></Link>
+      <Link to="/questionintro"><button className="button">We get it! Let's go!</button></Link>
     </div>
   );
 }

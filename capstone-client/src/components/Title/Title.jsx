@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { useSpeechSynthesis } from 'react-speech-kit';
+import React from 'react';
+// import { useSpeechSynthesis } from 'react-speech-kit';
 import { Link } from 'react-router-dom';
 import '../../App.scss';
 import './Title.scss';
 
 export default function Title() {
-  const [text] = useState('Thanks for hosting!  Enter your name and a room name to tell your friends');
-  const { speak, voices } = useSpeechSynthesis();
-  const voice = voices[51];
+  // const [text] = useState('Thanks for hosting!  Enter your name and a room name to tell your friends');
+  // const { speak, voices } = useSpeechSynthesis();
+  // const voice = voices[51];
 
   return (
       <div className="App">
         <h1 className="title">You Don't Know Diddly Squat</h1>
         <h3 className="title__sub">A multiplayer quiz show for the whole family!</h3>
         {/* <Link to="/host" onClick={() => {speak({ text, voice })}}> */}
-        <Link to="/host">
+        <Link to="/menu">
           <button className="button">Let's Go!</button>
         </Link>        
       </div>
