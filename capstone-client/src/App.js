@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, MemoryRouter } from 'react-router-dom';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import './App.scss';
 import Logo from './components/Logo/Logo.jsx';
 import Title from './components/Title/Title.jsx';
@@ -13,18 +13,23 @@ import Questions from './components/Questions/Questions.jsx';
 
 export default function App() {
   return (
-    <MemoryRouter initialEntries={["/"]} initialIndex={1}>
+    <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={Logo}/>
+        <Route path="/" exact render={props => (<Logo {... props}/>)}/>
         <Route path="/title" component={Title}/>
         <Route path="/menu" render={props => <Menu {... props}/>}/>
         <Route path="/host" render={props => <Host {... props}/>}/>
         <Route path="/joinroom" render={props => <JoinRoom {... props}/>}/>
-        <Route path="/join" render={props => <Join {... props}/>}/>
+        <Route path="/join" exact render={props => <Join {... props}/>}/>
+        <Route path="/join/:name/:room" render={props => {
+          return (<Join 
+            room={props.match.params.room}
+            name={props.match.params.name}
+          />)}}/>
         <Route path="/instructions" component={Instructions}/>
         <Route path="/questionintro" component={QuestionIntro}/>
         <Route path="/questions" component={Questions}/>
       </Switch>
-    </MemoryRouter>
+    </BrowserRouter>
   );
 }

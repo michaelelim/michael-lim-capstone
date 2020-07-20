@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // import { useSpeechSynthesis } from 'react-speech-kit';
-import { Link, Switch, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../../App.scss';
 import './Join.scss';
 import socketIOClient from 'socket.io-client';
@@ -9,45 +9,41 @@ import Instructions from '../Instructions/Instructions'
 const ENDPOINT = 'http://127.0.0.1:3009';
 const socket = socketIOClient(ENDPOINT);
 
-export default function Join({name1, name2, room}) {
-  let [name1Final, setName1Final] = useState(name1);
-  let [name2Final, setName2Final] = useState(name2);
-  let [roomfinal, setRoomFinal] = useState(room);
+export default function Join({name, room}) {
+
+  let [name1Final, setName1Final] = useState('');
+  let [name2Final, setName2Final] = useState("JOIN NOW!");
+  // let [roomfinal, setRoomFinal] = useState(room);
   let [advanceButton, setAdvanceButton] = useState(false);
 
   const roomToServer = () => {socket.emit('roomName', room)}
-  const name1ToServer = () => {socket.emit('name1', name1)}
-  const name2ToServer = () => {socket.emit('name2', name2)}
+  const name1ToServer = () => {socket.emit('name1', name)}
+  // const name2ToServer = () => {socket.emit('name2', name2Final)}
   const advanceToServer = () => {socket.emit('advanceButton', true)}
+
+  // {name1Final == '' ? setName1Final(name) : setName2Final(name)}
 
   useEffect(() => {
     socket.on("name1broadcast", data => {setName1Final(data)})
     socket.on("name2broadcast", data => {setName2Final(data)})
-    // socket.on("advancebuttonbroadcast", data => {
-    //   setAdvanceButton(true)
-    //   return <Instructions/>
-    // })
+    socket.on("advancebuttonbroadcast", data => {
+      setAdvanceButton(true)
+      // try window.location.href
+      return <Instructions/>
+    })
   }, [])
 
   // const [text] = useState('The instructions are simple!  A question will come up and you have to choose the correct answer on your device.  If you have the most points... you win!');
-  const [name, setName] = useState("JOIN NOW!")
-  
-  // const showOnClick = () => {
-  //   document.getElementById("the-join-room").style.display = "block";
-  //   // setHideItem(false)
-  // }
-
-  const removeElement = () => {
-    let element = document.getElementById("the-join");
-    element.parentNode.removeChild(element);
-  }
 
   // const onEnd = () => {};
   // const { speak, voices } = useSpeechSynthesis();
   // const voice = voices[51];
 
-  return (
+  return ( 
     <div id="the-join" className="App">
+      {roomToServer()}
+      {name1ToServer()}
+      {/* {name2ToServer()} */}
       <div className="join__wrapper">
         <h1 className="join__left">Who's playing?</h1>
         
@@ -69,9 +65,6 @@ export default function Join({name1, name2, room}) {
         </div>
       </div>  
 
-      {roomToServer()}
-      {name1ToServer()}
-      {name2ToServer()}
 
       {/* <Link to="/instructions" onClick={() => {speak({ text, voice })}}> */}
       {/* <button className="button" onClick={advanceToServer()}>Everyone's here!</button> */}
