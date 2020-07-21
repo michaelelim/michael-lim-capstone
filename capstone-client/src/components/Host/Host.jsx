@@ -12,24 +12,26 @@ export default function Host() {
   // const { speak, voices } = useSpeechSynthesis();
   // const voice = voices[51];
 
-  return (
-      <div>
-        <div id="the-host" className="App">
-          <div className="host__wrapper">
-            <h1 className="host__top">Host Settings</h1>
-            
-            <div className="host__bottom">
-              <h4 className="host__name-title">Enter your name: </h4>
-              <input className="host__name-input" type="text" onChange={(e) => {setName(e.target.value)}}></input>
-              <h4 className="host__code-text">Create a room name: </h4>
-              <input className="host__code" type="text" onChange={(e) => {setRoom(e.target.value)}}></input>
-            </div>
+  // const showJoin = () => {
+  //   document.querySelector(".host__wrapper").style.display = "none"
+  //   document.querySelector("#create-room-button").style.display = "none"
+  //   document.querySelector("#the-join").style.display = "flex"
+  // }
 
-            <Link to={`/join/${name}/${room}`}>
-              <button className="button">Create Room</button>
-            </Link>  
-          </div>
-        </div>
+  return (
+    <div className="host__wrapper">
+      <h1 className="host__top">Host Settings</h1>
+      
+      <div className="host__bottom">
+        <h4 className="host__name-title">Enter your name: </h4>
+        <input className="host__name-input" type="text" onChange={(e) => {setName(e.target.value)}}></input>
+        <h4 className="host__code-text">Create a room name: </h4>
+        <input className="host__code" type="text" onChange={(e) => {setRoom(e.target.value)}}></input>
       </div>
+
+      <Link to={`/join/${name}/${room}`}>
+        <button id="create-room-button" className="button">Create Room</button>
+      </Link>  
+    </div>
   );
 }

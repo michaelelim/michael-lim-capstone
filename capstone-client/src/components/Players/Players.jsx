@@ -5,10 +5,18 @@ import socketIOClient from 'socket.io-client';
 
 const ENDPOINT = 'http://127.0.0.1:3009';
 const socket = socketIOClient(ENDPOINT);
+let player1 = '';
+let player2 = '';
 
 export default function Players({name1, name2}) {
-  let [name1Final, setName1Final] = useState(name1);
-  let [name2Final, setName2Final] = useState(name2);
+  let [name1Final, setName1Final] = useState(player1);
+  let [name2Final, setName2Final] = useState(player2);
+  
+  const setPlayers = () => {
+    console.log("Setting players")
+    player1 = name1Final
+    player2 = name2Final
+  }
 
   useEffect(() => {
     if (name1Final !== null) {socket.on("name1broadcast", data => {setName1Final(data)})} //listen for name1broadcast
@@ -26,6 +34,7 @@ export default function Players({name1, name2}) {
           <div className="players__number">Player 2</div>
           <div id="player2" className="players__name2">{name2Final}</div>
         </div>
-      </div>       
+        {setPlayers()}
+      </div>             
   );
 }

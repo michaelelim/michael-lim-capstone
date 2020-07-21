@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import './App.scss';
-import Logo from './components/Logo/Logo.jsx';
+import Home from './components/Home/Home.jsx';
 import Title from './components/Title/Title.jsx';
 import Menu from './components/Menu/Menu.jsx';
 import Host from './components/Host/Host.jsx';
@@ -15,8 +15,8 @@ export default function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact render={props => (<Logo {... props}/>)}/>
-        <Route path="/title" component={Title}/>
+        <Route path="/" exact render={props => (<Home {... props}/>)}/>
+        {/* <Route path="/title" component={Title}/> */}
         <Route path="/menu" render={props => <Menu {... props}/>}/>
         <Route path="/host" render={props => <Host {... props}/>}/>
         <Route path="/joinroom" render={props => <JoinRoom {... props}/>}/>
