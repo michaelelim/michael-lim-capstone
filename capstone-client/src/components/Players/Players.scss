@@ -1,0 +1,20 @@
+.players {
+  &__wrapper {
+    display: none;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    justify-content: space-around;
+    width: 80%;
+    padding-bottom: 50px;
+}
+
+  &__player-name1 {
+    font-size: calc(30px + 2vmin);
+    font-family: "Amaranth";
+  }
+
+  &__player-name2 {
+    font-size: calc(30px + 2vmin);
+    font-family: "Amaranth";
+  }
+}

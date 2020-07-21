@@ -12,11 +12,6 @@ let player2 = 'JOIN NOW!'
 let player1room = ''
 let player2room = ''
 
-// Run when client connects
-app.get('/', (req, res) => {
-  res.send("YDKDS Back-end")
-})
-
 io.on('connection', (socket) => {
   console.log('New PLAYER connected!');
 
@@ -53,6 +48,13 @@ io.on('connection', (socket) => {
     }
   })
 
+  // listen for reiterate player names
+  socket.on('listPlayers', () => {
+    console.log("reiterating player names: ", player1, player2)
+    io.emit('name1broadcast', player1)
+    io.emit('name2broadcast', player2)
+  })
+
   // Listen for advance button
   socket.on('advanceButton', () => {
     console.log("Advance call received")
@@ -61,15 +63,39 @@ io.on('connection', (socket) => {
 
   // Listen for time to serve questions
   const questions = require('./questions.json');
+  const filteredQuestions = [];
+  let questionsSent = false;
 
-  function getRandomInt(max) {
-    return (Math.floor(Math.random() * Math.floor(max)));
-  }
+  // Fisher-Yates shuffle algorithm
+  const shuffle = (array) => {
+    let currentIndex = array.length;
+    let temporaryValue, randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+    return array;
+  };
 
-  socket.on('sendQuestion', () => {
-    const filteredQuestion = questions[getRandomInt(50)]
-    console.log('Sending question: ', filteredQuestion)
-    // io.emit('question', filteredQuestion)
+  // listen for request for questions
+  socket.on('sendQuestions', () => { 
+    console.log("questionsSent?", questionsSent)
+    if (questionsSent === false) {
+      console.log('Shuffling questions!')
+      questionsSent = true;
+      shuffle(questions);
+      for (let i = 0; i < 3; i++) {filteredQuestions.push(questions[i])}
+    }
+    console.log('Sending questions: ', filteredQuestions)
+    io.emit('questions', filteredQuestions) //broadcast to all
   })
 
 })

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import '../../App.scss';
 import './Join.scss';
 import socketIOClient from 'socket.io-client';
-import Instructions from '../Instructions/Instructions'
+import Players from '../Players/Players'
 
 const ENDPOINT = 'http://127.0.0.1:3009';
 const STARTPOINT = 'http://127.0.0.1:3000';
@@ -15,7 +15,7 @@ export default function Join({name, room}) {
   let [name1Final, setName1Final] = useState('');
   let [name2Final, setName2Final] = useState("JOIN NOW!");
   // let [roomfinal, setRoomFinal] = useState(room);
-  let [advanceButton, setAdvanceButton] = useState(false);
+  // let [advanceButton, setAdvanceButton] = useState(false);
 
   const roomToServer = () => {socket.emit('roomName', room)}
   const name1ToServer = () => {socket.emit('name1', name)}
@@ -74,6 +74,7 @@ export default function Join({name, room}) {
         <button className="button" onClick={advanceToServer}>Everyone's here!</button>
       </Link>
       
+      <Players name1={name1Final} name2={name2Final}/>
     </div>
   );
 }
