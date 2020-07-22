@@ -10,9 +10,11 @@ import QuestionIntro from '../QuestionIntro/QuestionIntro'
 import '../QuestionIntro/QuestionIntro.scss';
 import Questions from '../Questions/Questions'
 import '../Questions/Questions.scss';
+import { v4 as uuidv4 } from 'uuid';
 
 const ENDPOINT = 'http://127.0.0.1:3009';
 const socket = socketIOClient(ENDPOINT);
+let clientId = uuidv4();
 
 export default function Join({name, room}) {
   let [name1Final, setName1Final] = useState('');
@@ -22,7 +24,7 @@ export default function Join({name, room}) {
   const roomToServer = () => {socket.emit('roomName', room)}
   const nameToServer = () => {
     socket.emit('name1', name)
-    socket.emit('name1id', socket.id)
+    socket.emit('name1id', clientId)
   }
 
   const advanceToServer = () => {

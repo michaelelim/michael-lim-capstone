@@ -5,10 +5,14 @@ const app = express();
 const server = http.createServer(app)
 const io = socket(server)
 
-let player1 = ''
+let player1 = ""
 let player2 = 'JOIN NOW!'
 let player1Id = ''
 let player2Id = ''
+let theRoom = ''
+
+let p1 = {name: "", id: "", score: 0, room: ""}
+let p2 = {name: "", id: "", score: 0, room: ""}
 
 io.on('connection', (socket) => {
   console.log('New PLAYER connected!: ', socket.id);
@@ -18,6 +22,7 @@ io.on('connection', (socket) => {
   // Listen for room
   socket.on('roomName', (room) => {
     io.emit('roomName', room) // Broadcast to everyone
+    theRoom = room
     socket.join(room)
   })
 
@@ -25,17 +30,30 @@ io.on('connection', (socket) => {
   socket.on('name1', (name) => {
     if (name !== null && player1 === "" && player1 !== name) {
       player1 = name      
-      player1Id = socket.id
-      console.log("player1Id: ", player1Id)
-      io.emit('name1broadcast', player1)
-      io.emit('name1Id', player1Id)
+
+      p1.name = player1
+      p1.id = ""
+      p1.score = 0
+      p1.room = theRoom
+      console.log(p1)
+
+      io.emit('name1Broadcast', player1)
+      io.emit('p1Broadcast', p1)
     } 
     else if (name !== null && player2 === "JOIN NOW!" && player1 !== name) {
       player2 = name
       player2Id = socket.id
-      io.emit('name1broadcast', player1)
-      io.emit('name2broadcast', player2)
-      io.emit('name2Id', player2Id)
+
+      p2.name = player2
+      p2.id = ""
+      p1.score = 0
+      p2.room = theRoom
+      console.log(p2)
+
+      io.emit('name1Broadcast', player1)
+      io.emit('name2Broadcast', player2)
+      io.emit('p1Broadcast', p1)
+      io.emit('p2Broadcast', p2)
     }
   })
 
@@ -76,14 +94,12 @@ io.on('connection', (socket) => {
   // listen for request for questions
   let questionsSent = false;
   socket.on('sendQuestions', () => { 
-    console.log("questionsSent?", questionsSent)
     if (questionsSent === false) {
       console.log('Shuffling questions!')
       questionsSent = true;
       shuffle(questions);
       for (let i = 0; i < 11; i++) {filteredQuestions.push(questions[i])}
     }
-    console.log('Sending questions: ', filteredQuestions)
     io.emit('filteredQuestions', filteredQuestions) //broadcast to all
   })
 
@@ -96,6 +112,16 @@ io.on('connection', (socket) => {
   socket.on('removeWrongAnswer3', () => {io.emit('removeWrongAnswer3')})
 
   // listen for correct answers
+  socket.on('100Player', (id) => {
+    console.log("100 for a player... Which?")
+    if (id === p1.id) {
+      console.log("Sending 100 to p1")
+      io.emit('100Player1')}
+    else if (id === p2.id) {
+      console.log("Sending 100 to p2")
+      io.emit('100Player2')}
+  })
+  
   socket.on('100Player1', () => {io.emit('100Player1')})
   socket.on('minus75Player1', () => {io.emit('minus75Player1')})
 })

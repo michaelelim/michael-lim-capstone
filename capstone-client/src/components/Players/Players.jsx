@@ -5,12 +5,13 @@ import socketIOClient from 'socket.io-client';
 
 const ENDPOINT = 'http://127.0.0.1:3009';
 const socket = socketIOClient(ENDPOINT);
+let p1 = {name: "", id: "", score: 0, room: ""}
+let p2 = {name: "", id: "", score: 0, room: ""}
 let player1 = '';
 let player2 = '';
-let player1Id = '';
-let player2Id = '';
 let score1 = 0;
 let score2 = 0;
+
 
 export default function Players() {
   let [name1Final, setName1Final] = useState(player1);
@@ -29,26 +30,31 @@ export default function Players() {
   }
 
   useEffect(() => {
-    if (name1Final !== null) {socket.on("name1broadcast", data => {setName1Final(data)})} //listen for name1broadcast
-    if (name2Final !== "JOIN NOW!") {socket.on("name2broadcast", data => {setName2Final(data)})} //listen for name2broadcast
+    if (name1Final !== null) {socket.on("name1Broadcast", data => {setName1Final(data)})} //listen for name1broadcast
+    if (name2Final !== "JOIN NOW!") {socket.on("name2Broadcast", data => {setName2Final(data)})} //listen for name2broadcast
     if (name1Final === "" && name2Final === "") {socket.emit('listPlayers')}
-    socket.on('100Player1', () => {
-      score1 += 100
-      setScore1Final(score1)
+
+    socket.on('p1Broadcast', (data) => {
+      p1.name = data.name
+      p1.id = data.id
+      p1.score = data.score
+      p1.room = data.room
+      console.log(p1)
+    })
+
+    socket.on('100Player1', (data) => {
+      p1.score += 100
+      console.log("Points +100 for p1: ", p1)
+      // score1 += 100
+      setScore1Final(p1.score)
     });
-    socket.on('minus75Player1', () => {
-      score1 -= 75
-      setScore1Final(score1)
+    socket.on('minus75Player1', (data) => {
+      p1.score -= 75
+      console.log("Points -75 for p1: ", p1)
+      // score1 -= 75
+      setScore1Final(p1.score)
     });
     
-    socket.on('name1Id', (data) => {
-      console.log("name1IdFinal Data: ", data)
-      player1Id = data
-    })
-    socket.on('name2Id', (data) => {
-      console.log("name2IdFinal Data: ", data)
-      player2Id = data
-    })
   }, [])
 
   return (

@@ -45,12 +45,8 @@ export default function Questions() {
   }
 
   useEffect(() => {
-    socket.on("advanceToQuestions", () => {
-      if (theQuestions.length === 0) {
-        getQuestions()
-        console.log("Asking server for questions")
-      }      
-    })
+    // asking server for questions
+    socket.on("advanceToQuestions", () => {if (theQuestions.length === 0) {getQuestions()}})
     
     //listen for move to next question
     socket.on("nextQuestion", () => {
@@ -64,9 +60,6 @@ export default function Questions() {
     //listen for questions from server
     socket.on("filteredQuestions", (data) => {
       theQuestions = data
-      console.log("theQuestions[0]: ", theQuestions[0])
-      console.log("theQuestions[1]: ", theQuestions[1])
-      console.log("theQuestions[2]: ", theQuestions[2])
       console.log("theQuestions", theQuestions)
       serveQuestions();
     }) 
@@ -89,9 +82,7 @@ export default function Questions() {
   // }
 
   let serveQuestions = () => {
-    console.log("Questions remaining top: ", theQuestions)
     currentQuestion = theQuestions.pop()
-    console.log("currentQuestion: ", currentQuestion)
     question = currentQuestion.question
     console.log("question: ", question)
     choice1 = currentQuestion.correct_answer
@@ -102,7 +93,6 @@ export default function Questions() {
     // {shuffleAnswers(theQuestions[0])} WIP
   
   return (
-    console.log("currentQuestion: ", currentQuestion),
     document.querySelector(".question").innerHTML = question,
     document.querySelector(".question__answer1").innerHTML = choice1,
     document.querySelector(".question__answer2").innerHTML = choice2,
@@ -118,7 +108,10 @@ export default function Questions() {
 
     document.querySelector(".question__wrapper").style.display = "none"
     document.querySelector(".modal-text").innerHTML = "Correct! You get 100 points!"
-    socket.emit('100Player1');
+    
+    // socket.emit('100Player1', socket.id);
+    console.log("Current socket with correct answer: ", socket.id)
+    socket.emit('100Player', socket.id);
     
     setTimeout(() => {
       document.getElementById("answerModal").style.display = "none"
