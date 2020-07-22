@@ -5,8 +5,6 @@ const app = express();
 const server = http.createServer(app)
 const io = socket(server)
 
-const botName = 'Server'
-
 let player1 = ''
 let player2 = 'JOIN NOW!'
 let player1room = ''
@@ -14,14 +12,8 @@ let player2room = ''
 
 io.on('connection', (socket) => {
   console.log('New PLAYER connected!');
-
-  // socket.emit('message', 'Welcome to YDKDS') // Broadcast to client
-  // socket.broadcast.emit('message', 'A player has joined the game'); // Broadcast to everyone except connecting user
   
-  socket.on('disconnect', () => { //Runs when client disconnects
-    console.log("A player has left");
-    // io.emit('message', 'A player has left the game') // Broadcast to all
-  }) 
+  socket.on('disconnect', () => {console.log("A player has left");}) 
 
   // Listen for room
   socket.on('roomName', (room) => {
@@ -55,7 +47,6 @@ io.on('connection', (socket) => {
   })
 
   // Listen for advance button
-  // let gameState = ["join", "instructions", "questionintro", "questions"]
   socket.on('advanceButton', (item) => {
     console.log("Advance call received")
     if (item === "goToInstructions") {io.emit('advanceToInstructions', item)}
@@ -72,13 +63,9 @@ io.on('connection', (socket) => {
     let currentIndex = array.length;
     let temporaryValue, randomIndex;
   
-    // While there remain elements to shuffle...
     while (0 !== currentIndex) {
-      // Pick a remaining element...
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
-  
-      // And swap it with the current element.
       temporaryValue = array[currentIndex];
       array[currentIndex] = array[randomIndex];
       array[randomIndex] = temporaryValue;
@@ -94,11 +81,19 @@ io.on('connection', (socket) => {
       console.log('Shuffling questions!')
       questionsSent = true;
       shuffle(questions);
-      for (let i = 0; i < 3; i++) {filteredQuestions.push(questions[i])}
+      for (let i = 0; i < 11; i++) {filteredQuestions.push(questions[i])}
     }
     console.log('Sending questions: ', filteredQuestions)
     io.emit('filteredQuestions', filteredQuestions) //broadcast to all
   })
+
+  // listen for signal for nextQuestion
+  socket.on('nextQuestion', () => {io.emit('nextQuestion')})
+
+  // listen for removeWrongAnswers
+  socket.on('removeWrongAnswer1', () => {io.emit('removeWrongAnswer1')})
+  socket.on('removeWrongAnswer2', () => {io.emit('removeWrongAnswer2')})
+  socket.on('removeWrongAnswer3', () => {io.emit('removeWrongAnswer3')})
 
 })
 

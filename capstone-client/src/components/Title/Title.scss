@@ -2,7 +2,6 @@
   display: none;
   
   text-align: center;
-  background-color: #9257ff;
   min-height: 100vh;
   
   flex-direction: column;
@@ -14,7 +13,7 @@
   padding: 2%;
 
   &__title {
-    font-size: calc(60px + 2vmin);
+    font-size: calc(90px + 2vmin);
     color: white;
     font-weight: 600;
     font-family: 'Amaranth';

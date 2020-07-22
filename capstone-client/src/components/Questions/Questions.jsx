@@ -9,11 +9,14 @@ const socket = socketIOClient(ENDPOINT);
 let questionServed = false;
 let player1 = '';
 let player2 = '';
+let theQuestions = []
+let currentQuestion = {}
+let question = ""
 
 export default function Questions() {
-  let [theQuestions, setTheQuestions] = useState([])
-  let [currentQuestion, setCurrentQuestion] = useState({}) //current full question
-  let [question, setQuestion] = useState('') //only the question portion
+  // let [theQuestions, setTheQuestions] = useState([])
+  // let [currentQuestion, setCurrentQuestion] = useState({}) //current full question
+  // let [question, setQuestion] = useState('') //only the question portion
   let [allChoices, setAllChoices] = useState({})
   let [choice1, setChoice1] = useState('')
   let [choice2, setChoice2] = useState('')
@@ -56,8 +59,17 @@ export default function Questions() {
       }      
     })
     
+    //listen for move to next question
+    socket.on("nextQuestion", () => {
+      serveQuestions()
+      document.querySelector(".question__wrapper").style.display = "flex"
+      document.querySelector(".wrong-answer1").style.display = "flex"
+      document.querySelector(".wrong-answer2").style.display = "flex"
+      document.querySelector(".wrong-answer3").style.display = "flex"
+    })
+
     //listen for questions from server
-    socket.on("filteredQuestions", data => {      
+    socket.on("filteredQuestions", (data) => {
       theQuestions = data
       console.log("theQuestions[0]: ", theQuestions[0])
       console.log("theQuestions[1]: ", theQuestions[1])
@@ -66,16 +78,13 @@ export default function Questions() {
       serveQuestions();
     }) 
     
-    socket.on("name1broadcast", data1 => {
-      player1 = data1
-      console.log("player1: ", player1)
-    })
+    socket.on("name1broadcast", data1 => {player1 = data1})
+    socket.on("name2broadcast", data2 => {player2 = data2})
     
-    socket.on("name2broadcast", data2 => {
-      player2 = data2
-      console.log("player2: ", player2)
-    })
-    
+    socket.on("removeWrongAnswer1", () => {document.querySelector(".wrong-answer1").style.display = "none"})
+    socket.on("removeWrongAnswer2", () => {document.querySelector(".wrong-answer2").style.display = "none"})
+    socket.on("removeWrongAnswer3", () => {document.querySelector(".wrong-answer3").style.display = "none"})
+
   }, [])
 
   // const shuffleAnswers = (question) => {
@@ -86,7 +95,8 @@ export default function Questions() {
   //   console.log("allChoices:", allChoices)
   // }
 
-  const serveQuestions = () => {
+  let serveQuestions = () => {
+    console.log("Questions remaining top: ", theQuestions)
     currentQuestion = theQuestions.pop()
     console.log("currentQuestion: ", currentQuestion)
     question = currentQuestion.question
@@ -95,7 +105,8 @@ export default function Questions() {
     choice2 = currentQuestion.incorrect_answers[0]
     choice3 = currentQuestion.incorrect_answers[1]
     choice4 = currentQuestion.incorrect_answers[2]    
-    // {shuffleAnswers(theQuestions[0])}
+    console.log("Questions remaining bottom: ", theQuestions)
+    // {shuffleAnswers(theQuestions[0])} WIP
   
   return (
     console.log("currentQuestion: ", currentQuestion),
@@ -107,108 +118,54 @@ export default function Questions() {
   )
 }
 
-  // const submitChoice = (choice) => {
-  //   console.log("clicked: ", choice)
-  //   if (choice.target.id === 1) {
-  //     Correct()
-  //     // document.querySelector(".correct").style.display = "absolute"
-  //   } else if (choice.target.id !== 1) {
-  //     Incorrect()
-  //     // document.querySelector(".incorrect").style.display = "absolute"
-  //   }
-  // }
-
-  // function Correct() {
-  //   return (
-  //     document.querySelector("#question-wrapper").style.display = "none",
-  //     <div className="correct">
-  //       <h1>CORRECT! YOU GET 100 POINTS!</h1>
-  //     </div>      
-  //   )
-  // }
-  
-  // function Incorrect() {
-  //   return (
-  //     <div className="incorrect">
-  //       <h1>INCORRECT! YOU LOSE 75 POINTS!</h1>
-  //     </div>      
-  //   )
-  // }
-
   // Modal
   const submitCorrect = () => {
-    const modal = document.getElementById("answerModal");
-    const answerButton = document.getElementById("answer1");
-    const span = document.getElementsByClassName("close")[0];
+    document.getElementById("answerModal").style.display = "block";
+    document.getElementById("answer1");
 
+    document.querySelector(".question__wrapper").style.display = "none"
     document.querySelector(".modal-text").innerHTML = "Correct! You get 100 points!"
-
-    answerButton.onclick = () => {modal.style.display = "block"}
-  
-    span.onclick = () => {modal.style.display = "none"}
-    window.onclick = function(event) {if (event.target == modal) {modal.style.display = "none"}}
-
-    // WIP!!!
-    // setTimeout(() => {serveQuestions()}, 2000)
+    
+    setTimeout(() => {
+      document.getElementById("answerModal").style.display = "none"
+      socket.emit('nextQuestion'); //move to next question
+    }, 2000)
   }
 
   const submitIncorrect1 = () => {
-    const modal = document.getElementById("answerModal");
-    const answerButton = document.querySelector(".wrong-answer1");
-    const span = document.getElementsByClassName("close")[0];
+    document.getElementById("answerModal").style.display = 'block';
+    document.querySelector(".wrong-answer1");
 
     document.querySelector(".modal-text").innerHTML = "Incorrect! You lose 75 points!"
 
-    answerButton.onclick = () => {modal.style.display = "block"}
-  
-    span.onclick = () => {
-      modal.style.display = "none"
-      document.querySelector(".wrong-answer1").style.display = "none"
-    }
-    window.onclick = function(event) {if (event.target == modal) {
-      modal.style.display = "none"
-      document.querySelector(".wrong-answer1").style.display = "none"
-    }}
+    setTimeout(() => {
+      document.getElementById("answerModal").style.display = "none"
+      socket.emit('removeWrongAnswer1')
+    }, 2000)
   }
 
   const submitIncorrect2 = () => {
-    const modal = document.getElementById("answerModal");
-    const answerButton = document.querySelector(".wrong-answer2");
-    const span = document.getElementsByClassName("close")[0];
+    document.getElementById("answerModal").style.display = 'block';
+    document.querySelector(".wrong-answer2");
 
     document.querySelector(".modal-text").innerHTML = "Incorrect! You lose 75 points!"
 
-    answerButton.onclick = () => {modal.style.display = "block"}
-  
-    span.onclick = () => {
-      modal.style.display = "none"
-      document.querySelector(".wrong-answer2").style.display = "none"
-    }
-    window.onclick = function(event) {if (event.target == modal) {
-      modal.style.display = "none"
-      document.querySelector(".wrong-answer2").style.display = "none"
-    }}
+    setTimeout(() => {
+      document.getElementById("answerModal").style.display = "none"
+      socket.emit('removeWrongAnswer2')
+    }, 2000)
   }
 
   const submitIncorrect3 = () => {
-    const modal = document.getElementById("answerModal");
-    const answerButton = document.querySelector(".wrong-answer3");
-    const span = document.getElementsByClassName("close")[0];
+    document.getElementById("answerModal").style.display = 'block';
+    document.querySelector(".wrong-answer3");
 
     document.querySelector(".modal-text").innerHTML = "Incorrect! You lose 75 points!"
 
-    answerButton.onclick = () => {modal.style.display = "block"}
-  
-    span.onclick = () => {
-      modal.style.display = "none"
-      document.querySelector(".wrong-answer3").style.display = "none"
-    }
-    window.onclick = function(event) {if (event.target == modal) {
-      modal.style.display = "none"
-      document.querySelector(".wrong-answer3").style.display = "none"
-    }}
-
- 
+    setTimeout(() => {
+      document.getElementById("answerModal").style.display = "none"
+      socket.emit('removeWrongAnswer3')
+    }, 2000)
   }
 
   return (
@@ -216,8 +173,7 @@ export default function Questions() {
       
       <div id="answerModal" className="modal">
         <div className="modal-content">
-          <span className="close">&times;</span>
-          <p className="modal-text">Yay!</p>
+          <p className="modal-text"></p>
         </div>
       </div>
       

@@ -11,8 +11,6 @@ import QuestionIntro from '../QuestionIntro/QuestionIntro'
 import '../QuestionIntro/QuestionIntro.scss';
 import Questions from '../Questions/Questions'
 import '../Questions/Questions.scss';
-import AnswerPopup from '../AnswerPopup/AnswerPopup'
-import '../AnswerPopup/AnswerPopup.scss';
 
 const ENDPOINT = 'http://127.0.0.1:3009';
 const STARTPOINT = 'http://127.0.0.1:3000';
@@ -67,21 +65,8 @@ export default function Join({name, room}) {
           </div>
         </div>
       </div>
-      {/* <div className="join__player-wrapper">
-        <div>
-          <div className="join__player-number">Player 1</div>
-          <div id="player1" className="join__player-name">{name1Final}</div>
-        </div>
-        
-        <div>
-          <div className="join__player-number">Player 2</div>
-          <div id="player2" className="join__player-name">{name2Final}</div>
-        </div>
-      </div>   */}
 
-      {/* {document.querySelector(".players__wrapper").style.display = "flex"} */}
       <Questions />
-      <AnswerPopup />
       
       <Players name1={name1Final} name2={name2Final}/>
 
