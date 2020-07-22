@@ -7,22 +7,15 @@ import socketIOClient from 'socket.io-client';
 const ENDPOINT = 'http://127.0.0.1:3009';
 const socket = socketIOClient(ENDPOINT);
 let questionServed = false;
-let player1 = '';
-let player2 = '';
+let player1, player2 = '';
 let theQuestions = []
 let currentQuestion = {}
 let question = ""
+let choice1, choice2, choice3, choice4 = ""
 
 export default function Questions() {
-  // let [theQuestions, setTheQuestions] = useState([])
-  // let [currentQuestion, setCurrentQuestion] = useState({}) //current full question
-  // let [question, setQuestion] = useState('') //only the question portion
-  let [allChoices, setAllChoices] = useState({})
-  let [choice1, setChoice1] = useState('')
-  let [choice2, setChoice2] = useState('')
-  let [choice3, setChoice3] = useState('')
-  let [choice4, setChoice4] = useState('')
-  let [correctAnswer, setCorrectAnswer] = useState('')
+  // let [allChoices, setAllChoices] = useState({})
+  // let [correctAnswer, setCorrectAnswer] = useState('')
 
   // const [text, setText] = useState('Question 1... ');
   // const onEnd = () => {
@@ -125,6 +118,7 @@ export default function Questions() {
 
     document.querySelector(".question__wrapper").style.display = "none"
     document.querySelector(".modal-text").innerHTML = "Correct! You get 100 points!"
+    socket.emit('100Player1');
     
     setTimeout(() => {
       document.getElementById("answerModal").style.display = "none"
@@ -137,6 +131,7 @@ export default function Questions() {
     document.querySelector(".wrong-answer1");
 
     document.querySelector(".modal-text").innerHTML = "Incorrect! You lose 75 points!"
+    socket.emit('minus75Player1');
 
     setTimeout(() => {
       document.getElementById("answerModal").style.display = "none"
@@ -149,6 +144,7 @@ export default function Questions() {
     document.querySelector(".wrong-answer2");
 
     document.querySelector(".modal-text").innerHTML = "Incorrect! You lose 75 points!"
+    socket.emit('minus75Player1');
 
     setTimeout(() => {
       document.getElementById("answerModal").style.display = "none"
@@ -161,6 +157,7 @@ export default function Questions() {
     document.querySelector(".wrong-answer3");
 
     document.querySelector(".modal-text").innerHTML = "Incorrect! You lose 75 points!"
+    socket.emit('minus75Player1');
 
     setTimeout(() => {
       document.getElementById("answerModal").style.display = "none"

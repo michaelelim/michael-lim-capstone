@@ -1,6 +1,5 @@
 import React from 'react';
 // import { useSpeechSynthesis } from 'react-speech-kit';
-import { Link } from 'react-router-dom';
 import LogoImage from "../../assets/Logo/LimboStudios.svg"
 import '../../App.scss';
 import './Logo.scss';

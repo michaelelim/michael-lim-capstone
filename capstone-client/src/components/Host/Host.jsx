@@ -12,12 +12,6 @@ export default function Host() {
   // const { speak, voices } = useSpeechSynthesis();
   // const voice = voices[51];
 
-  // const showJoin = () => {
-  //   document.querySelector(".host__wrapper").style.display = "none"
-  //   document.querySelector("#create-room-button").style.display = "none"
-  //   document.querySelector("#the-join").style.display = "flex"
-  // }
-
   return (
     <div className="host__wrapper">
       <h1 className="host__top">Host Settings</h1>

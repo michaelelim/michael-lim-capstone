@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 // import { useSpeechSynthesis } from 'react-speech-kit';
-import { Link } from 'react-router-dom';
 import '../../App.scss';
 import './Join.scss';
 import socketIOClient from 'socket.io-client';
@@ -13,29 +12,27 @@ import Questions from '../Questions/Questions'
 import '../Questions/Questions.scss';
 
 const ENDPOINT = 'http://127.0.0.1:3009';
-const STARTPOINT = 'http://127.0.0.1:3000';
 const socket = socketIOClient(ENDPOINT);
 
 export default function Join({name, room}) {
   let [name1Final, setName1Final] = useState('');
   let [name2Final, setName2Final] = useState("JOIN NOW!");
-  let [gameState, setGameState] = useState("instructions");
+  // let [gameState, setGameState] = useState("instructions");
 
   const roomToServer = () => {socket.emit('roomName', room)}
-  const name1ToServer = () => {socket.emit('name1', name)}
-  // const name2ToServer = () => {socket.emit('name2', name2Final)}
+  const nameToServer = () => {
+    socket.emit('name1', name)
+    socket.emit('name1id', socket.id)
+  }
+
   const advanceToServer = () => {
-    console.log("Sending advance call to server")
     socket.emit('advanceButton', "goToInstructions")}
 
-  // {name1Final == '' ? setName1Final(name) : setName2Final(name)}
-
-  useEffect(() => {
-    socket.on("name1broadcast", data => {setName1Final(data)})
-    socket.on("name2broadcast", data => {setName2Final(data)})
-    socket.on("advanceToInstructions", () => {showInstructions()})
-      // window.location.href = STARTPOINT + "/instructions/" + name + "/" + room;
-  }, [])
+    useEffect(() => {
+      socket.on("name1broadcast", data => {setName1Final(data)})
+      socket.on("name2broadcast", data => {setName2Final(data)})
+      socket.on("advanceToInstructions", () => {showInstructions()})
+    }, [])
 
   // const [text] = useState('The instructions are simple!  A question will come up and you have to choose the correct answer on your device.  If you have the most points... you win!');
 
@@ -54,7 +51,7 @@ export default function Join({name, room}) {
     <div className="App">
       <div id="the-join" className="App">
         {roomToServer()}
-        {name1ToServer()}
+        {nameToServer()}
         {/* {name2ToServer()} */}
         <div className="join__wrapper">
           <h1 className="join__left">Who's playing?</h1>
@@ -67,18 +64,12 @@ export default function Join({name, room}) {
       </div>
 
       <Questions />
-      
       <Players name1={name1Final} name2={name2Final}/>
 
       {/* <Link to="/instructions" onClick={() => {speak({ text, voice })}}> */}
-      {/* <button className="button" onClick={advanceToServer}>Everyone's here!</button> */}
-      {/* <Link to={`/instructions/${name}/${room}`}> */}
-      {/* <Link to={`/instructions/${name}/${room}`}> */}
       <button className="button button__everyone-here" onClick={advanceToServer}>Everyone's here!</button>
-      {/* </Link> */}
       <Instructions />
       <QuestionIntro />
-
     </div>
   );
 }

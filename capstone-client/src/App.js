@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import './App.scss';
 import Home from './components/Home/Home.jsx';
-import Title from './components/Title/Title.jsx';
+// import Title from './components/Title/Title.jsx';
 import Menu from './components/Menu/Menu.jsx';
 import Host from './components/Host/Host.jsx';
 import JoinRoom from './components/JoinRoom/JoinRoom.jsx';

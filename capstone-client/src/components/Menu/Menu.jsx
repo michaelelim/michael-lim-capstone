@@ -1,16 +1,11 @@
 import React from 'react';
 // import { useSpeechSynthesis } from 'react-speech-kit';
-import { Link } from 'react-router-dom';
 import '../../App.scss';
 import './Menu.scss';
-import Players from '../Players/Players'
-import '../Players/Players.scss';
 import Host from '../Host/Host'
 import '../Host/Host.scss';
 import JoinRoom from '../JoinRoom/JoinRoom'
 import '../JoinRoom/JoinRoom.scss';
-import Join from '../Join/Join'
-import '../Join/Join.scss';
 
 export default function Menu() {
   // const { speak, voices } = useSpeechSynthesis();

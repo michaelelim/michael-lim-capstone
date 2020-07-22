@@ -7,11 +7,11 @@ const io = socket(server)
 
 let player1 = ''
 let player2 = 'JOIN NOW!'
-let player1room = ''
-let player2room = ''
+let player1Id = ''
+let player2Id = ''
 
 io.on('connection', (socket) => {
-  console.log('New PLAYER connected!');
+  console.log('New PLAYER connected!: ', socket.id);
   
   socket.on('disconnect', () => {console.log("A player has left");}) 
 
@@ -23,19 +23,19 @@ io.on('connection', (socket) => {
 
   // Listen for name using algorithm
   socket.on('name1', (name) => {
-    console.log("name from client: ", name)
-    console.log("in player1: ", player1)
-    console.log("in player2: ", player2)
     if (name !== null && player1 === "" && player1 !== name) {
-      player1 = name
-      console.log("becoming name1")
-      io.emit('name1broadcast', player1) // Broadcast to everyone
+      player1 = name      
+      player1Id = socket.id
+      console.log("player1Id: ", player1Id)
+      io.emit('name1broadcast', player1)
+      io.emit('name1Id', player1Id)
     } 
     else if (name !== null && player2 === "JOIN NOW!" && player1 !== name) {
       player2 = name
-      console.log("becoming name2")
-      io.emit('name1broadcast', player1) // Broadcast to everyone
-      io.emit('name2broadcast', player2) // Broadcast to everyone
+      player2Id = socket.id
+      io.emit('name1broadcast', player1)
+      io.emit('name2broadcast', player2)
+      io.emit('name2Id', player2Id)
     }
   })
 
@@ -95,6 +95,9 @@ io.on('connection', (socket) => {
   socket.on('removeWrongAnswer2', () => {io.emit('removeWrongAnswer2')})
   socket.on('removeWrongAnswer3', () => {io.emit('removeWrongAnswer3')})
 
+  // listen for correct answers
+  socket.on('100Player1', () => {io.emit('100Player1')})
+  socket.on('minus75Player1', () => {io.emit('minus75Player1')})
 })
 
 const PORT = 3009 || process.env.PORT;

@@ -1,6 +1,5 @@
 import React from 'react';
 // import { useSpeechSynthesis } from 'react-speech-kit';
-import { Link } from 'react-router-dom';
 import '../../App.scss';
 import './Home.scss';
 import Title from '../Title/Title'

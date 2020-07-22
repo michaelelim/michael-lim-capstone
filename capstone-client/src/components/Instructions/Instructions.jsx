@@ -1,12 +1,10 @@
 import React, {useEffect} from 'react';
 // import { useSpeechSynthesis } from 'react-speech-kit';
-import { Link } from 'react-router-dom';
 import '../../App.scss';
 import './Instructions.scss';
 import socketIOClient from 'socket.io-client';
 
 const ENDPOINT = 'http://127.0.0.1:3009';
-const STARTPOINT = 'http://127.0.0.1:3000';
 const socket = socketIOClient(ENDPOINT);
 
 export default function Instructions() {
@@ -16,18 +14,17 @@ export default function Instructions() {
   // const voice = voices[51];
 
   const advanceToServer = () => {
-    console.log("Sending advance call to server")
-    socket.emit('advanceButton', "goToQuestionIntro")}
+      socket.emit('advanceButton', "goToQuestionIntro")}
 
-  useEffect(() => {
-    socket.on("advanceToQuestionIntro", () => {showQuestionIntro()})
-  }, [])
+    useEffect(() => {
+      socket.on("advanceToQuestionIntro", () => {showQuestionIntro()})
+    }, [])
 
-  const showQuestionIntro = () => {
-    document.querySelector("#the-instructions").style.display = "none"
-    document.querySelector("#button__leave-instructions").style.display = "none"
-    document.querySelector("#question-intro").style.display = "flex"
-  }
+    const showQuestionIntro = () => {
+      document.querySelector("#the-instructions").style.display = "none"
+      document.querySelector("#button__leave-instructions").style.display = "none"
+      document.querySelector("#question-intro").style.display = "flex"
+    }
 
   return (
     <div id="the-instructions" className="App">
