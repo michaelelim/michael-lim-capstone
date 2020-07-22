@@ -44,7 +44,6 @@ io.on('connection', (socket) => {
       console.log("becoming name2")
       io.emit('name1broadcast', player1) // Broadcast to everyone
       io.emit('name2broadcast', player2) // Broadcast to everyone
-        
     }
   })
 
@@ -56,15 +55,17 @@ io.on('connection', (socket) => {
   })
 
   // Listen for advance button
-  socket.on('advanceButton', () => {
+  // let gameState = ["join", "instructions", "questionintro", "questions"]
+  socket.on('advanceButton', (item) => {
     console.log("Advance call received")
-    io.emit('advancebuttonbroadcast', true)
+    if (item === "goToInstructions") {io.emit('advanceToInstructions', item)}
+    if (item === "goToQuestionIntro") {io.emit('advanceToQuestionIntro', item)}
+    if (item === "goToQuestions") {io.emit('advanceToQuestions', item)}
   })
 
   // Listen for time to serve questions
   const questions = require('./questions.json');
   const filteredQuestions = [];
-  let questionsSent = false;
 
   // Fisher-Yates shuffle algorithm
   const shuffle = (array) => {
@@ -86,6 +87,7 @@ io.on('connection', (socket) => {
   };
 
   // listen for request for questions
+  let questionsSent = false;
   socket.on('sendQuestions', () => { 
     console.log("questionsSent?", questionsSent)
     if (questionsSent === false) {
@@ -95,7 +97,7 @@ io.on('connection', (socket) => {
       for (let i = 0; i < 3; i++) {filteredQuestions.push(questions[i])}
     }
     console.log('Sending questions: ', filteredQuestions)
-    io.emit('questions', filteredQuestions) //broadcast to all
+    io.emit('filteredQuestions', filteredQuestions) //broadcast to all
   })
 
 })

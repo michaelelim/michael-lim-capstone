@@ -9,7 +9,7 @@ const ENDPOINT = 'http://127.0.0.1:3009';
 const STARTPOINT = 'http://127.0.0.1:3000';
 const socket = socketIOClient(ENDPOINT);
 
-export default function Instructions({name, room}) {
+export default function Instructions() {
   // const [text] = useState('Question... number... 1...');
   // const onEnd = () => {};
   // const { speak, voices } = useSpeechSynthesis({onEnd});
@@ -17,14 +17,17 @@ export default function Instructions({name, room}) {
 
   const advanceToServer = () => {
     console.log("Sending advance call to server")
-    socket.emit('advanceButton', true)}
+    socket.emit('advanceButton', "goToQuestionIntro")}
 
-    useEffect(() => {
-      socket.on("advancebuttonbroadcast", data => {
-        window.location.href = STARTPOINT + "/questions/" + name + "/" + room;
-      })
-    }, [])
+  useEffect(() => {
+    socket.on("advanceToQuestionIntro", () => {showQuestionIntro()})
+  }, [])
 
+  const showQuestionIntro = () => {
+    document.querySelector("#the-instructions").style.display = "none"
+    document.querySelector("#button__leave-instructions").style.display = "none"
+    document.querySelector("#question-intro").style.display = "flex"
+  }
 
   return (
     <div id="the-instructions" className="App">
@@ -33,28 +36,28 @@ export default function Instructions({name, room}) {
       </div>
 
       <div className="instructions__wrapper-question">
-        <div className="question__0">What is the capital of a fake question?</div>
-        <div className="question__answer-wrapper">
+        <div className="question">What is the capital of a fake question?</div>
+        <button className="question__answer-wrapper">
           <div className="question__letter">A:</div>
-          <div className="question__0-answer1">Fakesville, USA</div>
-        </div>
-        <div className="question__answer-wrapper">
+          <div className="question__answer1">Fakesville, USA</div>
+        </button>
+        <button className="question__answer-wrapper">
           <div className="question__letter">B:</div>
-          <div className="question__0-answer2">42</div>
-        </div>
-        <div className="question__answer-wrapper">
+          <div className="question__answer2">42</div>
+        </button>
+        <button className="question__answer-wrapper">
           <div className="question__letter">C:</div>
-          <div className="question__0-answer3">When in doubt, pick C</div>
-        </div>
-        <div className="question__answer-wrapper">
+          <div className="question__answer3">When in doubt, pick C</div>
+        </button>
+        <button className="question__answer-wrapper">
           <div className="question__letter">D:</div>
-          <div className="question__0-answer4">None of the above</div>
-        </div>
+          <div className="question__answer4">None of the above</div>
+        </button>
       </div>
 
-      <Link to={`/questions/${name}/${room}`}>
-        <button className="button" onClick={advanceToServer}>We got it! Let's go!</button>
-      </Link>
+      {/* <Link to={`/questions/${name}/${room}`}> */}
+        <button id="button__leave-instructions" className="button" onClick={advanceToServer}>We got it! Let's go!</button>
+      {/* </Link> */}
     </div>
-  );
-}
+    );
+  }

@@ -1,14 +1,17 @@
-.instructions {
+#the-instructions {
+  display: none;
+  min-height: 40vw;
+}
 
+.instructions {
   &__wrapper {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     align-items: flex-start;
     justify-content: flex-start;
-    font-size: calc(10px + 2vmin);
-    color: white;
+    font-size: calc(20px + 2vmin);
+    padding-bottom: 5%;
     width: 100%;
-    min-height: 20vh;
   }
 
   &__title {
@@ -16,8 +19,8 @@
     width: 50%;
     height: 100%;
     font-size: calc(50px + 2vmin);
-    padding-left: 5%;
     margin-top: 0;
+    padding-left: 5%;
     font-family: "Amaranth";
     font-weight: 600;
   }
@@ -46,10 +49,19 @@
 }
 
 .question {
-  &__0 {
   font-size: calc(30px + 2vmin);
   padding-bottom: 20px;
   font-weight: 500;
+
+  &__answer1, &__answer2, &__answer3, &__answer4  {
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 0;
+    text-align: left;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 80%;
+    font-size: 100%;
   }
 
   &__letter {
@@ -61,6 +73,8 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: flex-start;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    height: auto;
+    width: 100%;
   }
 }

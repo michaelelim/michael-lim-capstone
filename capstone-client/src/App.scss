@@ -9,7 +9,7 @@
 
 .App {
   text-align: center;
-  background-color: #9257ff;
+  background-color: #002d95;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -29,21 +29,24 @@
   border: none;
   border-radius: 8px;
   font-size: calc(30px + 2vmin);
-  height: 100px;
-  width: 400px;
+  height: auto;
+  width: auto;
   background-color: rgb(68, 19, 6);
   color: white;
-  margin: 1%;
+  margin: 2%;
+  padding: 2%;
 }
 
 .button2 {
   border: none;
   border-radius: 8px;
   font-size: calc(30px + 2vmin);
-  height: 100px;
-  width: 100%;
+  height: auto;
+  width: 50vw;
   background-color: black;
   color: white;
+  margin: 2%;
+  padding: 2%;
 }
 
 .fade-out {

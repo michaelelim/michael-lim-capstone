@@ -1,5 +1,9 @@
-.question {
+#question-wrapper {
+  display: none;
+  min-height: 40vw;
+}
 
+.question {
   &__wrapper {
     display: flex;
     flex-flow: column nowrap;
@@ -43,6 +47,7 @@
   &__letter {
     padding-right: 10%;
     padding-left: 0;
+    font-size: 300%;
     // margin-left: 35vw;
   }
 
@@ -52,14 +57,69 @@
     margin: 0 auto;
     align-items: center;
     justify-content: center;
-    width: auto;
+    width: 80%;
+  }
+    
+    &__answer1, &__answer2, &__answer3, &__answer4  {
+      display: flex;
+      flex-flow: column nowrap;
+      margin: 0 auto;
+      align-items: center;
+      justify-content: center;
+      width: 80%;
+      font-size: 300%;
+
 
     &-wrapper{
       display: flex;
       flex-flow: row nowrap;
       align-items: flex-start;
       justify-content: flex-start;
+      height: auto;
       width: 100%;
     }
   }
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding: 5%;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  font-size: 300%;
+  border-radius: 10px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-text {
+  color: blue;
 }

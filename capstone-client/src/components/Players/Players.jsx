@@ -13,7 +13,7 @@ export default function Players({name1, name2}) {
   let [name2Final, setName2Final] = useState(player2);
   
   const setPlayers = () => {
-    console.log("Setting players")
+    console.log("Setting players: ", name1Final, name2Final)
     player1 = name1Final
     player2 = name2Final
   }
@@ -21,6 +21,7 @@ export default function Players({name1, name2}) {
   useEffect(() => {
     if (name1Final !== null) {socket.on("name1broadcast", data => {setName1Final(data)})} //listen for name1broadcast
     if (name2Final !== "JOIN NOW!") {socket.on("name2broadcast", data => {setName2Final(data)})} //listen for name2broadcast
+    if (name1Final === "" && name2Final === "") {socket.emit('listPlayers')}
   }, [])
 
   return (
