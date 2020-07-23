@@ -3,20 +3,20 @@ import React, { useState, useEffect } from 'react';
 import '../../App.scss';
 import './Questions.scss';
 import socketIOClient from 'socket.io-client';
-// import clientId from '../Join/Join'
 
 const ENDPOINT = 'http://127.0.0.1:3009';
 const socket = socketIOClient(ENDPOINT);
-let questionServed = false;
-let player1, player2 = '';
+let questionServed = false
+let player1, player2 = ''
 let theQuestions = []
 let currentQuestion = {}
 let question = ""
 let choice1, choice2, choice3, choice4 = ""
+let correctAnswer = ""
+let allAnswers = []
 
 export default function Questions(clientId) {
-  // let [allChoices, setAllChoices] = useState({})
-  // let [correctAnswer, setCorrectAnswer] = useState('')
+  // let [allChoices, setAllChoices] = useState([])
 
   // const [text, setText] = useState('Question 1... ');
   // const onEnd = () => {
@@ -53,9 +53,10 @@ export default function Questions(clientId) {
     socket.on("nextQuestion", () => {
       serveQuestions()
       document.querySelector(".question__wrapper").style.display = "flex"
-      document.querySelector(".wrong-answer1").style.display = "flex"
-      document.querySelector(".wrong-answer2").style.display = "flex"
-      document.querySelector(".wrong-answer3").style.display = "flex"
+      document.querySelector("#answer1").style.display = "flex"
+      document.querySelector("#answer2").style.display = "flex"
+      document.querySelector("#answer3").style.display = "flex"
+      document.querySelector("#answer4").style.display = "flex"
     })
 
     //listen for questions from server
@@ -67,30 +68,53 @@ export default function Questions(clientId) {
     
     socket.on("name1broadcast", data1 => {player1 = data1})
     socket.on("name2broadcast", data2 => {player2 = data2})
-    
-    socket.on("removeWrongAnswer1", () => {document.querySelector(".wrong-answer1").style.display = "none"})
-    socket.on("removeWrongAnswer2", () => {document.querySelector(".wrong-answer2").style.display = "none"})
-    socket.on("removeWrongAnswer3", () => {document.querySelector(".wrong-answer3").style.display = "none"})
 
+    socket.on('removeWrongAnswer', (thisAnswer) => {
+      console.log(thisAnswer)
+      for (const p of document.querySelectorAll("p")) {
+        if (p.textContent.includes(thisAnswer)) {
+          p.parentElement.style.display = "none"
+        }
+      }
+      
+    })
   }, [])
 
-  // const shuffleAnswers = (question) => {
-  //   setAllChoices(... question.correct_answer)
-  //   setAllChoices(... question.incorrect_answers[0])
-  //   setAllChoices(... question.incorrect_answers[1])
-  //   setAllChoices(... question.incorrect_answers[2])
-  //   console.log("allChoices:", allChoices)
-  // }
+  const shuffleAnswers = (currentQuestion) => {
+    console.log("correct answer is: ", currentQuestion.correct_answer)
+    allAnswers = []
+    allAnswers.push(currentQuestion.correct_answer)
+    allAnswers.push(currentQuestion.incorrect_answers[0])
+    allAnswers.push(currentQuestion.incorrect_answers[1])
+    allAnswers.push(currentQuestion.incorrect_answers[2])
+    shuffle(allAnswers)
+  }
+
+  // Fisher-Yates shuffle algorithm
+  const shuffle = (array) => {
+    let currentIndex = array.length;
+    let temporaryValue, randomIndex;
+  
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+      }
+    return array;
+  };
 
   let serveQuestions = () => {
     currentQuestion = theQuestions.pop()
     question = currentQuestion.question
-    choice1 = currentQuestion.correct_answer
-    choice2 = currentQuestion.incorrect_answers[0]
-    choice3 = currentQuestion.incorrect_answers[1]
-    choice4 = currentQuestion.incorrect_answers[2]    
+    correctAnswer = currentQuestion.correct_answer
+    shuffleAnswers(currentQuestion)
+    choice1 = allAnswers[0]
+    choice2 = allAnswers[1]
+    choice3 = allAnswers[2]
+    choice4 = allAnswers[3]
     console.log("Questions remaining: ", theQuestions)
-    // {shuffleAnswers(theQuestions[0])} WIP
   
   return (
     document.querySelector(".question").innerHTML = question,
@@ -102,61 +126,93 @@ export default function Questions(clientId) {
 }
 
   // Modal
-  const submitCorrect = () => {
+  // const submitCorrect = () => {
+  //   document.getElementById("answerModal").style.display = "block";
+  //   document.getElementById("answer1");
+
+  //   document.querySelector(".question__wrapper").style.display = "none"
+  //   document.querySelector(".modal-text").innerHTML = "Correct! You get 100 points!"
+  //   socket.emit('100Player', clientId);
+    
+  //   setTimeout(() => {
+  //     document.getElementById("answerModal").style.display = "none"
+  //     socket.emit('nextQuestion'); //move to next question
+  //   }, 2000)
+  // }
+
+  // const submitIncorrect1 = () => {
+  //   document.getElementById("answerModal").style.display = 'block';
+  //   document.querySelector(".wrong-answer1");
+
+  //   document.querySelector(".modal-text").innerHTML = "Incorrect! You lose 75 points!"
+  //   socket.emit('minus75Player', clientId);
+
+  //   setTimeout(() => {
+  //     document.getElementById("answerModal").style.display = "none"
+  //     socket.emit('removeWrongAnswer1')
+  //   }, 2000)
+  // }
+
+  // const submitIncorrect2 = () => {
+  //   document.getElementById("answerModal").style.display = 'block';
+  //   document.querySelector(".wrong-answer2");
+
+  //   document.querySelector(".modal-text").innerHTML = "Incorrect! You lose 75 points!"
+  //   socket.emit('minus75Player', clientId);
+
+  //   setTimeout(() => {
+  //     document.getElementById("answerModal").style.display = "none"
+  //     socket.emit('removeWrongAnswer2')
+  //   }, 2000)
+  // }
+
+  // const submitIncorrect3 = () => {
+  //   document.getElementById("answerModal").style.display = 'block';
+  //   document.querySelector(".wrong-answer3");
+
+  //   document.querySelector(".modal-text").innerHTML = "Incorrect! You lose 75 points!"
+  //   socket.emit('minus75Player', clientId);
+
+  //   setTimeout(() => {
+  //     document.getElementById("answerModal").style.display = "none"
+  //     socket.emit('removeWrongAnswer3')
+  //   }, 2000)
+  // }
+
+  const submitAnswer = (arg) => {
+    const thisAnswer = document.querySelector(".question__" + arg).innerHTML 
     document.getElementById("answerModal").style.display = "block";
-    document.getElementById("answer1");
+    // document.getElementById(`#${arg}`);
 
-    document.querySelector(".question__wrapper").style.display = "none"
-    document.querySelector(".modal-text").innerHTML = "Correct! You get 100 points!"
+    if (document.querySelector(".question__" + arg).innerHTML === correctAnswer ) {
+      document.querySelector(".question__wrapper").style.display = "none"
+      document.querySelector(".modal-text").innerHTML = "Correct! You get 100 points!"
+      socket.emit('100Player', clientId);
+
+        setTimeout(() => {
+          document.getElementById("answerModal").style.display = "none"
+          socket.emit('nextQuestion'); //move to next question
+        }, 2000)
+
+      } else if (document.querySelector(".question__" + arg).innerHTML !== correctAnswer) {
+        document.querySelector(".modal-text").innerHTML = "Incorrect! You lose 75 points!"
+        socket.emit('minus75Player', clientId);
+
+        setTimeout(() => {
+          document.getElementById("answerModal").style.display = "none"
+          socket.emit('removeWrongAnswer', thisAnswer)
+        }, 2000)
+      }
+
+    // console.log("Current id with correct answer: ", clientId)
+    // socket.emit('100Player', clientId);
     
-    console.log("Current id with correct answer: ", clientId)
-    socket.emit('100Player', clientId);
+    // setTimeout(() => {
+    //   document.getElementById("answerModal").style.display = "none"
+    //   socket.emit('nextQuestion'); //move to next question
+    // }, 2000)
+  }
     
-    setTimeout(() => {
-      document.getElementById("answerModal").style.display = "none"
-      socket.emit('nextQuestion'); //move to next question
-    }, 2000)
-  }
-
-  const submitIncorrect1 = () => {
-    document.getElementById("answerModal").style.display = 'block';
-    document.querySelector(".wrong-answer1");
-
-    document.querySelector(".modal-text").innerHTML = "Incorrect! You lose 75 points!"
-    socket.emit('minus75Player', clientId);
-
-    setTimeout(() => {
-      document.getElementById("answerModal").style.display = "none"
-      socket.emit('removeWrongAnswer1')
-    }, 2000)
-  }
-
-  const submitIncorrect2 = () => {
-    document.getElementById("answerModal").style.display = 'block';
-    document.querySelector(".wrong-answer2");
-
-    document.querySelector(".modal-text").innerHTML = "Incorrect! You lose 75 points!"
-    socket.emit('minus75Player', clientId);
-
-    setTimeout(() => {
-      document.getElementById("answerModal").style.display = "none"
-      socket.emit('removeWrongAnswer2')
-    }, 2000)
-  }
-
-  const submitIncorrect3 = () => {
-    document.getElementById("answerModal").style.display = 'block';
-    document.querySelector(".wrong-answer3");
-
-    document.querySelector(".modal-text").innerHTML = "Incorrect! You lose 75 points!"
-    socket.emit('minus75Player', clientId);
-
-    setTimeout(() => {
-      document.getElementById("answerModal").style.display = "none"
-      socket.emit('removeWrongAnswer3')
-    }, 2000)
-  }
-
   return (
     <div id="question-wrapper" className="App">
       
@@ -169,21 +225,21 @@ export default function Questions(clientId) {
       <div className="question__wrapper">
           <div className="question"></div>
           <div className="question__answer">
-            <button className="question__answer-wrapper" id="answer1" onClick={submitCorrect}>
+            <button className="question__answer-wrapper" id="answer1" onClick={() => {submitAnswer("answer1")}}>
               <div className="question__letter">A:</div>
-              <div className="question__answer1"></div>
+              <p className="question__answer1"></p>
             </button>
-            <button className="question__answer-wrapper wrong-answer1" onClick={submitIncorrect1}>
+            <button className="question__answer-wrapper" id="answer2" onClick={() => {submitAnswer("answer2")}}>
               <div className="question__letter">B:</div>
-              <div className="question__answer2"></div>
+              <p className="question__answer2"></p>
             </button>
-            <button className="question__answer-wrapper wrong-answer2" onClick={submitIncorrect2}>
+            <button className="question__answer-wrapper" id="answer3" onClick={() => {submitAnswer("answer3")}}>
               <div className="question__letter">C:</div>
-              <div className="question__answer3"></div>
+              <p className="question__answer3"></p>
             </button>
-            <button className="question__answer-wrapper wrong-answer3" onClick={submitIncorrect3}>
+            <button className="question__answer-wrapper" id="answer4" onClick={() => {submitAnswer("answer4")}}>
               <div className="question__letter">D:</div>
-              <div className="question__answer4"></div>
+              <p className="question__answer4"></p>
             </button>
           </div>
         </div>

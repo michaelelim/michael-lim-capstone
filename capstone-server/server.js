@@ -105,9 +105,8 @@ io.on('connection', (socket) => {
   socket.on('nextQuestion', () => {io.emit('nextQuestion')})
 
   // listen for removeWrongAnswers
-  socket.on('removeWrongAnswer1', () => {io.emit('removeWrongAnswer1')})
-  socket.on('removeWrongAnswer2', () => {io.emit('removeWrongAnswer2')})
-  socket.on('removeWrongAnswer3', () => {io.emit('removeWrongAnswer3')})
+  socket.on('removeWrongAnswer', (thisAnswer) => {
+    io.emit('removeWrongAnswer', thisAnswer)})
 
   // listen for correct answers
   socket.on('100Player', (id) => {
