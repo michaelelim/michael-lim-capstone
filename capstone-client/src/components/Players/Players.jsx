@@ -42,17 +42,33 @@ export default function Players() {
       console.log(p1)
     })
 
+    socket.on('p2Broadcast', (data) => {
+      p2.name = data.name
+      p2.id = data.id
+      p2.score = data.score
+      p2.room = data.room
+      console.log(p2)
+    })
+
     socket.on('100Player1', (data) => {
       p1.score += 100
       console.log("Points +100 for p1: ", p1)
-      // score1 += 100
       setScore1Final(p1.score)
     });
     socket.on('minus75Player1', (data) => {
       p1.score -= 75
       console.log("Points -75 for p1: ", p1)
-      // score1 -= 75
       setScore1Final(p1.score)
+    });
+    socket.on('100Player2', (data) => {
+      p2.score += 100
+      console.log("Points +100 for p2: ", p2)
+      setScore2Final(p2.score)
+    });
+    socket.on('minus75Player2', (data) => {
+      p2.score -= 75
+      console.log("Points -75 for p1: ", p2)
+      setScore2Final(p2.score)
     });
     
   }, [])

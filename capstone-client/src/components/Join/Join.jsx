@@ -19,12 +19,10 @@ let clientId = uuidv4();
 export default function Join({name, room}) {
   let [name1Final, setName1Final] = useState('');
   let [name2Final, setName2Final] = useState("JOIN NOW!");
-  // let [gameState, setGameState] = useState("instructions");
 
   const roomToServer = () => {socket.emit('roomName', room)}
   const nameToServer = () => {
-    socket.emit('name1', name)
-    socket.emit('name1id', clientId)
+    socket.emit('name1', name, clientId)
   }
 
   const advanceToServer = () => {
@@ -65,7 +63,7 @@ export default function Join({name, room}) {
         </div>
       </div>
 
-      <Questions />
+      <Questions clientId={clientId} />
       <Players name1={name1Final} name2={name2Final}/>
 
       {/* <Link to="/instructions" onClick={() => {speak({ text, voice })}}> */}

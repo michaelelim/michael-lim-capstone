@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import '../../App.scss';
 import './Questions.scss';
 import socketIOClient from 'socket.io-client';
+// import clientId from '../Join/Join'
 
 const ENDPOINT = 'http://127.0.0.1:3009';
 const socket = socketIOClient(ENDPOINT);
@@ -13,7 +14,7 @@ let currentQuestion = {}
 let question = ""
 let choice1, choice2, choice3, choice4 = ""
 
-export default function Questions() {
+export default function Questions(clientId) {
   // let [allChoices, setAllChoices] = useState({})
   // let [correctAnswer, setCorrectAnswer] = useState('')
 
@@ -84,12 +85,11 @@ export default function Questions() {
   let serveQuestions = () => {
     currentQuestion = theQuestions.pop()
     question = currentQuestion.question
-    console.log("question: ", question)
     choice1 = currentQuestion.correct_answer
     choice2 = currentQuestion.incorrect_answers[0]
     choice3 = currentQuestion.incorrect_answers[1]
     choice4 = currentQuestion.incorrect_answers[2]    
-    console.log("Questions remaining bottom: ", theQuestions)
+    console.log("Questions remaining: ", theQuestions)
     // {shuffleAnswers(theQuestions[0])} WIP
   
   return (
@@ -109,9 +109,8 @@ export default function Questions() {
     document.querySelector(".question__wrapper").style.display = "none"
     document.querySelector(".modal-text").innerHTML = "Correct! You get 100 points!"
     
-    // socket.emit('100Player1', socket.id);
-    console.log("Current socket with correct answer: ", socket.id)
-    socket.emit('100Player', socket.id);
+    console.log("Current id with correct answer: ", clientId)
+    socket.emit('100Player', clientId);
     
     setTimeout(() => {
       document.getElementById("answerModal").style.display = "none"
@@ -124,7 +123,7 @@ export default function Questions() {
     document.querySelector(".wrong-answer1");
 
     document.querySelector(".modal-text").innerHTML = "Incorrect! You lose 75 points!"
-    socket.emit('minus75Player1');
+    socket.emit('minus75Player', clientId);
 
     setTimeout(() => {
       document.getElementById("answerModal").style.display = "none"
@@ -137,7 +136,7 @@ export default function Questions() {
     document.querySelector(".wrong-answer2");
 
     document.querySelector(".modal-text").innerHTML = "Incorrect! You lose 75 points!"
-    socket.emit('minus75Player1');
+    socket.emit('minus75Player', clientId);
 
     setTimeout(() => {
       document.getElementById("answerModal").style.display = "none"
@@ -150,7 +149,7 @@ export default function Questions() {
     document.querySelector(".wrong-answer3");
 
     document.querySelector(".modal-text").innerHTML = "Incorrect! You lose 75 points!"
-    socket.emit('minus75Player1');
+    socket.emit('minus75Player', clientId);
 
     setTimeout(() => {
       document.getElementById("answerModal").style.display = "none"
