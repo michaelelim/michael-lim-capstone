@@ -5,7 +5,6 @@ import '../../App.scss';
 import './Host.scss';
 
 export default function Host() {
-  // const [tts] = useState('Whos Playing? Tell your friends to join with the code below and press everyone is here when ready');
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
 

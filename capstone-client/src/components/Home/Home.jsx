@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import { useSpeechSynthesis } from 'react-speech-kit';
 import '../../App.scss';
 import './Home.scss';
@@ -8,18 +8,16 @@ import '../Title/Title.scss'
 import '../Logo/Logo.scss'
 
 export default function Home() {
-  // const Tts = () => {speak({ text, voice })}
-
-  // const [tts] = useState('Welcome to You Dont Know Diddly Squat... I am your host, Prince Abooboo... Are you ready?  Lets go!');
-  // const onEnd = () => {
-  //   return (
-  //     <Link to="/title" component={Title}/>
-  //   )
-  // };
-  // const { speak, voices } = useSpeechSynthesis({onEnd});
+  // const [text, setText] = useState('Welcome to You Dont Know Diddly Squat... I am your host, Prince Abooboo... Are you ready?  Lets go!');
+  // const [pitch, setPitch] = useState(1.2)
+  // const [rate, setRate] = useState(1.1)
+  // const onEnd = () => {setText('Are you hosting today, or joining a game.')};
+  // const {speak, cancel, speaking, supported, voices} = useSpeechSynthesis({onEnd});
   // const voice = voices[51];
+  // const announce = () => {speak({ text, voice, rate, pitch })}
 
   const showTitle = () => {
+    // announce()
     fadeOut(".logo-image")
     setTimeout(() => {
       document.querySelector(".logo").style.display = "none";
@@ -38,13 +36,7 @@ export default function Home() {
       <div className="App">
         <Logo />
         <Title/>
-
-        {/* <button className="button2" onClick={() => {
-            speak({ text, voice })
-            fadeOut(".logo-image")
-            fadeOut(".button2")
-          }}> */}
-          <button className="button2" onClick={showTitle}>Click to start</button>
+        <button className="button2" onClick={() => {showTitle()}}>Click to start</button>
       </div>
       
   )
