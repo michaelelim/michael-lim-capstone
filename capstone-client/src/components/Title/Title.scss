@@ -2,7 +2,7 @@
   display: none;
   
   text-align: center;
-  min-height: 100vh;
+  min-height: 70vh;
   
   flex-direction: column;
   align-items: center;
@@ -21,7 +21,7 @@
 
   &__sub {
     font-family: 'Titillium Web';
-    font-size: calc(35px + 2vmin);
+    font-size: calc(30px + 2vmin);
     font-weight: 400;
   }
 }

@@ -34,8 +34,7 @@ export default function Join({name, room}) {
       socket.on("advanceToInstructions", () => {showInstructions()})
     }, [])
 
-  // const [text] = useState('The instructions are simple!  A question will come up and you have to choose the correct answer on your device.  If you have the most points... you win!');
-
+  // const [tts] = useState('The instructions are simple!  A question will come up and you have to choose the correct answer on your device.  If you have the most points... you win!');
   // const onEnd = () => {};
   // const { speak, voices } = useSpeechSynthesis();
   // const voice = voices[51];
@@ -52,7 +51,6 @@ export default function Join({name, room}) {
       <div id="the-join" className="App">
         {roomToServer()}
         {nameToServer()}
-        {/* {name2ToServer()} */}
         <div className="join__wrapper">
           <h1 className="join__left">Who's playing?</h1>
           

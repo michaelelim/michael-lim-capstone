@@ -20,7 +20,7 @@
     height: 100%;
     font-size: calc(50px + 2vmin);
     margin-top: 0;
-    padding-left: 5%;
+    padding-left: 0;
     font-family: "Amaranth";
     font-weight: 600;
   }
@@ -53,22 +53,6 @@
   padding-bottom: 20px;
   font-weight: 500;
 
-  &__answer1, &__answer2, &__answer3, &__answer4  {
-    display: flex;
-    flex-flow: row nowrap;
-    margin: 0;
-    text-align: left;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 80%;
-    font-size: 100%;
-  }
-
-  &__letter {
-    padding-right: 20px;
-    padding-left: 30px;
-  }
-
   &__answer-wrapper {
     display: flex;
     flex-flow: row nowrap;
@@ -77,4 +61,15 @@
     height: auto;
     width: 100%;
   }
+
+  &__letter {
+    padding-right: 20px;
+    padding-left: 30px;
+  }
+}
+
+#qa {
+  font-size: 45px;
+  width: auto;
+  margin-left: 0;
 }

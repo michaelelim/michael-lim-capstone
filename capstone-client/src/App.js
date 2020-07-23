@@ -1,11 +1,11 @@
 import React from 'react';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { Switch, Route, MemoryRouter } from 'react-router-dom';
 import './App.scss';
 import Home from './components/Home/Home.jsx';
 // import Title from './components/Title/Title.jsx';
 import Menu from './components/Menu/Menu.jsx';
-import Host from './components/Host/Host.jsx';
-import JoinRoom from './components/JoinRoom/JoinRoom.jsx';
+// import Host from './components/Host/Host.jsx';
+// import JoinRoom from './components/JoinRoom/JoinRoom.jsx';
 import Join from './components/Join/Join.jsx';
 import Instructions from './components/Instructions/Instructions.jsx';
 import QuestionIntro from './components/QuestionIntro/QuestionIntro.jsx';
@@ -13,7 +13,7 @@ import Questions from './components/Questions/Questions.jsx';
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <MemoryRouter>
       <Switch>
         <Route path="/" exact render={props => (<Home {... props}/>)}/>
         <Route path="/menu" render={props => <Menu {... props}/>}/>
@@ -33,6 +33,6 @@ export default function App() {
         <Route path="/questionintro" component={QuestionIntro}/>
         <Route path="/questions" component={Questions}/>
       </Switch>
-    </BrowserRouter>
+    </MemoryRouter>
   );
 }

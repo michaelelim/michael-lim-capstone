@@ -7,10 +7,12 @@ const io = socket(server)
 
 let player1 = ""
 let player2 = 'JOIN NOW!'
-
 let p1 = {name: "", id: "", score: 0, room: ""}
 let p2 = {name: "", id: "", score: 0, room: ""}
-let questionCount = [{ room: "", qCount: 0 }]
+
+//== SETTINGS == 
+const questions = require('./questions.json'); //JSON
+let numberOfQuestions = 10; // SET NUMBER OF QUESTIONS
 
 io.on('connection', (socket) => {
   console.log('New PLAYER connected!: ', socket.id);
@@ -56,7 +58,7 @@ io.on('connection', (socket) => {
 
   // listen for reiterate player names
   socket.on('listPlayers', () => {
-    console.log("reiterating player names: ", player1, player2)
+    console.log("Reiterating player names: ", player1, player2)
     io.emit('name1Broadcast', player1)
     io.emit('name2Broadcast', player2)
     io.emit('p1Broadcast', p1)
@@ -65,7 +67,6 @@ io.on('connection', (socket) => {
 
   // Listen for advance button
   socket.on('advanceButton', (item) => {
-    console.log("Advance call received")
     if (item === "goToInstructions") {io.emit('advanceToInstructions', item)}
     if (item === "goToQuestionIntro") {io.emit('advanceToQuestionIntro', item)}
     if (item === "goToQuestions") {io.emit('advanceToQuestions', item)}
@@ -73,7 +74,6 @@ io.on('connection', (socket) => {
   })
 
   // Listen for time to serve questions
-  const questions = require('./questions.json');
   const filteredQuestions = [];
 
   // Fisher-Yates shuffle algorithm
@@ -93,12 +93,13 @@ io.on('connection', (socket) => {
 
   // listen for request for questions
   let questionsSent = false;
+
   socket.on('sendQuestions', () => { 
     if (questionsSent === false) {
       console.log('Shuffling questions!')
       questionsSent = true;
       shuffle(questions);
-      for (let i = 0; i < 3; i++) {filteredQuestions.push(questions[i])}
+      for (let i = 0; i < (numberOfQuestions + 1); i++) {filteredQuestions.push(questions[i])}
     }
     io.emit('filteredQuestions', filteredQuestions) //broadcast to all
   })
@@ -113,11 +114,9 @@ io.on('connection', (socket) => {
   // listen for correct answers
   socket.on('100Player', (id) => {
     if (id.clientId == p1.id) {
-      console.log("Sending 100 to p1")
       p1.score += 100
       io.emit('100Player1')}
     else if (id.clientId == p2.id) {
-      console.log("Sending 100 to p2")
       p2.score += 100
       io.emit('100Player2')}
   })
@@ -125,11 +124,9 @@ io.on('connection', (socket) => {
   // listen for incorrect answers
   socket.on('minus75Player', (id) => {
     if (id.clientId == p1.id) {
-      console.log("Sending -75 to p1")
       p1.score -= 75
       io.emit('minus75Player1')}
     else if (id.clientId == p2.id) {
-      console.log("Sending -75 to p2")
       p2.score -= 75
       io.emit('minus75Player2')}
   })

@@ -4,6 +4,13 @@ import '../../App.scss';
 import './Questions.scss';
 import socketIOClient from 'socket.io-client';
 
+// import DOMPurify from 'dompurify'
+// const createDOMPurify = require('dompurify');
+// const { JSDOM } = require('jsdom');
+// const window = new JSDOM('').window;
+// const DOMPurify = createDOMPurify(window);
+// const clean = DOMPurify.sanitize(dirty);
+
 const ENDPOINT = 'http://127.0.0.1:3009';
 const socket = socketIOClient(ENDPOINT);
 let questionServed = false
@@ -14,6 +21,7 @@ let question = ""
 let choice1, choice2, choice3, choice4 = ""
 let correctAnswer = ""
 let allAnswers = []
+let wrongAnswerCount = 0
 
 export default function Questions(clientId) {
   // const [tts, setTts] = useState('Question 1... ');
@@ -22,12 +30,10 @@ export default function Questions(clientId) {
 
   const getQuestions = () => {
     if (theQuestions.length === 0) {
-      console.log("theQuestions is null, asking for questions")
       socket.emit('sendQuestions', theQuestions) //ask server for questions
     } 
     else if (theQuestions.length !== 0 && questionServed === false) {
       questionServed = true;
-      console.log("Serving questions")
       serveQuestions();
     }
   }
@@ -38,6 +44,7 @@ export default function Questions(clientId) {
     
     //listen for move to next question
     socket.on("nextQuestion", () => {
+      wrongAnswerCount = 0
       serveQuestions()
       document.querySelector(".question__wrapper").style.display = "flex"
       document.querySelector("#answer1").style.display = "flex"
@@ -49,7 +56,6 @@ export default function Questions(clientId) {
     //listen for questions from server
     socket.on("filteredQuestions", (data) => {
       theQuestions = data
-      console.log("theQuestions", theQuestions)
       serveQuestions();
     }) 
     
@@ -57,10 +63,15 @@ export default function Questions(clientId) {
     socket.on("name2broadcast", data2 => {player2 = data2})
 
     socket.on('removeWrongAnswer', (thisAnswer) => {
+      wrongAnswerCount++;
+      if (wrongAnswerCount === 4) {
+        socket.emit('nextQuestion')
+      }  
       for (const p of document.querySelectorAll("p")) {
         if (p.textContent.includes(thisAnswer)) {
           p.parentElement.style.display = "none"
-        }}      
+        }}
+    
     })
   }, [])
 
@@ -113,7 +124,8 @@ export default function Questions(clientId) {
 
   // Modal - Correct/Incorrect Answers 
   const submitAnswer = (arg) => {
-    const thisAnswer = document.querySelector(".question__" + arg).innerHTML 
+    const thisAnswer = document.querySelector(".question__" + arg).innerHTML
+    const thisAnswer2 = document.querySelector(".question__" + arg).textContent
     document.getElementById("answerModal").style.display = "block";
 
     if (document.querySelector(".question__" + arg).innerHTML === correctAnswer ) {
@@ -124,7 +136,6 @@ export default function Questions(clientId) {
         setTimeout(() => {
           document.getElementById("answerModal").style.display = "none"
           if (theQuestions.length === 1) {
-            console.log("Advance to winner time!")
             socket.emit('advanceButton', "goToWinner")
           } else {
             socket.emit('nextQuestion')
@@ -146,26 +157,26 @@ export default function Questions(clientId) {
     <div id="question-wrapper" className="App">      
       <div id="answerModal" className="modal">
         <div className="modal-content">
-          <p className="modal-text"></p>
+          <div className="modal-text"></div>
         </div>
       </div>
       
       <div className="question__wrapper">
         <div className="question"></div>
         <div className="question__answer">
-          <button className="question__answer-wrapper" id="answer1" onClick={() => {submitAnswer("answer1")}}>
+          <button className="question__answer-wrapper button3" id="answer1" onClick={() => {submitAnswer("answer1")}}>
             <div className="question__letter">A:</div>
             <p className="question__answer1"></p>
           </button>
-          <button className="question__answer-wrapper" id="answer2" onClick={() => {submitAnswer("answer2")}}>
+          <button className="question__answer-wrapper button3" id="answer2" onClick={() => {submitAnswer("answer2")}}>
             <div className="question__letter">B:</div>
             <p className="question__answer2"></p>
           </button>
-          <button className="question__answer-wrapper" id="answer3" onClick={() => {submitAnswer("answer3")}}>
+          <button className="question__answer-wrapper button3" id="answer3" onClick={() => {submitAnswer("answer3")}}>
             <div className="question__letter">C:</div>
             <p className="question__answer3"></p>
           </button>
-          <button className="question__answer-wrapper" id="answer4" onClick={() => {submitAnswer("answer4")}}>
+          <button className="question__answer-wrapper button3" id="answer4" onClick={() => {submitAnswer("answer4")}}>
             <div className="question__letter">D:</div>
             <p className="question__answer4"></p>
           </button>

@@ -49,6 +49,18 @@
   padding: 2%;
 }
 
+.button3 {
+  border: none;
+  border-radius: 8px;
+  font-size: calc(5px + 1vmin);
+  height: auto;
+  width: 50vw;
+  background-color: #310872;
+  color: white;
+  margin: 1%;
+  padding: 1%;
+}
+
 .fade-out {
   transition: opacity 1s;
 }
