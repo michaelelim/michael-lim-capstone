@@ -16,10 +16,9 @@ export default function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact render={props => (<Home {... props}/>)}/>
-        {/* <Route path="/title" component={Title}/> */}
         <Route path="/menu" render={props => <Menu {... props}/>}/>
-        <Route path="/host" render={props => <Host {... props}/>}/>
-        <Route path="/joinroom" render={props => <JoinRoom {... props}/>}/>
+        {/* <Route path="/host" render={props => <Host {... props}/>}/>
+        <Route path="/joinroom" render={props => <JoinRoom {... props}/>}/> */}
         <Route path="/join" exact render={props => <Join {... props}/>}/>
         <Route path="/join/:name/:room" render={props => {
           return (<Join 

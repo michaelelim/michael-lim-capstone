@@ -25,9 +25,18 @@ export default function Home() {
   // }
 
   const showTitle = () => {
+    fadeOut(".logo-image")
+    setTimeout(() => {
       document.querySelector(".logo").style.display = "none";
       document.querySelector(".button2").style.display = "none";
       document.querySelector(".title").style.display = "flex";
+    }, 1000)
+  }
+
+  const fadeOut = (item) => {
+    const fadeTarget = document.querySelector(item)
+    fadeTarget.classList.add("fade-out");
+    fadeTarget.style.opacity = '0'
   }
 
   return (

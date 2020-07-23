@@ -8,9 +8,8 @@ const ENDPOINT = 'http://127.0.0.1:3009';
 const socket = socketIOClient(ENDPOINT);
 
 export default function Instructions() {
-  // const [text] = useState('Question... number... 1...');
-  // const onEnd = () => {};
-  // const { speak, voices } = useSpeechSynthesis({onEnd});
+  // const [tts] = useState('Question... number... 1...');
+  // const { speak, voices } = useSpeechSynthesis({});
   // const voice = voices[51];
 
   const advanceToServer = () => {
@@ -24,6 +23,7 @@ export default function Instructions() {
       document.querySelector("#the-instructions").style.display = "none"
       document.querySelector("#button__leave-instructions").style.display = "none"
       document.querySelector("#question-intro").style.display = "flex"
+      setTimeout(() => {socket.emit('advanceButton', "goToQuestions")}, 1500)
     }
 
   return (
@@ -52,9 +52,7 @@ export default function Instructions() {
         </button>
       </div>
 
-      {/* <Link to={`/questions/${name}/${room}`}> */}
-        <button id="button__leave-instructions" className="button" onClick={advanceToServer}>We got it! Let's go!</button>
-      {/* </Link> */}
+      <button id="button__leave-instructions" className="button" onClick={advanceToServer}>We got it! Let's go!</button>
     </div>
     );
   }

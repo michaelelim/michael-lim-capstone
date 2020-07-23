@@ -10,6 +10,7 @@ let player2 = 'JOIN NOW!'
 
 let p1 = {name: "", id: "", score: 0, room: ""}
 let p2 = {name: "", id: "", score: 0, room: ""}
+let questionCount = [{ room: "", qCount: 0 }]
 
 io.on('connection', (socket) => {
   console.log('New PLAYER connected!: ', socket.id);
@@ -68,6 +69,7 @@ io.on('connection', (socket) => {
     if (item === "goToInstructions") {io.emit('advanceToInstructions', item)}
     if (item === "goToQuestionIntro") {io.emit('advanceToQuestionIntro', item)}
     if (item === "goToQuestions") {io.emit('advanceToQuestions', item)}
+    if (item === "goToWinner") {io.emit('advanceToWinner', item)}
   })
 
   // Listen for time to serve questions
@@ -96,7 +98,7 @@ io.on('connection', (socket) => {
       console.log('Shuffling questions!')
       questionsSent = true;
       shuffle(questions);
-      for (let i = 0; i < 11; i++) {filteredQuestions.push(questions[i])}
+      for (let i = 0; i < 3; i++) {filteredQuestions.push(questions[i])}
     }
     io.emit('filteredQuestions', filteredQuestions) //broadcast to all
   })
@@ -112,9 +114,11 @@ io.on('connection', (socket) => {
   socket.on('100Player', (id) => {
     if (id.clientId == p1.id) {
       console.log("Sending 100 to p1")
+      p1.score += 100
       io.emit('100Player1')}
     else if (id.clientId == p2.id) {
       console.log("Sending 100 to p2")
+      p2.score += 100
       io.emit('100Player2')}
   })
 
@@ -122,9 +126,11 @@ io.on('connection', (socket) => {
   socket.on('minus75Player', (id) => {
     if (id.clientId == p1.id) {
       console.log("Sending -75 to p1")
+      p1.score -= 75
       io.emit('minus75Player1')}
     else if (id.clientId == p2.id) {
       console.log("Sending -75 to p2")
+      p2.score -= 75
       io.emit('minus75Player2')}
   })
 })

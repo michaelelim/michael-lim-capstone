@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../../App.scss';
 import './Players.scss';
 import socketIOClient from 'socket.io-client';
+import Winner from '../Winner/Winner'
 
 const ENDPOINT = 'http://127.0.0.1:3009';
 const socket = socketIOClient(ENDPOINT);
@@ -12,20 +13,21 @@ let player2 = '';
 let score1 = 0;
 let score2 = 0;
 
-
 export default function Players() {
   let [name1Final, setName1Final] = useState(player1);
   let [name2Final, setName2Final] = useState(player2);
   let [score1Final, setScore1Final] = useState(score1);
   let [score2Final, setScore2Final] = useState(score2);
-  // let [name1IdFinal, setName1IdFinal] = useState(player1Id);
-  // let [name2IdFinal, setName2IdFinal] = useState(player2Id);
+  let [winnerName, setWinnerName] = useState('')
+  let [winnerScore, setWinnerScore] = useState(0)
 
   const setPlayers = () => {
     if (player1 !== "" || player2 !== "") {
-    console.log("Setting players and scores: ", name1Final, name2Final)
+    console.log("Setting players: ", name1Final, name2Final)
     player1 = name1Final
     player2 = name2Final
+    score1 = score1Final
+    score2 = score2Final
     }
   }
 
@@ -70,10 +72,42 @@ export default function Players() {
       console.log("Points -75 for p1: ", p2)
       setScore2Final(p2.score)
     });
+
+    socket.on('advanceToWinner', () => {
+      if (p1.score > p2.score) {
+        setWinnerName(p1.name)
+        setWinnerScore(p1.score)
+      } else if (p1.score < p2.score) {
+        setWinnerName(p2.name)
+        setWinnerScore(p2.score)
+      } else if (p1.score === p2.score) {
+        setWinnerName("It's a TIE!")
+        setWinnerScore(p1.score)
+      }
+
+      {showWinner()}
+    })
     
   }, [])
 
+  const showWinner = () => {
+    fadeOut(".players__wrapper")
+    setTimeout(() => {
+      document.querySelector("#question-wrapper").style.display = "none"
+      document.querySelector(".players__wrapper").style.display = "none"
+      document.querySelector(".winner__wrapper").style.display = "block"
+    }, 1000)
+  }
+
+  const fadeOut = (item) => {
+    const fadeTarget = document.querySelector(item)
+    fadeTarget.classList.add("fade-out");
+    fadeTarget.style.opacity = '0'
+  }
+
   return (
+    <section className="players__section">
+      <Winner winnerName={winnerName} winnerScore={winnerScore} />
       <div className="players__wrapper">
         <div>
           <div className="players__number">Player 1</div>
@@ -86,5 +120,7 @@ export default function Players() {
         </div>
         {setPlayers()}
       </div>             
+
+      </section>
   );
 }

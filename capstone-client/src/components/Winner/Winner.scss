@@ -1,0 +1,27 @@
+.winner {
+  &__wrapper {
+    display: none;
+
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    justify-content: space-around;
+    width: 80%;
+    height: 100%;
+  }
+
+  &__number {
+  font-size: calc(150px + 2vmin);
+  font-family: "Amaranth";
+  margin: 0;
+  }
+
+  &__name {
+    font-size: calc(120px + 2vmin);
+    font-family: "Amaranth";
+  }
+
+  &__score {
+    font-size: calc(120px + 2vmin);
+    font-family: "Amaranth";
+  }
+}

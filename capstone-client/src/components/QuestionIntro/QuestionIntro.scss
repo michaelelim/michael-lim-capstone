@@ -1,11 +1,12 @@
 #question-intro {
   display: none;
+  min-height: 50vh;
 }
 
 .question-intro {
   &__title {
     font-family: 'Titillium Web';
-    font-size: calc(65px + 2vmin);
-    font-weight: 400;
+    font-size: calc(105px + 2vmin);
+    font-weight: 600;
   }
 }

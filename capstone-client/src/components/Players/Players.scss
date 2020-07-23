@@ -19,4 +19,15 @@
     font-size: calc(30px + 2vmin);
     font-family: "Amaranth";
   }
+
+  &__section {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0;
+    height: 100%;
+  }
 }
