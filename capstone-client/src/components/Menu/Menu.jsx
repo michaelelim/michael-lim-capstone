@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 // import { useSpeechSynthesis } from 'react-speech-kit';
 import '../../App.scss';
 import './Menu.scss';

@@ -3,10 +3,6 @@ import { Link } from 'react-router-dom';
 import '../../App.scss';
 import './Winner.scss';
 import '../Players/Players'
-import socketIOClient from 'socket.io-client';
-
-const ENDPOINT = 'http://127.0.0.1:3009';
-const socket = socketIOClient(ENDPOINT);
 
 export default function Winner({winnerName, winnerScore}) {
   return (

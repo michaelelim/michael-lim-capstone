@@ -5,7 +5,11 @@ import './QuestionIntro.scss';
 import socketIOClient from 'socket.io-client';
 
 const ENDPOINT = 'http://127.0.0.1:3009';
-const socket = socketIOClient(ENDPOINT);
+const socket = socketIOClient(ENDPOINT, {
+  transports: ['websocket'], 
+  reconnectionAttempts: 3,
+  reconnectionDelay: 3000
+});
 
 export default function QuestionIntro() {  
   // const [tts] = useState('First Question...);
@@ -17,17 +21,15 @@ export default function QuestionIntro() {
   // }
 
   useEffect(() => {
-    socket.on("advanceToQuestions", () => {showQuestions()})
+    socket.on("advanceToQuestions", () => {
+      fadeOut(".question-intro__title")
+      setTimeout(() => {
+        document.querySelector("#question-intro").style.display = "none"
+        document.querySelector("#question-wrapper").style.display = "flex"
+        document.querySelector(".players__wrapper").style.display = "flex"
+      }, 1000)
+    })
   }, [])
-
-  const showQuestions = () => {
-    fadeOut(".question-intro__title")
-    setTimeout(() => {
-      document.querySelector("#question-intro").style.display = "none"
-      document.querySelector("#question-wrapper").style.display = "flex"
-      document.querySelector(".players__wrapper").style.display = "flex"
-    }, 1000)
-  }
 
   const fadeOut = (item) => {
     const fadeTarget = document.querySelector(item)

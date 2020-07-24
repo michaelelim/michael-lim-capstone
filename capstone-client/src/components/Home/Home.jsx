@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // import { useSpeechSynthesis } from 'react-speech-kit';
 import '../../App.scss';
 import './Home.scss';

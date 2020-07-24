@@ -5,7 +5,11 @@ import socketIOClient from 'socket.io-client';
 import Winner from '../Winner/Winner'
 
 const ENDPOINT = 'http://127.0.0.1:3009';
-const socket = socketIOClient(ENDPOINT);
+const socket = socketIOClient(ENDPOINT, {
+  transports: ['websocket'], 
+  reconnectionAttempts: 3,
+  reconnectionDelay: 3000
+});
 let p1 = {name: "", id: "", score: 0, room: ""}
 let p2 = {name: "", id: "", score: 0, room: ""}
 let player1 = '';
@@ -23,14 +27,23 @@ export default function Players() {
 
   const setPlayers = () => {
     if (player1 !== "" || player2 !== "") {
-    player1 = name1Final
-    player2 = name2Final
+    player1 = p1.name
+    player2 = p2.name
     score1 = score1Final
     score2 = score2Final
     }
   }
 
   useEffect(() => {
+    const showWinner = () => {
+      fadeOut(".players__wrapper")
+      setTimeout(() => {
+        document.querySelector("#question-wrapper").style.display = "none"
+        document.querySelector(".players__wrapper").style.display = "none"
+        document.querySelector(".winner__wrapper").style.display = "block"
+      }, 1000)
+    }    
+    
     if (name1Final !== null) {socket.on("name1Broadcast", data => {setName1Final(data)})} //listen for name1broadcast
     if (name2Final !== "JOIN NOW!") {socket.on("name2Broadcast", data => {setName2Final(data)})} //listen for name2broadcast
     if (name1Final === "" && name2Final === "") {socket.emit('listPlayers')}
@@ -77,20 +90,9 @@ export default function Players() {
         setWinnerName("It's a TIE!")
         setWinnerScore(p1.score)
       }
-
-      {showWinner()}
+      showWinner()
     })
-    
   }, [])
-
-  const showWinner = () => {
-    fadeOut(".players__wrapper")
-    setTimeout(() => {
-      document.querySelector("#question-wrapper").style.display = "none"
-      document.querySelector(".players__wrapper").style.display = "none"
-      document.querySelector(".winner__wrapper").style.display = "block"
-    }, 1000)
-  }
 
   const fadeOut = (item) => {
     const fadeTarget = document.querySelector(item)

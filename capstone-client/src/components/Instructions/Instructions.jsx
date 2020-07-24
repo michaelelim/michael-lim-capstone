@@ -5,7 +5,11 @@ import './Instructions.scss';
 import socketIOClient from 'socket.io-client';
 
 const ENDPOINT = 'http://127.0.0.1:3009';
-const socket = socketIOClient(ENDPOINT);
+const socket = socketIOClient(ENDPOINT, {
+  transports: ['websocket'], 
+  reconnectionAttempts: 3,
+  reconnectionDelay: 3000
+});
 
 export default function Instructions() {
   // const [tts] = useState('Question... number... 1...');

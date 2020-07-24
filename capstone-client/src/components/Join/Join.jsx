@@ -13,7 +13,11 @@ import '../Questions/Questions.scss';
 import { v4 as uuidv4 } from 'uuid';
 
 const ENDPOINT = 'http://127.0.0.1:3009';
-const socket = socketIOClient(ENDPOINT);
+const socket = socketIOClient(ENDPOINT, {
+  transports: ['websocket'], 
+  reconnectionAttempts: 3,
+  reconnectionDelay: 3000
+});
 let clientId = uuidv4();
 
 export default function Join({name, room}) {

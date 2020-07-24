@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 // import { useSpeechSynthesis } from 'react-speech-kit';
 import '../../App.scss';
 import './Questions.scss';
@@ -12,9 +12,13 @@ import socketIOClient from 'socket.io-client';
 // const clean = DOMPurify.sanitize(dirty);
 
 const ENDPOINT = 'http://127.0.0.1:3009';
-const socket = socketIOClient(ENDPOINT);
+const socket = socketIOClient(ENDPOINT, {
+  transports: ['websocket'], 
+  reconnectionAttempts: 3,
+  reconnectionDelay: 3000
+});
 let questionServed = false
-let player1, player2 = ''
+// let player1, player2 = ''
 let theQuestions = []
 let currentQuestion = {}
 let question = ""
@@ -28,17 +32,64 @@ export default function Questions(clientId) {
   // const { speak, voices } = useSpeechSynthesis({onEnd});
   // const voice = voices[51];
 
-  const getQuestions = () => {
-    if (theQuestions.length === 0) {
-      socket.emit('sendQuestions', theQuestions) //ask server for questions
-    } 
-    else if (theQuestions.length !== 0 && questionServed === false) {
-      questionServed = true;
-      serveQuestions();
-    }
-  }
-
   useEffect(() => {
+    const getQuestions = () => {
+      if (theQuestions.length === 0) {
+        socket.emit('sendQuestions', theQuestions) //ask server for questions
+      } 
+      else if (theQuestions.length !== 0 && questionServed === false) {
+        questionServed = true;
+        serveQuestions();
+      }
+    }
+
+    let serveQuestions = () => {
+      if (theQuestions.length >= 2) {
+        currentQuestion = theQuestions.pop()
+        question = currentQuestion.question
+        correctAnswer = currentQuestion.correct_answer
+        shuffleAnswers(currentQuestion)
+        choice1 = allAnswers[0]
+        choice2 = allAnswers[1]
+        choice3 = allAnswers[2]
+        choice4 = allAnswers[3]
+        console.log("Questions remaining: ", theQuestions)
+        
+      return (
+        document.querySelector(".question").innerHTML = question,
+        document.querySelector(".question__answer1").innerHTML = choice1,
+        document.querySelector(".question__answer2").innerHTML = choice2,
+        document.querySelector(".question__answer3").innerHTML = choice3,
+        document.querySelector(".question__answer4").innerHTML = choice4
+      )
+      }
+    }
+
+    const shuffleAnswers = (currentQuestion) => {
+      console.log("correct answer is: ", currentQuestion.correct_answer)
+      allAnswers = []
+      allAnswers.push(currentQuestion.correct_answer)
+      allAnswers.push(currentQuestion.incorrect_answers[0])
+      allAnswers.push(currentQuestion.incorrect_answers[1])
+      allAnswers.push(currentQuestion.incorrect_answers[2])
+      shuffle(allAnswers)
+    }
+  
+    // Fisher-Yates shuffle algorithm
+    const shuffle = (array) => {
+      let currentIndex = array.length;
+      let temporaryValue, randomIndex;
+    
+      while (0 !== currentIndex) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+        }
+      return array;
+    };
+
     // asking server for questions
     socket.on("advanceToQuestions", () => {if (theQuestions.length === 0) {getQuestions()}})
     
@@ -59,8 +110,8 @@ export default function Questions(clientId) {
       serveQuestions();
     }) 
     
-    socket.on("name1broadcast", data1 => {player1 = data1})
-    socket.on("name2broadcast", data2 => {player2 = data2})
+    // socket.on("name1broadcast", data1 => {player1 = data1})
+    // socket.on("name2broadcast", data2 => {player2 = data2})
 
     socket.on('removeWrongAnswer', (thisAnswer) => {
       wrongAnswerCount++;
@@ -75,57 +126,9 @@ export default function Questions(clientId) {
     })
   }, [])
 
-  const shuffleAnswers = (currentQuestion) => {
-    console.log("correct answer is: ", currentQuestion.correct_answer)
-    allAnswers = []
-    allAnswers.push(currentQuestion.correct_answer)
-    allAnswers.push(currentQuestion.incorrect_answers[0])
-    allAnswers.push(currentQuestion.incorrect_answers[1])
-    allAnswers.push(currentQuestion.incorrect_answers[2])
-    shuffle(allAnswers)
-  }
-
-  // Fisher-Yates shuffle algorithm
-  const shuffle = (array) => {
-    let currentIndex = array.length;
-    let temporaryValue, randomIndex;
-  
-    while (0 !== currentIndex) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-      }
-    return array;
-  };
-
-  let serveQuestions = () => {
-    if (theQuestions.length >= 2) {
-      currentQuestion = theQuestions.pop()
-      question = currentQuestion.question
-      correctAnswer = currentQuestion.correct_answer
-      shuffleAnswers(currentQuestion)
-      choice1 = allAnswers[0]
-      choice2 = allAnswers[1]
-      choice3 = allAnswers[2]
-      choice4 = allAnswers[3]
-      console.log("Questions remaining: ", theQuestions)
-      
-    return (
-      document.querySelector(".question").innerHTML = question,
-      document.querySelector(".question__answer1").innerHTML = choice1,
-      document.querySelector(".question__answer2").innerHTML = choice2,
-      document.querySelector(".question__answer3").innerHTML = choice3,
-      document.querySelector(".question__answer4").innerHTML = choice4
-    )
-    }
-  }
-
   // Modal - Correct/Incorrect Answers 
   const submitAnswer = (arg) => {
     const thisAnswer = document.querySelector(".question__" + arg).innerHTML
-    const thisAnswer2 = document.querySelector(".question__" + arg).textContent
     document.getElementById("answerModal").style.display = "block";
 
     if (document.querySelector(".question__" + arg).innerHTML === correctAnswer ) {
