@@ -115,20 +115,20 @@ io.on('connection', (socket) => {
   socket.on('100Player', (id) => {
     if (id.clientId == p1.id) {
       p1.score += 100
-      io.emit('100Player1')}
+      io.emit('100Player1', p1.name)}
     else if (id.clientId == p2.id) {
       p2.score += 100
-      io.emit('100Player2')}
+      io.emit('100Player2', p2.name)}
   })
 
   // listen for incorrect answers
   socket.on('minus75Player', (id) => {
     if (id.clientId == p1.id) {
       p1.score -= 75
-      io.emit('minus75Player1')}
+      io.emit('minus75Player1', p1.name)}
     else if (id.clientId == p2.id) {
       p2.score -= 75
-      io.emit('minus75Player2')}
+      io.emit('minus75Player2', p2.name)}
   })
 })
 

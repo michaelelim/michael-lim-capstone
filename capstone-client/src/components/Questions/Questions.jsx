@@ -4,13 +4,6 @@ import '../../App.scss';
 import './Questions.scss';
 import socketIOClient from 'socket.io-client';
 
-// import DOMPurify from 'dompurify'
-// const createDOMPurify = require('dompurify');
-// const { JSDOM } = require('jsdom');
-// const window = new JSDOM('').window;
-// const DOMPurify = createDOMPurify(window);
-// const clean = DOMPurify.sanitize(dirty);
-
 const ENDPOINT = 'http://127.0.0.1:3009';
 const socket = socketIOClient(ENDPOINT, {
   transports: ['websocket'], 
@@ -118,26 +111,47 @@ export default function Questions(clientId) {
       if (wrongAnswerCount === 4) {
         socket.emit('nextQuestion')
       }  
+      console.log("through here")
       for (const p of document.querySelectorAll("p")) {
         if (p.textContent.includes(thisAnswer)) {
+          console.log("and here: ", thisAnswer)
           p.parentElement.style.display = "none"
         }}
     
     })
+
+    socket.on('100Player1', (theName) => {showCorrectModal(theName)})
+    socket.on('100Player2', (theName) => {showCorrectModal(theName)})
+
+    const showCorrectModal = (theName) => {
+      document.getElementById("answerModal").style.display = "block";
+      document.querySelector(".question__wrapper").style.display = "none"
+      document.querySelector(".modal-text").innerHTML = `Correct! ${theName} gets 100 points!`
+      setTimeout(() => {document.getElementById("answerModal").style.display = "none"}, 2000)
+    }
+
+    socket.on('minus75Player1', (theName) => {showIncorrectModal(theName)})
+    socket.on('minus75Player2', (theName) => {showIncorrectModal(theName)})
+
+    const showIncorrectModal = (theName) => {
+      document.getElementById("answerModal").style.display = "block";
+      document.querySelector(".modal-text").innerHTML = `Incorrect! ${theName} loses 75 points!`
+      setTimeout(() => {document.getElementById("answerModal").style.display = "none"}, 2000)
+    }
   }, [])
 
   // Modal - Correct/Incorrect Answers 
   const submitAnswer = (arg) => {
     const thisAnswer = document.querySelector(".question__" + arg).innerHTML
-    document.getElementById("answerModal").style.display = "block";
+    // document.getElementById("answerModal").style.display = "block";
 
     if (document.querySelector(".question__" + arg).innerHTML === correctAnswer ) {
-      document.querySelector(".question__wrapper").style.display = "none"
-      document.querySelector(".modal-text").innerHTML = "Correct! You get 100 points!"
+       // document.querySelector(".question__wrapper").style.display = "none"
+      // document.querySelector(".modal-text").innerHTML = "Correct! You get 100 points!"
       socket.emit('100Player', clientId);
 
         setTimeout(() => {
-          document.getElementById("answerModal").style.display = "none"
+          // document.getElementById("answerModal").style.display = "none"
           if (theQuestions.length === 1) {
             socket.emit('advanceButton', "goToWinner")
           } else {
@@ -146,11 +160,11 @@ export default function Questions(clientId) {
         }, 2000)
 
       } else if (document.querySelector(".question__" + arg).innerHTML !== correctAnswer) {
-        document.querySelector(".modal-text").innerHTML = "Incorrect! You lose 75 points!"
+        // document.querySelector(".modal-text").innerHTML = "Incorrect! You lose 75 points!"
         socket.emit('minus75Player', clientId);
 
         setTimeout(() => {
-          document.getElementById("answerModal").style.display = "none"
+          // document.getElementById("answerModal").style.display = "none"
           socket.emit('removeWrongAnswer', thisAnswer)
         }, 2000)
       }
