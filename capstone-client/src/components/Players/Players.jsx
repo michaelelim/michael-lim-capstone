@@ -44,8 +44,8 @@ export default function Players() {
       }, 1000)
     }    
     
-    if (name1Final !== null) {socket.on("name1Broadcast", data => {setName1Final(data)})} //listen for name1broadcast
-    if (name2Final !== "JOIN NOW!") {socket.on("name2Broadcast", data => {setName2Final(data)})} //listen for name2broadcast
+    if (name1Final !== null) {socket.on("name1Broadcast", data => {setName1Final(data)})}
+    if (name2Final !== "JOIN NOW!") {socket.on("name2Broadcast", data => {setName2Final(data)})}
     if (name1Final === "" && name2Final === "") {socket.emit('listPlayers')}
 
     socket.on('p1Broadcast', (data) => {
@@ -62,19 +62,19 @@ export default function Players() {
       p2.room = data.room
     })
 
-    socket.on('100Player1', (data) => {
+    socket.on('100Player1', () => {
       p1.score += 100
       setScore1Final(p1.score)
     });
-    socket.on('minus75Player1', (data) => {
+    socket.on('minus75Player1', () => {
       p1.score -= 75
       setScore1Final(p1.score)
     });
-    socket.on('100Player2', (data) => {
+    socket.on('100Player2', () => {
       p2.score += 100
       setScore2Final(p2.score)
     });
-    socket.on('minus75Player2', (data) => {
+    socket.on('minus75Player2', () => {
       p2.score -= 75
       setScore2Final(p2.score)
     });
@@ -115,7 +115,6 @@ export default function Players() {
         </div>
         {setPlayers()}
       </div>             
-
-      </section>
+    </section>
   );
 }

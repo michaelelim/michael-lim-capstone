@@ -11,7 +11,6 @@ const socket = socketIOClient(ENDPOINT, {
   reconnectionDelay: 3000
 });
 let questionServed = false
-// let player1, player2 = ''
 let theQuestions = []
 let currentQuestion = {}
 let question = ""
@@ -27,9 +26,7 @@ export default function Questions(clientId) {
 
   useEffect(() => {
     const getQuestions = () => {
-      if (theQuestions.length === 0) {
-        socket.emit('sendQuestions', theQuestions) //ask server for questions
-      } 
+      if (theQuestions.length === 0) {socket.emit('sendQuestions', theQuestions)} 
       else if (theQuestions.length !== 0 && questionServed === false) {
         questionServed = true;
         serveQuestions();
@@ -103,21 +100,11 @@ export default function Questions(clientId) {
       serveQuestions();
     }) 
     
-    // socket.on("name1broadcast", data1 => {player1 = data1})
-    // socket.on("name2broadcast", data2 => {player2 = data2})
-
     socket.on('removeWrongAnswer', (thisAnswer) => {
       wrongAnswerCount++;
-      if (wrongAnswerCount === 4) {
-        socket.emit('nextQuestion')
-      }  
-      console.log("through here")
+      if (wrongAnswerCount === 4) {socket.emit('nextQuestion')}  
       for (const p of document.querySelectorAll("p")) {
-        if (p.textContent.includes(thisAnswer)) {
-          console.log("and here: ", thisAnswer)
-          p.parentElement.style.display = "none"
-        }}
-    
+        if (p.textContent.includes(thisAnswer)) {p.parentElement.style.display = "none"}}    
     })
 
     socket.on('100Player1', (theName) => {showCorrectModal(theName)})
@@ -143,31 +130,17 @@ export default function Questions(clientId) {
   // Modal - Correct/Incorrect Answers 
   const submitAnswer = (arg) => {
     const thisAnswer = document.querySelector(".question__" + arg).innerHTML
-    // document.getElementById("answerModal").style.display = "block";
 
     if (document.querySelector(".question__" + arg).innerHTML === correctAnswer ) {
-       // document.querySelector(".question__wrapper").style.display = "none"
-      // document.querySelector(".modal-text").innerHTML = "Correct! You get 100 points!"
       socket.emit('100Player', clientId);
-
-        setTimeout(() => {
-          // document.getElementById("answerModal").style.display = "none"
-          if (theQuestions.length === 1) {
-            socket.emit('advanceButton', "goToWinner")
-          } else {
-            socket.emit('nextQuestion')
-          }
-        }, 2000)
-
-      } else if (document.querySelector(".question__" + arg).innerHTML !== correctAnswer) {
-        // document.querySelector(".modal-text").innerHTML = "Incorrect! You lose 75 points!"
+      setTimeout(() => {
+        if (theQuestions.length === 1) {socket.emit('advanceButton', "goToWinner")} 
+        else {socket.emit('nextQuestion')}
+      }, 2000)
+    } else if (document.querySelector(".question__" + arg).innerHTML !== correctAnswer) {
         socket.emit('minus75Player', clientId);
-
-        setTimeout(() => {
-          // document.getElementById("answerModal").style.display = "none"
-          socket.emit('removeWrongAnswer', thisAnswer)
-        }, 2000)
-      }
+        setTimeout(() => {socket.emit('removeWrongAnswer', thisAnswer)}, 2000)
+    }
   }
     
   return (

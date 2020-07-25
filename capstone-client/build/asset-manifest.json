@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.895200d6.chunk.css",
+    "main.js": "/static/js/main.dc58288d.chunk.js",
+    "main.js.map": "/static/js/main.dc58288d.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.ea30354d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.ea30354d.js.map",
+    "static/js/2.562f8a7a.chunk.js": "/static/js/2.562f8a7a.chunk.js",
+    "static/js/2.562f8a7a.chunk.js.map": "/static/js/2.562f8a7a.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.00ae01f5980bebd595b8aaf30b16727b.js": "/precache-manifest.00ae01f5980bebd595b8aaf30b16727b.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.895200d6.chunk.css.map": "/static/css/main.895200d6.chunk.css.map",
+    "static/js/2.562f8a7a.chunk.js.LICENSE.txt": "/static/js/2.562f8a7a.chunk.js.LICENSE.txt",
+    "static/media/App.scss": "/static/media/TitilliumWeb-SemiBold.232f3f3e.ttf",
+    "static/media/LimboStudios.svg": "/static/media/LimboStudios.8283a9e9.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ea30354d.js",
+    "static/js/2.562f8a7a.chunk.js",
+    "static/css/main.895200d6.chunk.css",
+    "static/js/main.dc58288d.chunk.js"
+  ]
+}

@@ -29,8 +29,8 @@ export default function Join({name, room}) {
     socket.emit('name1', name, clientId)
   }
 
-  const advanceToServer = () => {
-    socket.emit('advanceButton', "goToInstructions")}
+  const advanceToServer = (room) => {
+    socket.emit('advanceButton', "goToInstructions", room)}
 
     useEffect(() => {
       socket.on("name1broadcast", data => {setName1Final(data)})
@@ -69,7 +69,7 @@ export default function Join({name, room}) {
       <Players name1={name1Final} name2={name2Final}/>
 
       {/* <Link to="/instructions" onClick={() => {speak({ text, voice })}}> */}
-      <button className="button button__everyone-here" onClick={advanceToServer}>Everyone's here!</button>
+      <button className="button button__everyone-here" onClick={() => {advanceToServer(room)}}>Everyone's here!</button>
       <Instructions />
       <QuestionIntro />
     </div>

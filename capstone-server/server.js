@@ -4,15 +4,20 @@ const socket = require('socket.io')
 const app = express();
 const server = http.createServer(app)
 const io = socket(server)
+const axios = require('axios')
+const bodyParser = require('body-parser');
+app.use(bodyParser.json())
 
 let player1 = ""
 let player2 = 'JOIN NOW!'
 let p1 = {name: "", id: "", score: 0, room: ""}
 let p2 = {name: "", id: "", score: 0, room: ""}
 
+const sessionQuestions = []
+
 //== SETTINGS == 
 const questions = require('./questions.json'); //JSON
-let numberOfQuestions = 10; // SET NUMBER OF QUESTIONS
+let numberOfQuestions = 5; // SET NUMBER OF QUESTIONS
 
 io.on('connection', (socket) => {
   console.log('New PLAYER connected!: ', socket.id);
@@ -65,9 +70,23 @@ io.on('connection', (socket) => {
     io.emit('p2Broadcast', p2)
   })
 
-  // Listen for advance button
-  socket.on('advanceButton', (item) => {
-    if (item === "goToInstructions") {io.emit('advanceToInstructions', item)}
+  // Listen for advance button - WIP!!
+  socket.on('advanceButton', (item, room) => {
+    if (item === "goToInstructions") {
+      io.emit('advanceToInstructions', item)
+    //   axios
+    //   .get('https://opentdb.com/api.php?amount=5&type=multiple')
+    //   .then(res => {
+    //     const newArr = []
+    //     res.data.results.map(item => {
+    //       sessionQuestions.push({
+    //         ""
+    //       })}
+    //     )
+    //     return(sessionQuestions)
+    //   })
+    //   .catch(err => {console.log(err)})
+    }
     if (item === "goToQuestionIntro") {io.emit('advanceToQuestionIntro', item)}
     if (item === "goToQuestions") {io.emit('advanceToQuestions', item)}
     if (item === "goToWinner") {io.emit('advanceToWinner', item)}
@@ -99,8 +118,11 @@ io.on('connection', (socket) => {
       console.log('Shuffling questions!')
       questionsSent = true;
       shuffle(questions);
+      // shuffle(sessionQuestions);
+      // for (let i = 0; i < (numberOfQuestions + 1); i++) {filteredQuestions.push(sessionQuestions[i])}
       for (let i = 0; i < (numberOfQuestions + 1); i++) {filteredQuestions.push(questions[i])}
     }
+    console.log("Filtered questions: ", filteredQuestions)
     io.emit('filteredQuestions', filteredQuestions) //broadcast to all
   })
 
