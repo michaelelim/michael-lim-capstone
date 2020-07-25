@@ -92,7 +92,7 @@ export default function Players() {
       }
       showWinner()
     })
-  }, [])
+  }, [name1Final, name2Final])
 
   const fadeOut = (item) => {
     const fadeTarget = document.querySelector(item)
