@@ -4,20 +4,20 @@ import './Players.scss';
 import socketIOClient from 'socket.io-client';
 import Winner from '../Winner/Winner'
 
-const ENDPOINT = 'https://michaelelim-capstone-server.herokuapp.com/';
+const ENDPOINT = 'http://127.0.0.1:3009';
 const socket = socketIOClient(ENDPOINT, {
   transports: ['websocket'], 
   reconnectionAttempts: 3,
   reconnectionDelay: 3000
 });
-let p1 = {name: "", id: "", score: 0, room: ""}
-let p2 = {name: "", id: "", score: 0, room: ""}
+let p1 = {name: "", id: "", room: "", score: 0}
+let p2 = {name: "", id: "", room: "", score: 0}
 let player1 = '';
 let player2 = '';
 let score1 = 0;
 let score2 = 0;
 
-export default function Players() {
+export default function Players(room) {
   let [name1Final, setName1Final] = useState(player1);
   let [name2Final, setName2Final] = useState(player2);
   let [score1Final, setScore1Final] = useState(score1);
@@ -44,22 +44,32 @@ export default function Players() {
       }, 1000)
     }    
     
-    if (name1Final !== null) {socket.on("name1Broadcast", data => {setName1Final(data)})}
-    if (name2Final !== "JOIN NOW!") {socket.on("name2Broadcast", data => {setName2Final(data)})}
+    if (name1Final !== null) {socket.on("name1Broadcast", data => {
+      console.log("data: ", data)
+      console.log("room: ", room)
+      console.log("updated name1")
+      setName1Final(data)})}
+    if (name2Final !== "JOIN NOW!") {socket.on("name2Broadcast", data => {
+      console.log("updated name2")
+      setName2Final(data)})}
     if (name1Final === "" && name2Final === "") {socket.emit('listPlayers')}
 
     socket.on('p1Broadcast', (data) => {
-      p1.name = data.name
-      p1.id = data.id
-      p1.score = data.score
-      p1.room = data.room
+      console.log("p1 updated: ", data)
+      p1.name = data[0].name
+      p1.id = data[0].clientId
+      p1.score = data[0].score
+      p1.room = data[0].room
     })
 
     socket.on('p2Broadcast', (data) => {
-      p2.name = data.name
-      p2.id = data.id
-      p2.score = data.score
-      p2.room = data.room
+      if (data.length !== 0) {
+        console.log("p2 updated: ", data)
+        p2.name = data[0].name
+        p2.id = data[0].clientId
+        p2.score = data[0].score
+        p2.room = data[0].room
+      }
     })
 
     socket.on('100Player1', () => {

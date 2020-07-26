@@ -12,7 +12,7 @@ import Questions from '../Questions/Questions'
 import '../Questions/Questions.scss';
 import { v4 as uuidv4 } from 'uuid';
 
-const ENDPOINT = 'https://michaelelim-capstone-server.herokuapp.com/';
+const ENDPOINT = 'http://127.0.0.1:3009';
 const socket = socketIOClient(ENDPOINT, {
   transports: ['websocket'], 
   reconnectionAttempts: 3,
@@ -24,10 +24,9 @@ export default function Join({name, room}) {
   let [name1Final, setName1Final] = useState('');
   let [name2Final, setName2Final] = useState("JOIN NOW!");
 
-  const roomToServer = () => {socket.emit('roomName', room)}
-  const nameToServer = () => {
-    socket.emit('name1', name, clientId)
-  }
+  const userToServer = () => {socket.emit('userName', name, clientId, room)}
+  // const roomToServer = () => {socket.emit('roomName', room)}
+  // const nameToServer = () => {socket.emit('name1', name, clientId) }
 
   const advanceToServer = (room) => {
     socket.emit('advanceButton', "goToInstructions", room)}
@@ -35,7 +34,7 @@ export default function Join({name, room}) {
     useEffect(() => {
       socket.on("name1broadcast", data => {setName1Final(data)})
       socket.on("name2broadcast", data => {setName2Final(data)})
-      socket.on("advanceToInstructions", () => {showInstructions()})
+      socket.on('advanceToInstructions', () => {showInstructions()})
     }, [])
 
   // const [tts] = useState('The instructions are simple!  A question will come up and you have to choose the correct answer on your device.  If you have the most points... you win!');
@@ -53,8 +52,9 @@ export default function Join({name, room}) {
   return (
     <div className="App">
       <div id="the-join" className="App">
-        {roomToServer()}
-        {nameToServer()}
+        {/* {roomToServer()}
+        {nameToServer()} */}
+        {userToServer()}
         <div className="join__wrapper">
           <h1 className="join__left">Who's playing?</h1>
           
@@ -65,13 +65,13 @@ export default function Join({name, room}) {
         </div>
       </div>
 
-      <Questions clientId={clientId} />
-      <Players name1={name1Final} name2={name2Final}/>
+      <Questions clientId={clientId} room={room}/>
+      <Players name1={name1Final} name2={name2Final} room={room}/>
 
       {/* <Link to="/instructions" onClick={() => {speak({ text, voice })}}> */}
       <button className="button button__everyone-here" onClick={() => {advanceToServer(room)}}>Everyone's here!</button>
-      <Instructions />
-      <QuestionIntro />
+      <Instructions room={room}/>
+      <QuestionIntro room={room}/>
     </div>
   );
 }

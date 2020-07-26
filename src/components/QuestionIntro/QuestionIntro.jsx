@@ -4,14 +4,14 @@ import '../../App.scss';
 import './QuestionIntro.scss';
 import socketIOClient from 'socket.io-client';
 
-const ENDPOINT = 'https://michaelelim-capstone-server.herokuapp.com/';
+const ENDPOINT = 'http://127.0.0.1:3009';
 const socket = socketIOClient(ENDPOINT, {
   transports: ['websocket'], 
   reconnectionAttempts: 3,
   reconnectionDelay: 3000
 });
 
-export default function QuestionIntro() {  
+export default function QuestionIntro(room) {  
   // const [tts] = useState('First Question...);
   // const { speak, voices } = useSpeechSynthesis({onEnd});
   // const voice = voices[51];
@@ -21,7 +21,7 @@ export default function QuestionIntro() {
   // }
 
   useEffect(() => {
-    socket.on("advanceToQuestions", () => {
+    socket.on('advanceToQuestions', () => {
       fadeOut(".question-intro__title")
       setTimeout(() => {
         document.querySelector("#question-intro").style.display = "none"

@@ -4,7 +4,7 @@ import '../../App.scss';
 import './Questions.scss';
 import socketIOClient from 'socket.io-client';
 
-const ENDPOINT = 'https://michaelelim-capstone-server.herokuapp.com/';
+const ENDPOINT = 'http://127.0.0.1:3009';
 const socket = socketIOClient(ENDPOINT, {
   transports: ['websocket'], 
   reconnectionAttempts: 3,
@@ -19,7 +19,7 @@ let correctAnswer = ""
 let allAnswers = []
 let wrongAnswerCount = 0
 
-export default function Questions(clientId) {
+export default function Questions(clientId, room) {
   // const [tts, setTts] = useState('Question 1... ');
   // const { speak, voices } = useSpeechSynthesis({onEnd});
   // const voice = voices[51];
@@ -132,6 +132,7 @@ export default function Questions(clientId) {
     const thisAnswer = document.querySelector(".question__" + arg).innerHTML
 
     if (document.querySelector(".question__" + arg).innerHTML === correctAnswer ) {
+      console.log("submitting 100Player: ", clientId)
       socket.emit('100Player', clientId);
       setTimeout(() => {
         if (theQuestions.length === 1) {socket.emit('advanceButton', "goToWinner")} 
