@@ -4,8 +4,6 @@ import '../../App.scss';
 import './Winner.scss';
 import '../Players/Players'
 
-// const STARTPOINT = 'http://127.0.0.1:3000';
-
 export default function Winner({winnerName, winnerScore, room}) {
   const refreshBrowser = () => {
     window.location.reload(true)

@@ -19,7 +19,7 @@ let correctAnswer = ""
 let allAnswers = []
 let wrongAnswerCount = 0
 
-export default function Questions(clientId, room) {
+export default function Questions({ room, clientId, socket }) {
   // const [tts, setTts] = useState('Question 1... ');
   // const { speak, voices } = useSpeechSynthesis({onEnd});
   // const voice = voices[51];
