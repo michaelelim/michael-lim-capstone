@@ -4,7 +4,13 @@ import '../../App.scss';
 import './Winner.scss';
 import '../Players/Players'
 
-export default function Winner({winnerName, winnerScore}) {
+// const STARTPOINT = 'http://127.0.0.1:3000';
+
+export default function Winner({winnerName, winnerScore, room}) {
+  const refreshBrowser = () => {
+    window.location.reload(true)
+  }
+
   return (
       <div className="winner__wrapper">
         <div>
@@ -13,9 +19,7 @@ export default function Winner({winnerName, winnerScore}) {
           <div id="playerscore" className="winner__score">{winnerScore}</div>
         </div>
 
-      <Link to={`/`}>
-        <button id="button__leave-winner" className="button">Start a New Game!</button>
-      </Link>  
+        <button id="button__leave-winner" className="button" onClick={refreshBrowser}>Start a New Game!</button>
       </div>             
   );
 }
