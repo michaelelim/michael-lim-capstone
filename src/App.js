@@ -4,8 +4,6 @@ import './App.scss';
 import Home from './components/Home/Home.jsx';
 import Title from './components/Title/Title.jsx';
 import Menu from './components/Menu/Menu.jsx';
-// import Host from './components/Host/Host.jsx';
-// import JoinRoom from './components/JoinRoom/JoinRoom.jsx';
 import Join from './components/Join/Join.jsx';
 import Instructions from './components/Instructions/Instructions.jsx';
 import QuestionIntro from './components/QuestionIntro/QuestionIntro.jsx';
@@ -18,9 +16,6 @@ export default function App() {
         <Route path="/" exact render={props => (<Home {... props}/>)}/>
         <Route path="/title" render={props => (<Title {... props}/>)}/>
         <Route path="/menu" render={props => <Menu {... props}/>}/>
-        {/* <Route path="/host" render={props => <Host {... props}/>}/>
-        <Route path="/joinroom" render={props => <JoinRoom {... props}/>}/> */}
-        {/* <Route path="/join" exact render={props => <Join {... props}/>}/> */}
         <Route path="/join/:name/:room" render={props => {
           return (<Join 
             room={props.match.params.room}

@@ -39,25 +39,25 @@ export default function Instructions({room, socket}) {
 
       <div className="instructions__wrapper-question">
         <div className="question">What is the capital of a fake question?</div>
-        <button className="question__answer-wrapper button3">
+        <button className="question__answer-wrapper button3 coolBeans">
           <div className="question__letter">A:</div>
           <div id="qa" className="question__answer1">Fakesville, USA</div>
         </button>
-        <button className="question__answer-wrapper button3">
+        <button className="question__answer-wrapper button3 coolBeans">
           <div className="question__letter">B:</div>
           <div id="qa" className="question__answer2">42</div>
         </button>
-        <button className="question__answer-wrapper button3">
+        <button className="question__answer-wrapper button3 coolBeans">
           <div className="question__letter">C:</div>
           <div id="qa" className="question__answer3">When in doubt, pick C</div>
         </button>
-        <button className="question__answer-wrapper button3">
+        <button className="question__answer-wrapper button3 coolBeans">
           <div className="question__letter">D:</div>
           <div id="qa" className="question__answer4">None of the above</div>
         </button>
       </div>
 
-      <button id="button__leave-instructions" className="button" onClick={advanceToServer}>We got it! Let's go!</button>
+      <button id="button__leave-instructions" className="button coolBeans" onClick={advanceToServer}>We got it! Let's go!</button>
     </div>
     );
   }

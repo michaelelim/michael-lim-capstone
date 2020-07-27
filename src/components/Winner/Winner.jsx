@@ -17,7 +17,7 @@ export default function Winner({winnerName, winnerScore, room}) {
           <div id="playerscore" className="winner__score">{winnerScore}</div>
         </div>
 
-        <button id="button__leave-winner" className="button" onClick={refreshBrowser}>Start a New Game!</button>
+        <button id="button__leave-winner" className="button coolBeans" onClick={refreshBrowser}>Start a New Game!</button>
       </div>             
   );
 }

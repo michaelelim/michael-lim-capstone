@@ -17,7 +17,7 @@ export default function Title() {
         <h1 className="animate__animated animate__tada title__title">You Don't Know Diddly Squat</h1>
         <h3 className="title__sub">A multiplayer quiz show for the whole family!</h3>
         <Link to="/menu">
-          <button className="button from-center">Let's Go!</button>
+          <button className="button coolBeans">Let's Go!</button>
         </Link>        
       </div>
   )

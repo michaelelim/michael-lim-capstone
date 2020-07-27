@@ -62,7 +62,7 @@ export default function Join({ name, room }) {
       <Players clientId={clientId} room={room} socket={socket} />
 
       {/* <Link to="/instructions" onClick={() => {speak({ text, voice })}}> */}
-      <button className="button button__everyone-here" onClick={() => {advanceToServer(room)}}>Everyone's here!</button>
+      <button className="button button__everyone-here coolBeans" onClick={() => {advanceToServer(room)}}>Everyone's here!</button>
       <Instructions room={room} socket={socket}/>
       <QuestionIntro room={room} socket={socket}/>
     </div>

@@ -163,19 +163,19 @@ export default function Questions({ room, clientId, socket }) {
       <div className="question__wrapper">
         <span className="question"></span>
         <div className="question__answer">
-          <button className="question__answer-wrapper button3" id="answer1" onClick={() => {submitAnswer("answer1")}}>
+          <button className="question__answer-wrapper button3 coolBeans" id="answer1" onClick={() => {submitAnswer("answer1")}}>
             <div className="question__letter">A:</div>
             <p className="question__answer1"></p>
           </button>
-          <button className="question__answer-wrapper button3" id="answer2" onClick={() => {submitAnswer("answer2")}}>
+          <button className="question__answer-wrapper button3 coolBeans" id="answer2" onClick={() => {submitAnswer("answer2")}}>
             <div className="question__letter">B:</div>
             <p className="question__answer2"></p>
           </button>
-          <button className="question__answer-wrapper button3" id="answer3" onClick={() => {submitAnswer("answer3")}}>
+          <button className="question__answer-wrapper button3 coolBeans" id="answer3" onClick={() => {submitAnswer("answer3")}}>
             <div className="question__letter">C:</div>
             <p className="question__answer3"></p>
           </button>
-          <button className="question__answer-wrapper button3" id="answer4" onClick={() => {submitAnswer("answer4")}}>
+          <button className="question__answer-wrapper button3 coolBeans" id="answer4" onClick={() => {submitAnswer("answer4")}}>
             <div className="question__letter">D:</div>
             <p className="question__answer4"></p>
           </button>

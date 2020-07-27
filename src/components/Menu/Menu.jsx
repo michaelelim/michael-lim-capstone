@@ -43,8 +43,8 @@ export default function Menu() {
           <h1 className="animate__animated animate__backInDown menu__top">You Don't Know Diddly Squat</h1>          
         </div>
       
-        <button className="animate__animated button button__host" onClick={showHost}>Host a Game</button>
-        <button className="button button__join-room" onClick={showJoinRoom}>Join a Game</button>
+        <button className="animate__animated button button__host coolBeans" onClick={showHost}>Host a Game</button>
+        <button className="button button__join-room coolBeans" onClick={showJoinRoom}>Join a Game</button>
       </div>
 
       <Host/>

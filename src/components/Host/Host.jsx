@@ -40,7 +40,7 @@ export default function Host() {
       </div>
 
       <Link to={`/join/${name}/${room}`} room={room}>
-        <button id="create-room-button" className="button">Create Room</button>
+        <button id="create-room-button" className="button coolBeans">Create Room</button>
       </Link>  
     </div>
   );
