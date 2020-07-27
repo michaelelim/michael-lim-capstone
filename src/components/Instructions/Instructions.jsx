@@ -2,32 +2,34 @@ import React, {useEffect} from 'react';
 // import { useSpeechSynthesis } from 'react-speech-kit';
 import '../../App.scss';
 import './Instructions.scss';
-import socketIOClient from 'socket.io-client';
+// import socketIOClient from 'socket.io-client';
 
-const ENDPOINT = 'http://127.0.0.1:3009';
-const socket = socketIOClient(ENDPOINT, {
-  transports: ['websocket'], 
-  reconnectionAttempts: 3,
-  reconnectionDelay: 3000
-});
+// const ENDPOINT = 'http://127.0.0.1:3009';
+// const socket = socketIOClient(ENDPOINT, {
+//   transports: ['websocket'], 
+//   reconnectionAttempts: 3,
+//   reconnectionDelay: 3000
+// });
 
-export default function Instructions({room}) {
+export default function Instructions({room, socket}) {
   // const [tts] = useState('Question... number... 1...');
   // const { speak, voices } = useSpeechSynthesis({});
   // const voice = voices[51];
 
-  const advanceToServer = () => {socket.emit('advanceButton', "goToQuestionIntro")}
-
   useEffect(() => {
-    socket.on('advanceToQuestionIntro', () => {showQuestionIntro()})
-  }, [])
+    if (socket) {
+      socket.on('advanceToQuestionIntro', () => {showQuestionIntro()})
 
-  const showQuestionIntro = () => {
-    document.querySelector("#the-instructions").style.display = "none"
-    document.querySelector("#button__leave-instructions").style.display = "none"
-    document.querySelector("#question-intro").style.display = "flex"
-    setTimeout(() => {socket.emit('advanceButton', "goToQuestions")}, 1500)
-  }
+      const showQuestionIntro = () => {
+        document.querySelector("#the-instructions").style.display = "none"
+        document.querySelector("#button__leave-instructions").style.display = "none"
+        document.querySelector("#question-intro").style.display = "flex"
+        setTimeout(() => {socket.emit('advanceButton', "goToQuestions")}, 1500)
+      }
+    }
+  }, [socket])
+
+  const advanceToServer = () => {socket.emit('advanceButton', "goToQuestionIntro")}
 
   return (
     <div id="the-instructions" className="App">

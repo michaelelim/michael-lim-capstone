@@ -63,8 +63,8 @@ export default function Join({ name, room }) {
 
       {/* <Link to="/instructions" onClick={() => {speak({ text, voice })}}> */}
       <button className="button button__everyone-here" onClick={() => {advanceToServer(room)}}>Everyone's here!</button>
-      <Instructions room={room}/>
-      <QuestionIntro room={room}/>
+      <Instructions room={room} socket={socket}/>
+      <QuestionIntro room={room} socket={socket}/>
     </div>
   );
 }

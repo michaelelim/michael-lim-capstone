@@ -1,15 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { useSpeechSynthesis } from 'react-speech-kit';
 import { Link } from 'react-router-dom';
 import '../../App.scss';
 import './Host.scss';
+// import socketIOClient from 'socket.io-client';
+
+const ENDPOINT = 'http://127.0.0.1:3009';
 
 export default function Host() {
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
+  let [socket, setSocket] = useState();
 
   // const { speak, voices } = useSpeechSynthesis();
   // const voice = voices[51];
+
+  // set socket
+  // useEffect(() => {
+  //   setSocket(socketIOClient(ENDPOINT, {
+  //     transports: ['websocket'], 
+  //     reconnectionAttempts: 3,
+  //     reconnectionDelay: 3000
+  //   }));
+  // }, [])
+
+  // const pullQuestions = () => {
+  //   socket.on('advanceButton', 'pullQuestions', room)
+  // }
 
   return (
     <div className="host__wrapper">
@@ -22,7 +39,7 @@ export default function Host() {
         <input className="host__code" type="text" onChange={(e) => {setRoom(e.target.value)}}></input>
       </div>
 
-      <Link to={`/join/${name}/${room}`}>
+      <Link to={`/join/${name}/${room}`} socket={socket} room={room}>
         <button id="create-room-button" className="button">Create Room</button>
       </Link>  
     </div>

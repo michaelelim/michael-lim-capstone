@@ -2,14 +2,7 @@ import React, { useEffect } from 'react';
 // import { useSpeechSynthesis } from 'react-speech-kit';
 import '../../App.scss';
 import './Questions.scss';
-import socketIOClient from 'socket.io-client';
 
-const ENDPOINT = 'http://127.0.0.1:3009';
-const socket = socketIOClient(ENDPOINT, {
-  transports: ['websocket'], 
-  reconnectionAttempts: 3,
-  reconnectionDelay: 3000
-});
 let questionServed = false
 let theQuestions = []
 let currentQuestion = {}
@@ -25,122 +18,136 @@ export default function Questions({ room, clientId, socket }) {
   // const voice = voices[51];
 
   useEffect(() => {
-    const getQuestions = () => {
-      if (theQuestions.length === 0) {socket.emit('sendQuestions', theQuestions)} 
-      else if (theQuestions.length !== 0 && questionServed === false) {
-        questionServed = true;
-        serveQuestions();
-      }
-    }
-
-    let serveQuestions = () => {
-      if (theQuestions.length >= 2) {
-        currentQuestion = theQuestions.pop()
-        question = currentQuestion.question
-        correctAnswer = currentQuestion.correct_answer
-        shuffleAnswers(currentQuestion)
-        choice1 = allAnswers[0]
-        choice2 = allAnswers[1]
-        choice3 = allAnswers[2]
-        choice4 = allAnswers[3]
-        console.log("Questions remaining: ", theQuestions)
-        
-      return (
-        document.querySelector(".question").innerHTML = question,
-        document.querySelector(".question__answer1").innerHTML = choice1,
-        document.querySelector(".question__answer2").innerHTML = choice2,
-        document.querySelector(".question__answer3").innerHTML = choice3,
-        document.querySelector(".question__answer4").innerHTML = choice4
-      )
-      }
-    }
-
-    const shuffleAnswers = (currentQuestion) => {
-      console.log("correct answer is: ", currentQuestion.correct_answer)
-      allAnswers = []
-      allAnswers.push(currentQuestion.correct_answer)
-      allAnswers.push(currentQuestion.incorrect_answers[0])
-      allAnswers.push(currentQuestion.incorrect_answers[1])
-      allAnswers.push(currentQuestion.incorrect_answers[2])
-      shuffle(allAnswers)
-    }
-  
-    // Fisher-Yates shuffle algorithm
-    const shuffle = (array) => {
-      let currentIndex = array.length;
-      let temporaryValue, randomIndex;
-    
-      while (0 !== currentIndex) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
+      let serveQuestions = () => {
+        if (theQuestions.length >= 2) {
+          currentQuestion = theQuestions.pop()
+          question = currentQuestion.question
+          correctAnswer = currentQuestion.correct_answer
+          shuffleAnswers(currentQuestion)
+          choice1 = allAnswers[0]
+          choice2 = allAnswers[1]
+          choice3 = allAnswers[2]
+          choice4 = allAnswers[3]
+          console.log("Questions remaining: ", theQuestions)
+          
+        return (
+          document.querySelector(".question").innerHTML = question,
+          document.querySelector(".question__answer1").innerHTML = choice1,
+          document.querySelector(".question__answer2").innerHTML = choice2,
+          document.querySelector(".question__answer3").innerHTML = choice3,
+          document.querySelector(".question__answer4").innerHTML = choice4
+        )
         }
-      return array;
-    };
+      }
 
-    // asking server for questions
-    socket.on("advanceToQuestions", () => {if (theQuestions.length === 0) {getQuestions()}})
+      const shuffleAnswers = (currentQuestion) => {
+        console.log("correct answer is: ", currentQuestion.correct_answer)
+        allAnswers = []
+        allAnswers.push(currentQuestion.correct_answer)
+        allAnswers.push(currentQuestion.incorrect_answers[0])
+        allAnswers.push(currentQuestion.incorrect_answers[1])
+        allAnswers.push(currentQuestion.incorrect_answers[2])
+        shuffle(allAnswers)
+      }
     
-    //listen for move to next question
-    socket.on("nextQuestion", () => {
-      wrongAnswerCount = 0
-      serveQuestions()
-      document.querySelector(".question__wrapper").style.display = "flex"
-      document.querySelector("#answer1").style.display = "flex"
-      document.querySelector("#answer2").style.display = "flex"
-      document.querySelector("#answer3").style.display = "flex"
-      document.querySelector("#answer4").style.display = "flex"
-    })
+      // Fisher-Yates shuffle algorithm
+      const shuffle = (array) => {
+        let currentIndex = array.length;
+        let temporaryValue, randomIndex;
+      
+        while (0 !== currentIndex) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+          }
+        return array;
+      };
 
-    //listen for questions from server
-    socket.on("filteredQuestions", (data) => {
-      theQuestions = data
-      serveQuestions();
-    }) 
-    
-    socket.on('removeWrongAnswer', (thisAnswer) => {
-      wrongAnswerCount++;
-      if (wrongAnswerCount === 4) {socket.emit('nextQuestion')}  
-      for (const p of document.querySelectorAll("p")) {
-        if (p.textContent.includes(thisAnswer)) {p.parentElement.style.display = "none"}}    
-    })
+      if (socket) {
+        console.log("In the Questions socket")
 
-    socket.on('100Player1', (theName) => {showCorrectModal(theName)})
-    socket.on('100Player2', (theName) => {showCorrectModal(theName)})
+        const getQuestions = () => {
+          console.log("in getQuestions")
+          if (theQuestions.length === 0) {socket.emit('sendQuestions', theQuestions)} 
+          else if (theQuestions.length !== 0 && questionServed === false) {
+            questionServed = true;
+            console.log("serving questions")
+            serveQuestions();
+          }
+        }
 
-    const showCorrectModal = (theName) => {
-      document.getElementById("answerModal").style.display = "block";
-      document.querySelector(".question__wrapper").style.display = "none"
-      document.querySelector(".modal-text").innerHTML = `Correct! ${theName} gets 100 points!`
-      setTimeout(() => {document.getElementById("answerModal").style.display = "none"}, 2000)
+        // asking server for questions
+        socket.on("advanceToQuestions", () => {if (theQuestions.length === 0) {
+          console.log("getting questions")
+          getQuestions()
+        } else {
+          console.log("no questions")
+        }
+        })
+      
+      //listen for move to next question
+      socket.on("nextQuestion", () => {
+        wrongAnswerCount = 0
+        serveQuestions()
+        document.querySelector(".question__wrapper").style.display = "flex"
+        document.querySelector("#answer1").style.display = "flex"
+        document.querySelector("#answer2").style.display = "flex"
+        document.querySelector("#answer3").style.display = "flex"
+        document.querySelector("#answer4").style.display = "flex"
+      })
+
+      //listen for questions from server
+      socket.on("filteredQuestions", (data) => {
+        theQuestions = data
+        serveQuestions();
+      }) 
+      
+      socket.on('removeWrongAnswer', (thisAnswer, room) => {
+        wrongAnswerCount++;
+        if (wrongAnswerCount === 4) {socket.emit('nextQuestion')}  
+        for (const p of document.querySelectorAll("p")) {
+          if (p.textContent.includes(thisAnswer)) {p.parentElement.style.display = "none"}}    
+      })
+
+      socket.on('100Player1', (theName) => {showCorrectModal(theName[0].name)})
+      socket.on('100Player2', (theName) => {showCorrectModal(theName[1].name)})
+
+      const showCorrectModal = (finalName) => {
+        document.getElementById("answerModal").style.display = "block";
+        document.querySelector(".question__wrapper").style.display = "none"
+        document.querySelector(".modal-text").innerHTML = `Correct! ${finalName} gets 100 points!`
+        setTimeout(() => {document.getElementById("answerModal").style.display = "none"}, 2000)
+      }
+
+      socket.on('minus75Player1', (theName) => {showIncorrectModal(theName[0].name)})
+      socket.on('minus75Player2', (theName) => {showIncorrectModal(theName[1].name)})
+
+      const showIncorrectModal = (finalName) => {
+        document.getElementById("answerModal").style.display = "block";
+        document.querySelector(".modal-text").innerHTML = `Incorrect! ${finalName} loses 75 points!`
+        setTimeout(() => {document.getElementById("answerModal").style.display = "none"}, 2000)
+      }
     }
-
-    socket.on('minus75Player1', (theName) => {showIncorrectModal(theName)})
-    socket.on('minus75Player2', (theName) => {showIncorrectModal(theName)})
-
-    const showIncorrectModal = (theName) => {
-      document.getElementById("answerModal").style.display = "block";
-      document.querySelector(".modal-text").innerHTML = `Incorrect! ${theName} loses 75 points!`
-      setTimeout(() => {document.getElementById("answerModal").style.display = "none"}, 2000)
-    }
-  }, [])
+  }, [socket])
 
   // Modal - Correct/Incorrect Answers 
   const submitAnswer = (arg) => {
     const thisAnswer = document.querySelector(".question__" + arg).innerHTML
 
     if (document.querySelector(".question__" + arg).innerHTML === correctAnswer ) {
-      console.log("submitting 100Player: ", clientId)
-      socket.emit('100Player', clientId);
+      console.log("submitting 100Player: ", clientId, room)
+      socket.emit('100Player', clientId, room);
       setTimeout(() => {
-        if (theQuestions.length === 1) {socket.emit('advanceButton', "goToWinner")} 
+        if (theQuestions.length === 1) {socket.emit('advanceButton', "goToWinner", room)} 
         else {socket.emit('nextQuestion')}
       }, 2000)
+    
     } else if (document.querySelector(".question__" + arg).innerHTML !== correctAnswer) {
-        socket.emit('minus75Player', clientId);
-        setTimeout(() => {socket.emit('removeWrongAnswer', thisAnswer)}, 2000)
+      console.log("submitting minus75Player: ", clientId, room)  
+      socket.emit('minus75Player', clientId, room);
+        setTimeout(() => {socket.emit('removeWrongAnswer', thisAnswer, room)}, 2000)
     }
   }
     
