@@ -22,7 +22,7 @@ export default function Home() {
     setTimeout(() => {
       document.querySelector(".logo").style.display = "none";
       document.querySelector(".button2").style.display = "none";
-      document.querySelector(".title").style.display = "flex";
+      document.querySelector(".title").style.display = "flex";      
     }, 1000)
   }
 
