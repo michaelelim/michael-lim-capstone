@@ -40,10 +40,10 @@ export default function Menu() {
     <div>
       <div id="the-menu" className="App">
         <div className="menu__wrapper">
-          <h1 className="menu__top">You Don't Know Diddly Squat</h1>          
+          <h1 className="animate__animated animate__backInDown menu__top">You Don't Know Diddly Squat</h1>          
         </div>
       
-        <button className="button button__host" onClick={showHost}>Host a Game</button>
+        <button className="animate__animated button button__host" onClick={showHost}>Host a Game</button>
         <button className="button button__join-room" onClick={showJoinRoom}>Join a Game</button>
       </div>
 

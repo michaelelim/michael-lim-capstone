@@ -30,7 +30,7 @@ export default function Host() {
 
   return (
     <div className="host__wrapper">
-      <h1 className="host__top">Host Settings</h1>
+      <h1 className="animate__animated animate__lightSpeedInRight host__top">Host Settings</h1>
       
       <div className="host__bottom">
         <h4 className="host__name-title">Enter your name: </h4>

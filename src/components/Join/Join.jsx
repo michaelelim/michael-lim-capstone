@@ -49,11 +49,11 @@ export default function Join({ name, room }) {
     <div className="App">
       <div id="the-join" className="App">
         <div className="join__wrapper">
-          <h1 className="join__left">Who's playing?</h1>
+          <h1 className="animate__animated animate__rotateInDownLeft join__left">Who's playing?</h1>
           
           <div className="join__right">
             <h4 className="join__room-title">Room code: </h4>
-            <div className="join__room">{room}</div>
+            <div className="animate__animated animate__flash join__room">{room}</div>
           </div>
         </div>
       </div>

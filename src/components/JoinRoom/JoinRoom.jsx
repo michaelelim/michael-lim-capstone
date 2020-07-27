@@ -14,7 +14,7 @@ export default function JoinRoom() {
 
   return (
     <div className="join-room__wrapper">
-      <h1 className="join-room__top">Join a Room</h1>
+      <h1 className="animate__animated animate__lightSpeedInLeft join-room__top">Join a Room</h1>
       
       <div className="join-room__bottom">
         <h4 className="join-room__name-title">Enter your name: </h4>

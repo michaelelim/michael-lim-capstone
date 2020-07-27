@@ -2,18 +2,20 @@
   display: none;
   
   text-align: center;
-  min-height: 70vh;
+  min-height: 80vh;
+  width: 75%;
   
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: 150%;
   color: white;
   box-sizing: border-box;
   padding: 2%;
+  margin: 0;
 
   &__title {
-    font-size: calc(90px + 2vmin);
+    font-size: calc(120px + 2vmin);
     color: white;
     font-weight: 600;
     font-family: 'Amaranth';

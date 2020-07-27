@@ -7,16 +7,21 @@
     justify-content: space-around;
     width: 80%;
     padding-bottom: 50px;
-    height: 30%;
+    height: 35%;
+
+  &__number {
+    font-size: 32px;
+    font-weight: 600;
+  }
 }
 
   &__player-name1 {
-    font-size: calc(30px + 2vmin);
+    font-size: calc(40px + 2vmin);
     font-family: "Amaranth";
   }
 
   &__player-name2 {
-    font-size: calc(30px + 2vmin);
+    font-size: calc(40px + 2vmin);
     font-family: "Amaranth";
   }
 

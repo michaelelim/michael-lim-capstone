@@ -27,7 +27,7 @@
 
 .button {
   border: none;
-  border-radius: 8px;
+  border-radius: 15px;
   font-size: calc(30px + 2vmin);
   height: auto;
   min-width: 50vw;
@@ -39,7 +39,7 @@
 
 .button2 {
   border: none;
-  border-radius: 8px;
+  border-radius: 15px;
   font-size: calc(30px + 2vmin);
   height: auto;
   width: 50vw;
@@ -51,7 +51,7 @@
 
 .button3 {
   border: none;
-  border-radius: 8px;
+  border-radius: 15px;
   font-size: calc(5px + 1vmin);
   height: auto;
   width: 50vw;
@@ -59,6 +59,7 @@
   color: white;
   margin: 1%;
   padding: 1%;
+  padding-top: 5px;
 }
 
 .fade-out {

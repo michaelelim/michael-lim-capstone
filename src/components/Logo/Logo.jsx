@@ -7,7 +7,7 @@ import './Logo.scss';
 export default function Logo() {
   return (
     <div className="logo">
-      <img className="logo-image" src={LogoImage} alt="Limbo Productions logo."/>                
+      <img classname="logo-image" src={LogoImage} alt="Limbo Productions logo."/>                
     </div>      
   )
 }

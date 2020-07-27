@@ -18,7 +18,7 @@ export default function Home() {
 
   const showTitle = () => {
     // announce()
-    fadeOut(".logo-image")
+    // fadeOut(".logo-image")
     setTimeout(() => {
       document.querySelector(".logo").style.display = "none";
       document.querySelector(".button2").style.display = "none";
@@ -26,17 +26,17 @@ export default function Home() {
     }, 1000)
   }
 
-  const fadeOut = (item) => {
-    const fadeTarget = document.querySelector(item)
-    fadeTarget.classList.add("fade-out");
-    fadeTarget.style.opacity = '0'
-  }
+  // const fadeOut = (item) => {
+  //   const fadeTarget = document.querySelector(item)
+  //   fadeTarget.classList.add("fade-out");
+  //   fadeTarget.style.opacity = '0'
+  // }
 
   return (
       <div className="App">
         <Logo />
         <Title/>
-        <button className="button2" onClick={() => {showTitle()}}>Click to start</button>
+        <button className="animate__pulse button2" onClick={() => {showTitle()}}>Click to start</button>
       </div>
       
   )

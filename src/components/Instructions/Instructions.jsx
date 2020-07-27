@@ -34,7 +34,7 @@ export default function Instructions({room, socket}) {
   return (
     <div id="the-instructions" className="App">
       <div className="instructions__wrapper">
-        <h1 className="instructions__title">Instructions</h1>
+        <h1 className="animate__animated animate__jackInTheBox instructions__title">Instructions</h1>
       </div>
 
       <div className="instructions__wrapper-question">
