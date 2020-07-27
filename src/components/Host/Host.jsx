@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 // import { useSpeechSynthesis } from 'react-speech-kit';
 import { Link } from 'react-router-dom';
 import '../../App.scss';
 import './Host.scss';
 // import socketIOClient from 'socket.io-client';
 
-const ENDPOINT = 'http://127.0.0.1:3009';
+// const ENDPOINT = 'https://michaelelim-capstone-server.herokuapp.com/';
 
 export default function Host() {
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
-  let [socket, setSocket] = useState();
+  // let [socket, setSocket] = useState();
 
   // const { speak, voices } = useSpeechSynthesis();
   // const voice = voices[51];

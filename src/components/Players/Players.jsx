@@ -21,7 +21,7 @@ export default function Players({ room, socket, clientId }) {
         document.querySelector("#question-wrapper").style.display = "none"
         document.querySelector(".players__wrapper").style.display = "none"
         document.querySelector(".winner__wrapper").style.display = "block"
-        {socket.emit('resetRoom', room)}
+        socket.emit('resetRoom', room)
       }, 1000)
     }    
 
@@ -38,7 +38,7 @@ export default function Players({ room, socket, clientId }) {
         showWinner()
       })
     }
-  }, [socket])
+  }, [socket, room])
 
   return (
     <section className="players__section">
@@ -56,15 +56,3 @@ export default function Players({ room, socket, clientId }) {
     </section>
   );
 }
-
-      
-      {/* <div className="players__wrapper">        
-            <div>
-              <div className="players__number">Player 1</div>
-              <div id="player1" className="players__name1">{`${playerOne.name}: ${playerOne.score}`}</div>
-            </div>   
-            <div>
-              <div className="players__number">Player 2</div>
-              <div id="player2" className="players__name2">{`${playerTwo.name}: ${playerTwo.score}`}</div>
-            </div>   
-      </div>  */}

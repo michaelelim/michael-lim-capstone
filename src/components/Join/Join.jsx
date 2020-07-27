@@ -12,7 +12,7 @@ import Questions from '../Questions/Questions'
 import '../Questions/Questions.scss';
 import { v4 as uuidv4 } from 'uuid';
 
-const ENDPOINT = 'http://127.0.0.1:3009';
+const ENDPOINT = 'https://michaelelim-capstone-server.herokuapp.com/';
 
 export default function Join({ name, room }) {
   let [clientId] = useState(uuidv4());
@@ -25,7 +25,7 @@ export default function Join({ name, room }) {
       reconnectionAttempts: 3,
       reconnectionDelay: 3000
     }));
-  }, [])
+  }, [name, room])
 
   useEffect(() => {
     if (socket) {
