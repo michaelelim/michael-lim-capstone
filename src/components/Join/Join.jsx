@@ -25,14 +25,14 @@ export default function Join({ name, room }) {
       reconnectionAttempts: 3,
       reconnectionDelay: 3000
     }));
-  }, [name, room])
+  }, [])
 
   useEffect(() => {
     if (socket) {
       socket.on('advanceToInstructions', () => {showInstructions()});
       socket.emit('userName', name, clientId, room)
     }
-  }, [socket, clientId])
+  }, [socket, clientId, name, room])
 
   const advanceToServer = (room) => {
     socket.emit('advanceButton', "goToInstructions", room)
