@@ -39,7 +39,7 @@ export default function Host() {
         <input className="host__code" type="text" onChange={(e) => {setRoom(e.target.value)}}></input>
       </div>
 
-      <Link to={`/join/${name}/${room}`} socket={socket} room={room}>
+      <Link to={`/join/${name}/${room}`} room={room}>
         <button id="create-room-button" className="button">Create Room</button>
       </Link>  
     </div>
