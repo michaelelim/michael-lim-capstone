@@ -2,7 +2,7 @@
   display: none;
   
   text-align: center;
-  min-height: 80vh;
+  min-height: 70vh;
   width: 75%;
   
   flex-direction: column;
@@ -15,7 +15,7 @@
   margin: 0;
 
   &__title {
-    font-size: calc(120px + 2vmin);
+    font-size: calc(80px + 2vmin);
     color: white;
     font-weight: 600;
     font-family: 'Amaranth';

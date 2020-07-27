@@ -91,6 +91,7 @@ export default function Questions({ room, clientId, socket }) {
       socket.on("nextQuestion", () => {
         wrongAnswerCount = 0
         serveQuestions()
+
         document.querySelector(".question__wrapper").style.display = "flex"
         document.querySelector("#answer1").style.display = "flex"
         document.querySelector("#answer2").style.display = "flex"
@@ -160,7 +161,7 @@ export default function Questions({ room, clientId, socket }) {
       </div>
       
       <div className="question__wrapper">
-        <div className="question"></div>
+        <span className="question"></span>
         <div className="question__answer">
           <button className="question__answer-wrapper button3" id="answer1" onClick={() => {submitAnswer("answer1")}}>
             <div className="question__letter">A:</div>
