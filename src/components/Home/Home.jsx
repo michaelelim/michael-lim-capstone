@@ -21,6 +21,7 @@ export default function Home() {
         <Logo />
         <Title/>
         <button className="button2 coolBeans" onClick={() => {showTitle()}}>Click to start</button>
+        <div className="bokeh-background"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
       </div>
       
   )

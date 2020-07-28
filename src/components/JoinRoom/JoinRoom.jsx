@@ -19,7 +19,7 @@ export default function JoinRoom() {
       </div>
 
       <Link to={`/join/${name}/${room}`}>
-        <button className="button">Join Room</button>
+        <button className="button coolBeans">Join Room</button>
       </Link>  
     </div>
   );

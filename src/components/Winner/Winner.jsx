@@ -11,7 +11,7 @@ export default function Winner({winnerName, winnerScore, room}) {
   return (
       <div className="winner__wrapper">
         <div>
-          <h1 className="animate__animated animate__flip winner__number">Congratulations!</h1>
+          <h1 className="animate__animated animate__flip winner__number">Congrats!</h1>
           <div id="player" className="winner__name">{winnerName}</div>
           <div id="playerscore" className="winner__score">{winnerScore}</div>
         </div>

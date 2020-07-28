@@ -24,7 +24,6 @@ export default function Questions({ room, clientId, socket }) {
           choice2 = allAnswers[1]
           choice3 = allAnswers[2]
           choice4 = allAnswers[3]
-          console.log("Questions remaining: ", theQuestions)
           
         return (
           document.querySelector(".question").innerHTML = question,
@@ -37,7 +36,6 @@ export default function Questions({ room, clientId, socket }) {
       }
 
       const shuffleAnswers = (currentQuestion) => {
-        console.log("correct answer is: ", currentQuestion.correct_answer)
         allAnswers = []
         allAnswers.push(currentQuestion.correct_answer)
         allAnswers.push(currentQuestion.incorrect_answers[0])
@@ -62,24 +60,18 @@ export default function Questions({ room, clientId, socket }) {
       };
 
       if (socket) {
-        console.log("In the Questions socket")
 
         const getQuestions = () => {
-          console.log("in getQuestions")
           if (theQuestions.length === 0) {socket.emit('sendQuestions', theQuestions)} 
           else if (theQuestions.length !== 0 && questionServed === false) {
             questionServed = true;
-            console.log("serving questions")
             serveQuestions();
           }
         }
 
         // asking server for questions
         socket.on("advanceToQuestions", () => {if (theQuestions.length === 0) {
-          console.log("getting questions")
           getQuestions()
-        } else {
-          console.log("no questions")
         }
         })
       
@@ -134,7 +126,6 @@ export default function Questions({ room, clientId, socket }) {
     const thisAnswer = document.querySelector(".question__" + arg).innerHTML
 
     if (document.querySelector(".question__" + arg).innerHTML === correctAnswer ) {
-      console.log("submitting 100Player: ", clientId, room)
       socket.emit('100Player', clientId, room);
       setTimeout(() => {
         if (theQuestions.length === 1) {socket.emit('advanceButton', "goToWinner", room)} 
@@ -142,7 +133,6 @@ export default function Questions({ room, clientId, socket }) {
       }, 2000)
     
     } else if (document.querySelector(".question__" + arg).innerHTML !== correctAnswer) {
-      console.log("submitting minus75Player: ", clientId, room)  
       socket.emit('minus75Player', clientId, room);
         setTimeout(() => {socket.emit('removeWrongAnswer', thisAnswer, room)}, 2000)
     }

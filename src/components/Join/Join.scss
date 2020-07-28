@@ -21,8 +21,9 @@
     text-align: left;
     width: 50%;
     height: 100%;
-    font-size: calc(70px + 2vmin);
+    font-size: calc(50px + 2vmin);
     padding-left: 5%;
+    padding-top: 5%;
     margin-top: 0;
 
     font-weight: 600;
@@ -68,7 +69,8 @@
     font-size: 200%;
 
     &-title {
-      font-size: 200%;
+      padding-top: 15%;
+      font-size: 150%;
       margin: 0;
     }
   }

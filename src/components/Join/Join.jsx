@@ -62,6 +62,7 @@ export default function Join({ name, room }) {
       <button className="button button__everyone-here coolBeans" onClick={() => {advanceToServer(room)}}>Everyone's here!</button>
       <Instructions room={room} socket={socket}/>
       <QuestionIntro room={room} socket={socket}/>
+      <div className="bokeh-background"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     </div>
   );
 }
