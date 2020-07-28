@@ -25,26 +25,26 @@ export default function Instructions({room, socket}) {
       </div>
 
       <div className="instructions__wrapper-question">
-        <div className="question">What is the capital of a fake question?</div>
+        <div className="question">It's a multiple choice quiz show! Possible answers appear below. Get points for picking correctly...</div>
         <button className="question__answer-wrapper button3 coolBeans">
           <div className="question__letter">A:</div>
-          <div id="qa" className="question__answer1">Fakesville, USA</div>
+          <div id="qa" className="question__answer1">Ah. I see...</div>
         </button>
         <button className="question__answer-wrapper button3 coolBeans">
           <div className="question__letter">B:</div>
-          <div id="qa" className="question__answer2">42</div>
+          <div id="qa" className="question__answer2">Ingenious.</div>
         </button>
         <button className="question__answer-wrapper button3 coolBeans">
           <div className="question__letter">C:</div>
-          <div id="qa" className="question__answer3">When in doubt, pick C</div>
+          <div id="qa" className="question__answer3">What a concept!</div>
         </button>
         <button className="question__answer-wrapper button3 coolBeans">
           <div className="question__letter">D:</div>
-          <div id="qa" className="question__answer4">None of the above</div>
+          <div id="qa" className="question__answer4">Where have a seen this game before?!</div>
         </button>
       </div>
 
-      <button id="button__leave-instructions" className="button coolBeans" onClick={advanceToServer}>We got it! Let's go!</button>
+      <button id="button__leave-instructions" className="button coolBeans" onClick={advanceToServer}>OKAY! Let's just play!</button>
     </div>
     );
   }
