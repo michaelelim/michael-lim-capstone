@@ -1,5 +1,5 @@
 import React from 'react';
-import LogoImage from "../../assets/Logo/LimboStudios.svg"
+import LogoImage from "../../assets/Logo/LimboStudios.png"
 import '../../App.scss';
 import './Logo.scss';
 
