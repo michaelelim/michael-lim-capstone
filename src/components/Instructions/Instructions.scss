@@ -1,6 +1,7 @@
 #the-instructions {
   display: none;
   min-height: 40vw;
+  padding: 0;
 }
 
 .instructions {
@@ -20,7 +21,7 @@
     height: 100%;
     font-size: calc(40px + 2vmin);
     margin: 0;
-    padding-left: 0;
+    padding-left: 2rem;
     font-family: "Amaranth";
     font-weight: 600;
   }
@@ -31,7 +32,7 @@
     align-items: flex-start;
     justify-content: flex-start;
     font-size: calc(20px + 2vmin);
-    padding-bottom: 40px;
+    padding-bottom: 1rem;
   }
 
   &__player-wrapper {
