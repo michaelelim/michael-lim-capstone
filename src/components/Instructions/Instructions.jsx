@@ -1,21 +1,8 @@
 import React, {useEffect} from 'react';
-// import { useSpeechSynthesis } from 'react-speech-kit';
 import '../../App.scss';
 import './Instructions.scss';
-// import socketIOClient from 'socket.io-client';
-
-// const ENDPOINT = 'https://michaelelim-capstone-server.herokuapp.com/';
-// const socket = socketIOClient(ENDPOINT, {
-//   transports: ['websocket'], 
-//   reconnectionAttempts: 3,
-//   reconnectionDelay: 3000
-// });
 
 export default function Instructions({room, socket}) {
-  // const [tts] = useState('Question... number... 1...');
-  // const { speak, voices } = useSpeechSynthesis({});
-  // const voice = voices[51];
-
   useEffect(() => {
     if (socket) {
       socket.on('advanceToQuestionIntro', () => {showQuestionIntro()})

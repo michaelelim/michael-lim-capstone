@@ -1,5 +1,4 @@
 import React from 'react';
-// import { useSpeechSynthesis } from 'react-speech-kit';
 import '../../App.scss';
 import './Home.scss';
 import Title from '../Title/Title'
@@ -8,16 +7,8 @@ import '../Title/Title.scss'
 import '../Logo/Logo.scss'
 
 export default function Home() {
-  // const [text, setText] = useState('Welcome to You Dont Know Diddly Squat... I am your host, Prince Abooboo... Are you ready?  Lets go!');
-  // const [pitch, setPitch] = useState(1.2)
-  // const [rate, setRate] = useState(1.1)
-  // const onEnd = () => {setText('Are you hosting today, or joining a game.')};
-  // const {speak, cancel, speaking, supported, voices} = useSpeechSynthesis({onEnd});
-  // const voice = voices[51];
-  // const announce = () => {speak({ text, voice, rate, pitch })}
 
   const showTitle = () => {
-    // announce()
     setTimeout(() => {
       document.querySelector(".logo").style.display = "none";
       document.querySelector(".button2").style.display = "none";

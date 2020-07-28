@@ -28,7 +28,7 @@
 .button {
   border: none;
   border-radius: 10px;
-  font-size: calc(30px + 2vmin);
+  font-size: calc(25px + 2vmin);
   height: auto;
   min-width: 50vw;
   background-color: rgb(68, 19, 6);
@@ -38,10 +38,8 @@
 }
 
   .coolBeans {
-  // border: 2px solid currentColor;
   border-radius: 3rem;
   color: rgb(255, 255, 255);
-  font-size: 4rem;
   font-weight: 400;
   overflow: hidden;
   padding: 1rem 2rem;
@@ -53,7 +51,6 @@
 
   &::after {
     background-color: rgb(255, 255, 255);
-    // border-radius: 2rem;
     content: '';
     display: block;
     height: 100%;
@@ -73,18 +70,16 @@
   }
     
   &:hover {
-    // border: 2px solid transparent;
     color: rgb(68, 19, 6);
     transform: scale(1.05);
     will-change: transform;
   }
 }
     
-
 .button2 {
   border: none;
   border-radius: 2rem;
-  font-size: calc(30px + 2vmin);
+  font-size: calc(25px + 2vmin);
   height: auto;
   width: 50vw;
   background-color: black;

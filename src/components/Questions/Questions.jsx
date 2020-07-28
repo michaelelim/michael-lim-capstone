@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-// import { useSpeechSynthesis } from 'react-speech-kit';
 import '../../App.scss';
 import './Questions.scss';
 
@@ -13,9 +12,6 @@ let allAnswers = []
 let wrongAnswerCount = 0
 
 export default function Questions({ room, clientId, socket }) {
-  // const [tts, setTts] = useState('Question 1... ');
-  // const { speak, voices } = useSpeechSynthesis({onEnd});
-  // const voice = voices[51];
 
   useEffect(() => {
       let serveQuestions = () => {

@@ -4,7 +4,7 @@ import './Players.scss';
 import Winner from '../Winner/Winner'
 
 export default function Players({ room, socket, clientId }) {
-  const [players, setPlayers] = useState([{}]) // [ { name: 'jim', score: 0, clientId: 'xyz' }, {} ]
+  const [players, setPlayers] = useState([{}])
   let [winnerName, setWinnerName] = useState('')
   let [winnerScore, setWinnerScore] = useState(0)
 

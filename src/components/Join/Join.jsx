@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import { useSpeechSynthesis } from 'react-speech-kit';
 import '../../App.scss';
 import './Join.scss';
 import socketIOClient from 'socket.io-client';
@@ -18,7 +17,6 @@ export default function Join({ name, room }) {
   let [clientId] = useState(uuidv4());
   let [socket, setSocket] = useState();
 
-  // set socket
   useEffect(() => {
     setSocket(socketIOClient(ENDPOINT, {
       transports: ['websocket'], 
@@ -61,7 +59,6 @@ export default function Join({ name, room }) {
       <Questions clientId={clientId} room={room} socket={socket} />
       <Players clientId={clientId} room={room} socket={socket} />
 
-      {/* <Link to="/instructions" onClick={() => {speak({ text, voice })}}> */}
       <button className="button button__everyone-here coolBeans" onClick={() => {advanceToServer(room)}}>Everyone's here!</button>
       <Instructions room={room} socket={socket}/>
       <QuestionIntro room={room} socket={socket}/>

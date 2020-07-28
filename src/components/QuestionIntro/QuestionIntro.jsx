@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-// import { useSpeechSynthesis } from 'react-speech-kit';
 import '../../App.scss';
 import './QuestionIntro.scss';
 import socketIOClient from 'socket.io-client';
@@ -12,14 +11,6 @@ const socket = socketIOClient(ENDPOINT, {
 });
 
 export default function QuestionIntro(room) {  
-  // const [tts] = useState('First Question...);
-  // const { speak, voices } = useSpeechSynthesis({onEnd});
-  // const voice = voices[51];
-
-  // const advanceToServer = () => {
-  //   socket.emit('advanceButton', "goToQuestions")
-  // }
-
   useEffect(() => {
     socket.on('advanceToQuestions', () => {
       fadeOut(".question-intro__title")
@@ -40,10 +31,6 @@ export default function QuestionIntro(room) {
   return (
     <div id="question-intro" className="App">
       <h1 className="question-intro__title">Question 1</h1>
-        {/* <button className="button2" onClick={() => {
-          speak({ text, voice })
-          fadeOut(".question-intro__title")
-        }}> */}
     </div>
   );
 }

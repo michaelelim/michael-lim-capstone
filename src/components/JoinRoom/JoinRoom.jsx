@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
-// import { useSpeechSynthesis } from 'react-speech-kit';
 import { Link } from 'react-router-dom';
 import '../../App.scss';
 import './JoinRoom.scss';
 
 export default function JoinRoom() {
-  // const [text] = useState('');
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
-
-  // const { speak, voices } = useSpeechSynthesis();
-  // const voice = voices[51];
 
   return (
     <div className="join-room__wrapper">

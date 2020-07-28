@@ -1,32 +1,11 @@
 import React, { useState } from 'react';
-// import { useSpeechSynthesis } from 'react-speech-kit';
 import { Link } from 'react-router-dom';
 import '../../App.scss';
 import './Host.scss';
-// import socketIOClient from 'socket.io-client';
-
-// const ENDPOINT = 'https://michaelelim-capstone-server.herokuapp.com/';
 
 export default function Host() {
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
-  // let [socket, setSocket] = useState();
-
-  // const { speak, voices } = useSpeechSynthesis();
-  // const voice = voices[51];
-
-  // set socket
-  // useEffect(() => {
-  //   setSocket(socketIOClient(ENDPOINT, {
-  //     transports: ['websocket'], 
-  //     reconnectionAttempts: 3,
-  //     reconnectionDelay: 3000
-  //   }));
-  // }, [])
-
-  // const pullQuestions = () => {
-  //   socket.on('advanceButton', 'pullQuestions', room)
-  // }
 
   return (
     <div className="host__wrapper">

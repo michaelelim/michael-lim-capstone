@@ -1,16 +1,10 @@
 import React from 'react';
-// import { useSpeechSynthesis } from 'react-speech-kit';
 import { Link } from 'react-router-dom';
 import '../../App.scss';
 import './Title.scss';
 
 
 export default function Title() {
-  // const [text, setText] = useState('Are you hosting or joining a game');
-  // const {speak, voices} = useSpeechSynthesis();
-  // const voice = voices[51];
-
-  // const announce = () => {speak({ text, voice })}
 
   return (
       <div className="title">
