@@ -10,13 +10,15 @@
   }
 
   &__number {
-  font-size: calc(80px + 2vmin);
+  font-size: calc(60px + 2vmin);
   font-family: "Amaranth";
   margin: 0;
+  padding-top: 10%;
+  padding-bottom: 5%;
   }
 
   &__name {
-    font-size: calc(120px + 2vmin);
+    font-size: calc(80px + 2vmin);
     font-family: "Amaranth";
   }
 

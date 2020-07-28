@@ -22,8 +22,8 @@ export default function Menu() {
   }
 
   return (
-    <div>
-      <div id="the-menu" className="App">
+    <div className="App">
+      <div id="the-menu">
         <div className="menu__wrapper">
           <h1 className="animate__animated animate__backInDown menu__top">You Don't Know Diddly Squat</h1>          
         </div>
@@ -34,6 +34,7 @@ export default function Menu() {
 
       <Host/>
       <JoinRoom />
+      <div className="bokeh-background"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     </div>
   );
 }

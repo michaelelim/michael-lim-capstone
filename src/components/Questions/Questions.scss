@@ -4,6 +4,9 @@
 }
 
 .question {
+  padding-top: 10%;
+  padding-bottom: 5%;
+
   &__wrapper {
     display: flex;
     flex-flow: column nowrap;

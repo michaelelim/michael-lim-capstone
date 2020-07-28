@@ -40,7 +40,7 @@ export default function Instructions({room, socket}) {
         </button>
         <button className="question__answer-wrapper button3 coolBeans">
           <div className="question__letter">D:</div>
-          <div id="qa" className="question__answer4">Where have I seen this game before?!</div>
+          <div id="qa" className="question__answer4">I've seen this game before...</div>
         </button>
       </div>
 

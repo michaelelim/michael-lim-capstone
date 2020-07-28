@@ -27,7 +27,7 @@ export default function App() {
             name={props.match.params.name}
           />)}}/>
         <Route path="/questionintro" component={QuestionIntro}/>
-        <Route path="/questions" component={Questions}/> */}
+        <Route path="/questions" component={Questions}/>
       </Switch>
     </MemoryRouter>
   );
