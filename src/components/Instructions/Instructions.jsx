@@ -25,7 +25,7 @@ export default function Instructions({room, socket}) {
       </div>
 
       <div className="instructions__wrapper-question">
-        <div className="question">It's a multiple choice quiz show! Possible answers appear below. Get points for picking correctly...</div>
+        <div className="instructions__question">It's a multiple choice quiz show! Pick correct answers, get points!</div>
         <button className="question__answer-wrapper button3 coolBeans">
           <div className="question__letter">A:</div>
           <div id="qa" className="question__answer1">Ah. I see...</div>
@@ -44,7 +44,7 @@ export default function Instructions({room, socket}) {
         </button>
       </div>
 
-      <button id="button__leave-instructions" className="button coolBeans" onClick={advanceToServer}>OKAY! Let's just play!</button>
+      <button id="button__leave-instructions" className="button coolBeans" onClick={advanceToServer}>OKAY, let's play</button>
     </div>
     );
   }

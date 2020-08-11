@@ -15,8 +15,7 @@ body {
 
 .App {
   text-align: center;
-  // background-color: #1f9da1;
-  min-height: 100vh;
+  min-height: 95vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,7 +23,7 @@ body {
   font-size: calc(10px + 2vmin);
   color: white;
   box-sizing: border-box;
-  padding: 2%;
+  padding: 1%;
 }
 
 .App-link {
@@ -41,7 +40,7 @@ body {
   background-color: rgb(68, 19, 6);
   color: white;
   margin: 2%;
-  padding: 1%;
+  padding: 0.5%;
 }
 
   .coolBeans {
@@ -49,7 +48,7 @@ body {
   color: rgb(255, 255, 255);
   font-weight: 400;
   overflow: hidden;
-  padding: 1rem 2rem;
+  padding: 0.5rem 2rem;
   position: relative;
   text-decoration: none;
   transition: .2s transform ease-in-out;
@@ -100,7 +99,7 @@ body {
   border-radius: 15px;
   font-size: calc(5px + 1vmin);
   height: auto;
-  width: 50vw;
+  width: 45vw;
   background-color: #310872;
   color: white;
   margin: 0.3rem;
@@ -152,7 +151,5 @@ $amount: 20;
 }
 
 @keyframes move {
-  100% {
-    transform: translate3d(0, 0, 1px) rotate(360deg);
-  }
+  100% {transform: translate3d(0, 0, 1px) rotate(360deg)}
 }

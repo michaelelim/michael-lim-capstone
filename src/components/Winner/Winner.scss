@@ -13,17 +13,18 @@
   font-size: calc(60px + 2vmin);
   font-family: "Amaranth";
   margin: 0;
-  padding-top: 10%;
-  padding-bottom: 5%;
+  padding-top: 5%;
+  padding-bottom: 3%;
   }
 
   &__name {
-    font-size: calc(80px + 2vmin);
+    font-size: calc(60px + 2vmin);
     font-family: "Amaranth";
+    line-height: 65px;
   }
 
   &__score {
-    font-size: calc(100px + 2vmin);
+    font-size: calc(90px + 2vmin);
     font-family: "Amaranth";
   }
 }

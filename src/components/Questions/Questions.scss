@@ -1,11 +1,11 @@
 #question-wrapper {
   display: none;
-  min-height: 40vw;
+  min-height: 35vw;
 }
 
 .question {
-  padding-top: 3rem;
-  padding-bottom: 2rem;
+  padding-top: 1%;
+  padding-bottom: 2%;
 
   &__wrapper {
     display: flex;
@@ -13,7 +13,7 @@
     align-items: flex-start;
     justify-content: flex-start;
     font-size: calc(20px + 2vmin);
-    padding-bottom: 5%;
+    padding-bottom: 1%;
     width: 100%;
   }
 
@@ -99,10 +99,10 @@
 
 .modal-content {
   background-color: #ffffff;
-  margin: 15% auto;
+  margin: 10% auto;
   padding: 20px;
   width: 80%;
-  font-size: 300%;
+  font-size: 250%;
   border-radius: 2rem;
 }
 

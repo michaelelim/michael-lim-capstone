@@ -31,6 +31,10 @@ export default function Players({ room, socket, clientId }) {
       socket.on('minus75Player1', (data) => {setPlayers(data)})   
       socket.on('100Player2', (data) => {setPlayers(data)})
       socket.on('minus75Player2', (data) => {setPlayers(data)});
+      socket.on('100Player3', (data) => {setPlayers(data)})
+      socket.on('minus75Player3', (data) => {setPlayers(data)});
+      socket.on('100Player4', (data) => {setPlayers(data)})
+      socket.on('minus75Player4', (data) => {setPlayers(data)});
   
       socket.on('advanceToWinner', (winnerName, winnerScore) => {
         setWinnerName(winnerName)

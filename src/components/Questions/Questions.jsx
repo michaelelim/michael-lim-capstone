@@ -102,6 +102,8 @@ export default function Questions({ room, clientId, socket }) {
 
       socket.on('100Player1', (theName) => {showCorrectModal(theName[0].name)})
       socket.on('100Player2', (theName) => {showCorrectModal(theName[1].name)})
+      socket.on('100Player3', (theName) => {showCorrectModal(theName[2].name)})
+      socket.on('100Player4', (theName) => {showCorrectModal(theName[3].name)})
 
       const showCorrectModal = (finalName) => {
         document.getElementById("answerModal").style.display = "block";
@@ -112,6 +114,8 @@ export default function Questions({ room, clientId, socket }) {
 
       socket.on('minus75Player1', (theName) => {showIncorrectModal(theName[0].name)})
       socket.on('minus75Player2', (theName) => {showIncorrectModal(theName[1].name)})
+      socket.on('minus75Player3', (theName) => {showIncorrectModal(theName[2].name)})
+      socket.on('minus75Player4', (theName) => {showIncorrectModal(theName[3].name)})
 
       const showIncorrectModal = (finalName) => {
         document.getElementById("answerModal").style.display = "block";
